@@ -60,6 +60,8 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (st.status == Status.OFF || st.status == Status.NO_BLUETOOTH)
                     Button(onClick = onEnableBluetooth) { Text("Start Bluetooth") }
+                if (st.status != Status.CONNECTED)
+                    OutlinedButton(onClick = { HidController.restart(ctx) }) { Text("Restart") }
                 if (st.status == Status.CONNECTED || st.status == Status.CONNECTING)
                     OutlinedButton(onClick = { HidController.disconnect() }) {
                         Text(if (st.status == Status.CONNECTING) "Cancel" else "Disconnect")
@@ -86,7 +88,7 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
             Text("The projector accepts a keyboard/mouse only if it does the pairing itself.")
             Text("1. If the projector is already paired: tap Forget below, and on the projector open Settings → Remotes & Accessories → your phone → Unpair.")
             Text("2. Tap Make phone visible (5 min) and keep this app open.")
-            Button(onClick = onMakeDiscoverable, enabled = st.status == Status.READY || st.status == Status.CONNECTED) {
+            Button(onClick = onMakeDiscoverable) {
                 Text("Make phone visible")
             }
             Text("3. On the projector: Settings → Remotes & Accessories → Add accessory. Pick “${HidController.localName()}” and confirm the code.")
@@ -116,7 +118,7 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
                     }
                     Button(
                         onClick = { Scanner.pairAndConnect(ctx, f.device) },
-                        enabled = scan.pairing == null && st.status == Status.READY,
+                        enabled = scan.pairing == null && st.status != Status.NO_BLUETOOTH,
                     ) { Text(if (scan.pairing == f.device.address) "Pairing…" else "Pair") }
                 }
             }
@@ -136,7 +138,7 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
                     else {
                         OutlinedButton(
                             onClick = { HidController.connect(d) },
-                            enabled = st.status == Status.READY,
+                            enabled = st.status != Status.NO_BLUETOOTH,
                         ) { Text("Connect") }
                         TextButton(onClick = {
                             val ok = HidController.forget(d)

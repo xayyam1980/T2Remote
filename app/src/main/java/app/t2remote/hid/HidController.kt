@@ -80,6 +80,15 @@ object HidController {
         _state.update { State(layout = it.layout) }
     }
 
+    /** Re-registers the keyboard/mouse service from scratch (recovers from stuck states). */
+    fun restart(ctx: Context) {
+        log("restart")
+        main.removeCallbacks(watchdog)
+        target = null
+        shutdown()
+        main.postDelayed({ init(ctx) }, 800)
+    }
+
     fun bondedDevices(): List<BluetoothDevice> =
         runCatching { adapter?.bondedDevices?.toList().orEmpty() }.getOrDefault(emptyList())
             .sortedBy { it.name ?: it.address }
@@ -92,7 +101,11 @@ object HidController {
     private const val ATTEMPT_SECONDS = 8
 
     fun connect(device: BluetoothDevice) {
-        val h = hid ?: run { _state.update { it.copy(message = "Keyboard service not ready yet — wait a second and retry") }; return }
+        val h = hid ?: run {
+            log("connect requested but keyboard service not registered")
+            _state.update { it.copy(message = "Keyboard/mouse service not running — tap Restart, then Connect") }
+            return
+        }
         main.removeCallbacks(watchdog)
         target = device; attempt = 1; waited = 0
         log("connect → ${device.name ?: device.address}")
