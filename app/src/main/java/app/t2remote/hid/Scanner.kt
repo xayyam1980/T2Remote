@@ -10,6 +10,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -65,7 +67,13 @@ object Scanner {
                         BluetoothDevice.BOND_BONDING -> _state.update { it.copy(pairing = d.address, message = "Pairing… confirm the code on both screens") }
                         BluetoothDevice.BOND_BONDED -> {
                             _state.update { it.copy(pairing = null, message = "Paired with ${d.name ?: d.address}. Connecting…") }
-                            if (pendingConnect == d.address) { pendingConnect = null; HidController.connect(d) }
+                            // Give the projector a moment to read our keyboard/mouse service record.
+                            if (pendingConnect == d.address) {
+                                pendingConnect = null
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    if (!HidController.adoptConnected()) HidController.connect(d)
+                                }, 2000)
+                            }
                         }
                         BluetoothDevice.BOND_NONE -> if (_state.value.pairing == d.address)
                             _state.update { it.copy(pairing = null, message = "Pairing failed or cancelled. Try again.") }

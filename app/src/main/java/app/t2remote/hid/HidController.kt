@@ -8,6 +8,8 @@ import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import app.t2remote.Prefs
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -68,15 +70,81 @@ object HidController {
         runCatching { adapter?.bondedDevices?.toList().orEmpty() }.getOrDefault(emptyList())
             .sortedBy { it.name ?: it.address }
 
+    private val main = Handler(Looper.getMainLooper())
+    private var target: BluetoothDevice? = null
+    private var attempt = 0
+    private var waited = 0
+    private const val MAX_ATTEMPTS = 3
+    private const val ATTEMPT_SECONDS = 8
+
     fun connect(device: BluetoothDevice) {
-        val h = hid ?: return
+        val h = hid ?: run { _state.update { it.copy(message = "Keyboard service not ready yet — wait a second and retry") }; return }
+        main.removeCallbacks(watchdog)
+        target = device; attempt = 1; waited = 0
         _state.update { it.copy(status = Status.CONNECTING, message = "Connecting to ${device.name ?: device.address}…") }
-        if (!h.connect(device)) _state.update { it.copy(status = Status.READY, message = "Connect request rejected") }
+        h.connect(device)
+        main.postDelayed(watchdog, 1000)
+    }
+
+    /**
+     * Polls the real connection state once a second: some phones/projectors connect without
+     * delivering the callback. Retries a stalled attempt, then gives up with a clear hint.
+     */
+    private val watchdog = object : Runnable {
+        override fun run() {
+            val h = hid ?: return
+            val dev = target ?: return
+            if (adoptConnected()) return
+            if (_state.value.status != Status.CONNECTING) return
+            waited++
+            if (waited < ATTEMPT_SECONDS) { main.postDelayed(this, 1000); return }
+            if (attempt < MAX_ATTEMPTS) {
+                attempt++; waited = 0
+                _state.update { it.copy(message = "No answer from projector — retry $attempt of $MAX_ATTEMPTS…") }
+                runCatching { h.disconnect(dev) }
+                main.postDelayed({ hid?.connect(dev) }, 1200)
+                main.postDelayed(this, 2200)
+                return
+            }
+            runCatching { h.disconnect(dev) }
+            target = null
+            _state.update {
+                it.copy(status = Status.READY, host = null,
+                    message = "Projector paired but didn't open the keyboard/mouse channel. Tap “Forget & re-pair” below.")
+            }
+        }
+    }
+
+    /** If the stack reports a connected host we didn't hear about, take it. */
+    fun adoptConnected(): Boolean {
+        val h = hid ?: return false
+        val dev = runCatching { h.connectedDevices.firstOrNull() }.getOrNull()
+            ?: target?.takeIf { runCatching { h.getConnectionState(it) }.getOrNull() == BluetoothProfile.STATE_CONNECTED }
+            ?: return false
+        onConnected(dev)
+        return true
+    }
+
+    private fun onConnected(device: BluetoothDevice) {
+        main.removeCallbacks(watchdog)
+        target = null
+        Prefs.lastHost = device.address
+        _state.update { it.copy(status = Status.CONNECTED, host = device, message = "Connected to ${device.name ?: device.address}") }
+    }
+
+    /** Removes the bond (hidden API, works on most phones) so pairing can start clean. */
+    fun forget(device: BluetoothDevice): Boolean {
+        runCatching { hid?.disconnect(device) }
+        if (Prefs.lastHost == device.address) Prefs.lastHost = null
+        return runCatching { device.javaClass.getMethod("removeBond").invoke(device) as Boolean }.getOrDefault(false)
     }
 
     fun disconnect() {
-        val dev = _state.value.host ?: return
-        hid?.disconnect(dev)
+        main.removeCallbacks(watchdog)
+        val dev = _state.value.host ?: target
+        target = null
+        dev?.let { runCatching { hid?.disconnect(it) } }
+        _state.update { it.copy(status = if (hid != null) Status.READY else Status.OFF, host = null, message = "Disconnected") }
     }
 
     // ------------------------------------------------------------------ registration
@@ -113,22 +181,22 @@ object HidController {
                 return
             }
             _state.update { it.copy(status = Status.READY, message = "Ready — pair or pick the projector") }
-            val target = pluggedDevice ?: if (Prefs.autoReconnect) {
+            if (adoptConnected()) return
+            val auto = pluggedDevice ?: if (Prefs.autoReconnect) {
                 Prefs.lastHost?.let { addr -> bondedDevices().firstOrNull { it.address == addr } }
             } else null
-            target?.let { connect(it) }
+            auto?.let { d -> main.post { connect(d) } }
         }
 
         override fun onConnectionStateChanged(device: BluetoothDevice, state: Int) {
             when (state) {
-                BluetoothProfile.STATE_CONNECTED -> {
-                    Prefs.lastHost = device.address
-                    _state.update { it.copy(status = Status.CONNECTED, host = device, message = "Connected to ${device.name ?: device.address}") }
-                }
+                BluetoothProfile.STATE_CONNECTED -> main.post { onConnected(device) }
                 BluetoothProfile.STATE_CONNECTING ->
-                    _state.update { it.copy(status = Status.CONNECTING, message = "Connecting…") }
-                BluetoothProfile.STATE_DISCONNECTED ->
-                    _state.update { it.copy(status = Status.READY, host = null, message = "Disconnected") }
+                    _state.update { it.copy(status = Status.CONNECTING) }
+                BluetoothProfile.STATE_DISCONNECTED -> main.post {
+                    // During a retry cycle the watchdog owns the state.
+                    if (target == null) _state.update { it.copy(status = Status.READY, host = null, message = "Disconnected") }
+                }
             }
         }
 
@@ -147,7 +215,7 @@ object HidController {
 
     private fun send(id: Int, data: ByteArray): Boolean {
         val h = hid ?: return false
-        val host = _state.value.host ?: return false
+        val host = _state.value.host ?: (if (adoptConnected()) _state.value.host else null) ?: return false
         return h.sendReport(host, id, data)
     }
 
