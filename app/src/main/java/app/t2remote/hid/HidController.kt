@@ -1,0 +1,237 @@
+package app.t2remote.hid
+
+import android.annotation.SuppressLint
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothHidDevice
+import android.bluetooth.BluetoothHidDeviceAppSdpSettings
+import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothProfile
+import android.content.Context
+import android.util.Log
+import app.t2remote.Prefs
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+import java.util.concurrent.Executors
+
+/**
+ * Turns the phone into a Bluetooth HID keyboard + mouse (Android 9+ BluetoothHidDevice API).
+ * Permissions are checked by MainActivity before init().
+ */
+@SuppressLint("MissingPermission")
+object HidController {
+    private const val TAG = "T2Hid"
+
+    enum class Status { NO_BLUETOOTH, OFF, REGISTERING, READY, CONNECTING, CONNECTED }
+
+    data class State(
+        val status: Status = Status.OFF,
+        val host: BluetoothDevice? = null,
+        val layout: KeyMap.Layout = KeyMap.Layout.EN,
+        val message: String = "",
+    )
+
+    private val _state = MutableStateFlow(State())
+    val state: StateFlow<State> = _state
+
+    private var adapter: BluetoothAdapter? = null
+    private var hid: BluetoothHidDevice? = null
+    private var proxyRequested = false
+    private val callbackExec = Executors.newSingleThreadExecutor()
+    private val typingExec = Executors.newSingleThreadExecutor()
+    private var mouseButtons = 0
+
+    val isConnected get() = _state.value.status == Status.CONNECTED
+
+    fun init(ctx: Context) {
+        if (proxyRequested) return
+        val a = ctx.getSystemService(BluetoothManager::class.java)?.adapter
+        if (a == null) { _state.update { it.copy(status = Status.NO_BLUETOOTH, message = "Bluetooth not available") }; return }
+        adapter = a
+        if (!a.isEnabled) { _state.update { it.copy(status = Status.OFF, message = "Turn Bluetooth on") }; return }
+        proxyRequested = a.getProfileProxy(ctx.applicationContext, profileListener, BluetoothProfile.HID_DEVICE)
+        if (!proxyRequested) _state.update { it.copy(message = "This phone does not support HID device mode") }
+    }
+
+    fun shutdown() {
+        hid?.let {
+            runCatching { _state.value.host?.let { h -> it.disconnect(h) } }
+            runCatching { it.unregisterApp() }
+            runCatching { adapter?.closeProfileProxy(BluetoothProfile.HID_DEVICE, it) }
+        }
+        hid = null; proxyRequested = false
+        _state.update { State(layout = it.layout) }
+    }
+
+    fun bondedDevices(): List<BluetoothDevice> =
+        runCatching { adapter?.bondedDevices?.toList().orEmpty() }.getOrDefault(emptyList())
+            .sortedBy { it.name ?: it.address }
+
+    fun connect(device: BluetoothDevice) {
+        val h = hid ?: return
+        _state.update { it.copy(status = Status.CONNECTING, message = "Connecting to ${device.name ?: device.address}…") }
+        if (!h.connect(device)) _state.update { it.copy(status = Status.READY, message = "Connect request rejected") }
+    }
+
+    fun disconnect() {
+        val dev = _state.value.host ?: return
+        hid?.disconnect(dev)
+    }
+
+    // ------------------------------------------------------------------ registration
+
+    private val profileListener = object : BluetoothProfile.ServiceListener {
+        override fun onServiceConnected(profile: Int, proxy: BluetoothProfile) {
+            hid = proxy as BluetoothHidDevice
+            register()
+        }
+
+        override fun onServiceDisconnected(profile: Int) {
+            hid = null; proxyRequested = false
+            _state.update { it.copy(status = Status.OFF, host = null, message = "HID service stopped") }
+        }
+    }
+
+    private fun register() {
+        val h = hid ?: return
+        _state.update { it.copy(status = Status.REGISTERING, message = "Registering keyboard/mouse…") }
+        val sdp = BluetoothHidDeviceAppSdpSettings(
+            "T2 Remote", "Keyboard and mouse", "T2Remote",
+            BluetoothHidDevice.SUBCLASS1_COMBO, HidDescriptor.bytes,
+        )
+        if (!h.registerApp(sdp, null, null, callbackExec, hidCallback)) {
+            _state.update { it.copy(status = Status.OFF, message = "Registration failed — close other Bluetooth keyboard apps") }
+        }
+    }
+
+    private val hidCallback = object : BluetoothHidDevice.Callback() {
+        override fun onAppStatusChanged(pluggedDevice: BluetoothDevice?, registered: Boolean) {
+            Log.d(TAG, "app registered=$registered plugged=$pluggedDevice")
+            if (!registered) {
+                _state.update { it.copy(status = Status.OFF, host = null, message = "Not registered") }
+                return
+            }
+            _state.update { it.copy(status = Status.READY, message = "Ready — pair or pick the projector") }
+            val target = pluggedDevice ?: if (Prefs.autoReconnect) {
+                Prefs.lastHost?.let { addr -> bondedDevices().firstOrNull { it.address == addr } }
+            } else null
+            target?.let { connect(it) }
+        }
+
+        override fun onConnectionStateChanged(device: BluetoothDevice, state: Int) {
+            when (state) {
+                BluetoothProfile.STATE_CONNECTED -> {
+                    Prefs.lastHost = device.address
+                    _state.update { it.copy(status = Status.CONNECTED, host = device, message = "Connected to ${device.name ?: device.address}") }
+                }
+                BluetoothProfile.STATE_CONNECTING ->
+                    _state.update { it.copy(status = Status.CONNECTING, message = "Connecting…") }
+                BluetoothProfile.STATE_DISCONNECTED ->
+                    _state.update { it.copy(status = Status.READY, host = null, message = "Disconnected") }
+            }
+        }
+
+        override fun onGetReport(device: BluetoothDevice, type: Byte, id: Byte, bufferSize: Int) {
+            val size = HidDescriptor.sizeOf(id.toInt())
+            if (size > 0) hid?.replyReport(device, type, id, ByteArray(size))
+            else hid?.reportError(device, BluetoothHidDevice.ERROR_RSP_INVALID_RPT_ID)
+        }
+
+        override fun onSetReport(device: BluetoothDevice, type: Byte, id: Byte, data: ByteArray) {
+            hid?.reportError(device, BluetoothHidDevice.ERROR_RSP_SUCCESS)
+        }
+    }
+
+    // ------------------------------------------------------------------ low-level reports
+
+    private fun send(id: Int, data: ByteArray): Boolean {
+        val h = hid ?: return false
+        val host = _state.value.host ?: return false
+        return h.sendReport(host, id, data)
+    }
+
+    private fun keyReport(mod: Int, code: Int) =
+        send(HidDescriptor.ID_KEYBOARD, byteArrayOf(mod.toByte(), 0, code.toByte(), 0, 0, 0, 0, 0))
+
+    private fun pause() = Thread.sleep(Prefs.keyDelayMs.toLong().coerceAtLeast(4))
+
+    /** Press + release synchronously. Call only on typingExec. */
+    private fun tapNow(mod: Int, code: Int) {
+        keyReport(mod, code); pause()
+        keyReport(0, 0); pause()
+    }
+
+    // ------------------------------------------------------------------ keyboard API
+
+    fun key(code: Int, mod: Int = 0) = typingExec.execute { tapNow(mod, code) }
+
+    fun keyRepeat(code: Int, times: Int) = typingExec.execute { repeat(times) { tapNow(0, code) } }
+
+    /** Types text, switching the projector's layout between EN and RU as needed. */
+    fun type(text: String) = typingExec.execute {
+        for (c in text) {
+            val (layout, stroke) = KeyMap.resolve(c, _state.value.layout) ?: continue
+            if (layout != _state.value.layout) switchLayoutNow(layout)
+            tapNow(stroke.mod, stroke.code)
+        }
+    }
+
+    /** Sends the layout-switch shortcut once and flips the tracked layout. */
+    fun switchLayout() = typingExec.execute {
+        val next = if (_state.value.layout == KeyMap.Layout.EN) KeyMap.Layout.RU else KeyMap.Layout.EN
+        switchLayoutNow(next)
+    }
+
+    private fun switchLayoutNow(target: KeyMap.Layout) {
+        val combo = Prefs.layoutSwitch
+        if (combo.key == 0) { // modifier-only combo (Alt+Shift)
+            keyReport(combo.mod, 0); pause(); keyReport(0, 0)
+        } else {
+            tapNow(combo.mod, combo.key)
+        }
+        Thread.sleep(120) // let the projector apply the switch
+        _state.update { it.copy(layout = target) }
+    }
+
+    /** Correct the tracked layout without sending anything (when app and projector got out of sync). */
+    fun setAssumedLayout(layout: KeyMap.Layout) = _state.update { it.copy(layout = layout) }
+
+    // ------------------------------------------------------------------ mouse API
+
+    fun mouseMove(dx: Int, dy: Int) {
+        var x = dx; var y = dy
+        while (x != 0 || y != 0) {
+            val sx = x.coerceIn(-127, 127); val sy = y.coerceIn(-127, 127)
+            send(HidDescriptor.ID_MOUSE, byteArrayOf(mouseButtons.toByte(), sx.toByte(), sy.toByte(), 0))
+            x -= sx; y -= sy
+        }
+    }
+
+    fun wheel(steps: Int) {
+        var s = steps
+        while (s != 0) {
+            val chunk = s.coerceIn(-127, 127)
+            send(HidDescriptor.ID_MOUSE, byteArrayOf(mouseButtons.toByte(), 0, 0, chunk.toByte()))
+            s -= chunk
+        }
+    }
+
+    fun click(button: Int = 1) = typingExec.execute {
+        send(HidDescriptor.ID_MOUSE, byteArrayOf((mouseButtons or button).toByte(), 0, 0, 0)); pause()
+        send(HidDescriptor.ID_MOUSE, byteArrayOf(mouseButtons.toByte(), 0, 0, 0))
+    }
+
+    /** Hold/release a button (for drag). Returns new held state. */
+    fun setButtonHeld(button: Int, held: Boolean) {
+        mouseButtons = if (held) mouseButtons or button else mouseButtons and button.inv()
+        send(HidDescriptor.ID_MOUSE, byteArrayOf(mouseButtons.toByte(), 0, 0, 0))
+    }
+
+    // ------------------------------------------------------------------ consumer keys
+
+    fun consumer(usage: Int) = typingExec.execute {
+        send(HidDescriptor.ID_CONSUMER, byteArrayOf((usage and 0xFF).toByte(), (usage shr 8 and 0xFF).toByte())); pause()
+        send(HidDescriptor.ID_CONSUMER, byteArrayOf(0, 0))
+    }
+}
