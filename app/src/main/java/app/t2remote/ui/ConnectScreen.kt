@@ -158,7 +158,11 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
         Card {
             val log by HidController.log.collectAsState()
             if (log.isEmpty()) Text("No events yet.", color = MaterialTheme.colorScheme.onSurfaceVariant)
-            log.takeLast(15).forEach {
+            val clip = androidx.compose.ui.platform.LocalClipboardManager.current
+            OutlinedButton(onClick = {
+                clip.setText(androidx.compose.ui.text.AnnotatedString(log.joinToString("\n") + "\nphone=" + android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " Android " + android.os.Build.VERSION.RELEASE))
+            }) { Text("Copy log") }
+            log.takeLast(25).forEach {
                 Text(it, fontSize = 11.sp, fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
             }

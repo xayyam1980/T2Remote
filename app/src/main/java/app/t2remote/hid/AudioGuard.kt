@@ -48,6 +48,7 @@ object AudioGuard {
             runCatching { a2dp?.connectedDevices?.forEach { add(it.address) } }
             runCatching { headset?.connectedDevices?.forEach { add(it.address) } }
         }
+        if (set != _audioHosts.value) HidController.log("audio links: " + (set.ifEmpty { setOf("none") }).joinToString())
         _audioHosts.value = set
     }
 

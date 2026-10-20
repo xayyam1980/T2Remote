@@ -66,6 +66,7 @@ object HidController {
         adapter = a
         if (!a.isEnabled) { _state.update { it.copy(status = Status.OFF, message = "Turn Bluetooth on") }; return }
         AudioGuard.init(ctx)
+        Scanner.attach(ctx)
         proxyRequested = a.getProfileProxy(ctx.applicationContext, profileListener, BluetoothProfile.HID_DEVICE)
         if (!proxyRequested) _state.update { it.copy(message = "This phone does not support HID device mode") }
     }
@@ -123,7 +124,7 @@ object HidController {
             }.start()
             return
         }
-        h.connect(device)
+        log("hid.connect returned ${h.connect(device)}")
         main.postDelayed(watchdog, 1000)
     }
 
@@ -213,7 +214,13 @@ object HidController {
             "T2 Remote", "Keyboard and mouse", "T2Remote",
             BluetoothHidDevice.SUBCLASS1_COMBO, HidDescriptor.bytes,
         )
-        if (!h.registerApp(sdp, null, null, callbackExec, hidCallback)) {
+        // Outgoing QoS as used by common working HID-device apps; some stacks reject a null QoS.
+        val qos = android.bluetooth.BluetoothHidDeviceAppQosSettings(
+            android.bluetooth.BluetoothHidDeviceAppQosSettings.SERVICE_BEST_EFFORT,
+            800, 9, 0, 11250, android.bluetooth.BluetoothHidDeviceAppQosSettings.MAX,
+        )
+        log("registering keyboard/mouse service")
+        if (!h.registerApp(sdp, null, qos, callbackExec, hidCallback)) {
             _state.update { it.copy(status = Status.OFF, message = "Registration failed — close other Bluetooth keyboard apps") }
         }
     }

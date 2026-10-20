@@ -61,12 +61,28 @@ object Scanner {
                         "Nothing found. On the projector open Settings → Remotes & Accessories → Add accessory (makes it visible), then search again."
                     else "Tap your projector to pair.")
                 }
+                BluetoothDevice.ACTION_ACL_CONNECTED -> {
+                    val d = intent.device() ?: return
+                    HidController.log("link up: ${d.name ?: d.address}")
+                    val recent = justBonded == d.address && System.currentTimeMillis() - justBondedAt < 120_000
+                    if (recent || d.address == app.t2remote.Prefs.lastHost) autoConnect(d, "link up")
+                }
+                BluetoothDevice.ACTION_ACL_DISCONNECTED -> {
+                    val d = intent.device() ?: return
+                    HidController.log("link down: ${d.name ?: d.address}")
+                }
+                BluetoothDevice.ACTION_PAIRING_REQUEST -> {
+                    val d = intent.device() ?: return
+                    HidController.log("pairing request from ${d.name ?: d.address}")
+                }
                 BluetoothDevice.ACTION_BOND_STATE_CHANGED -> {
                     val d = intent.device() ?: return
                     when (intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, -1)) {
                         BluetoothDevice.BOND_BONDING -> _state.update { it.copy(pairing = d.address, message = "Pairing… confirm the code on both screens") }
                         BluetoothDevice.BOND_BONDED -> {
                             HidController.log("paired with ${d.name ?: d.address}")
+                            justBonded = d.address; justBondedAt = System.currentTimeMillis()
+                            if (pendingConnect != d.address) autoConnect(d, "new pairing")
                             _state.update { it.copy(pairing = null, message = "Paired with ${d.name ?: d.address}. Connecting…") }
                             // Give the projector a moment to read our keyboard/mouse service record.
                             if (pendingConnect == d.address) {
@@ -88,6 +104,23 @@ object Scanner {
         if (Build.VERSION.SDK_INT >= 33) getParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java)
         else @Suppress("DEPRECATION") getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
 
+    /** Start listening for pairing / link events (called at app start). */
+    fun attach(ctx: Context) { ensure(ctx) }
+
+    private var justBonded: String? = null
+    private var justBondedAt = 0L
+    private val main = Handler(Looper.getMainLooper())
+
+    /** After the projector pairs or links to us, open the keyboard/mouse channel ourselves. */
+    private fun autoConnect(d: BluetoothDevice, why: String) {
+        main.postDelayed({
+            if (HidController.state.value.status == HidController.Status.CONNECTED) return@postDelayed
+            if (HidController.adoptConnected()) return@postDelayed
+            HidController.log("auto-connect ($why) → ${d.name ?: d.address}")
+            HidController.connect(d)
+        }, 2500)
+    }
+
     private fun ensure(ctx: Context): BluetoothAdapter? {
         if (adapter == null) adapter = ctx.getSystemService(BluetoothManager::class.java)?.adapter
         if (!registered) {
@@ -96,6 +129,9 @@ object Scanner {
                 addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED)
                 addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
                 addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
+                addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
+                addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
+                addAction(BluetoothDevice.ACTION_PAIRING_REQUEST)
             }
             ContextCompat.registerReceiver(ctx.applicationContext, receiver, f, ContextCompat.RECEIVER_EXPORTED)
             registered = true
