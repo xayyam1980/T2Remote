@@ -81,10 +81,22 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
             }
         }
 
-        SectionTitle("Find projector")
+        SectionTitle("Pair from the projector (recommended)")
         Card {
-            Text("1. On the projector open Settings → Remotes & Accessories → Add accessory (this makes it visible).")
-            Text("2. Tap Search, then tap your projector and confirm the code on both screens.")
+            Text("The projector accepts a keyboard/mouse only if it does the pairing itself.")
+            Text("1. If the projector is already paired: tap Forget below, and on the projector open Settings → Remotes & Accessories → your phone → Unpair.")
+            Text("2. Tap Make phone visible (5 min) and keep this app open.")
+            Button(onClick = onMakeDiscoverable, enabled = st.status == Status.READY || st.status == Status.CONNECTED) {
+                Text("Make phone visible")
+            }
+            Text("3. On the projector: Settings → Remotes & Accessories → Add accessory. Pick “${HidController.localName()}” and confirm the code.")
+            Text("The status above turns Connected on its own.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+
+        SectionTitle("Alternative: search from the phone")
+        Card {
+            Text("Use only if the projector doesn't list your phone. On the projector keep Add accessory open, then tap Search and Pair.",
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Button(
                     onClick = { refresh++; Scanner.start(ctx) },
@@ -108,16 +120,6 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
                     ) { Text(if (scan.pairing == f.device.address) "Pairing…" else "Pair") }
                 }
             }
-        }
-
-        SectionTitle("If Search finds nothing")
-        Card {
-            Text("Make the phone visible, then look for it on the projector's Add accessory screen (some firmwares list phones).")
-            Button(onClick = onMakeDiscoverable, enabled = st.status == Status.READY || st.status == Status.CONNECTED) {
-                Text("Make phone visible")
-            }
-            Text("Or pair in the phone's own Settings → Bluetooth, then tap Refresh list below and Connect.",
-                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
 
         SectionTitle("Already paired devices")
@@ -148,6 +150,16 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
             }
             forgotMsg?.let { Text(it, fontSize = 13.sp, color = MaterialTheme.colorScheme.secondary) }
             OutlinedButton(onClick = { refresh++; HidController.adoptConnected() }) { Text("Refresh list") }
+        }
+
+        SectionTitle("Connection log")
+        Card {
+            val log by HidController.log.collectAsState()
+            if (log.isEmpty()) Text("No events yet.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+            log.takeLast(15).forEach {
+                Text(it, fontSize = 11.sp, fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
     }
 }

@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
         if (!hasPermissions()) { ensureBluetooth(); return }
         discoverableLauncher.launch(
             Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)
-                .putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 120)
+                .putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300)
         )
     }
 

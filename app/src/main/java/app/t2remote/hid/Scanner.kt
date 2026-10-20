@@ -66,6 +66,7 @@ object Scanner {
                     when (intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, -1)) {
                         BluetoothDevice.BOND_BONDING -> _state.update { it.copy(pairing = d.address, message = "Pairing… confirm the code on both screens") }
                         BluetoothDevice.BOND_BONDED -> {
+                            HidController.log("paired with ${d.name ?: d.address}")
                             _state.update { it.copy(pairing = null, message = "Paired with ${d.name ?: d.address}. Connecting…") }
                             // Give the projector a moment to read our keyboard/mouse service record.
                             if (pendingConnect == d.address) {

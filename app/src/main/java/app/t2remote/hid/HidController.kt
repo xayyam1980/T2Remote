@@ -37,6 +37,19 @@ object HidController {
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state
 
+    private val _log = MutableStateFlow<List<String>>(emptyList())
+    /** Recent connection events, newest last — shown on the Connect tab for troubleshooting. */
+    val log: StateFlow<List<String>> = _log
+    private val timeFmt = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.US)
+    fun log(msg: String) {
+        Log.d(TAG, msg)
+        _log.update { (it + "${timeFmt.format(java.util.Date())}  $msg").takeLast(40) }
+    }
+    private var connectedAt = 0L
+
+    /** This phone's Bluetooth name, as the projector will list it. */
+    fun localName(): String = runCatching { adapter?.name }.getOrNull() ?: android.os.Build.MODEL
+
     private var adapter: BluetoothAdapter? = null
     private var hid: BluetoothHidDevice? = null
     private var proxyRequested = false
@@ -82,6 +95,7 @@ object HidController {
         val h = hid ?: run { _state.update { it.copy(message = "Keyboard service not ready yet — wait a second and retry") }; return }
         main.removeCallbacks(watchdog)
         target = device; attempt = 1; waited = 0
+        log("connect → ${device.name ?: device.address}")
         _state.update { it.copy(status = Status.CONNECTING, message = "Connecting to ${device.name ?: device.address}…") }
         if (AudioGuard.isAudioConnected(device)) {
             // Projector is using the phone as an audio source — drop that first.
@@ -114,6 +128,7 @@ object HidController {
             if (waited < ATTEMPT_SECONDS) { main.postDelayed(this, 1000); return }
             if (attempt < MAX_ATTEMPTS) {
                 attempt++; waited = 0
+                log("no answer, retry $attempt")
                 _state.update { it.copy(message = "No answer from projector — retry $attempt of $MAX_ATTEMPTS…") }
                 runCatching { h.disconnect(dev) }
                 main.postDelayed({ hid?.connect(dev) }, 1200)
@@ -143,6 +158,7 @@ object HidController {
 
     private fun onConnected(device: BluetoothDevice) {
         main.removeCallbacks(watchdog)
+        if (_state.value.status != Status.CONNECTED) { connectedAt = System.currentTimeMillis(); log("CONNECTED to ${device.name ?: device.address}") }
         target = null
         Prefs.lastHost = device.address
         _state.update { it.copy(status = Status.CONNECTED, host = device, message = "Connected to ${device.name ?: device.address}") }
@@ -191,7 +207,7 @@ object HidController {
 
     private val hidCallback = object : BluetoothHidDevice.Callback() {
         override fun onAppStatusChanged(pluggedDevice: BluetoothDevice?, registered: Boolean) {
-            Log.d(TAG, "app registered=$registered plugged=$pluggedDevice")
+            log("keyboard/mouse service registered=$registered" + (pluggedDevice?.let { " host=${it.name ?: it.address}" } ?: ""))
             if (!registered) {
                 _state.update { it.copy(status = Status.OFF, host = null, message = "Not registered") }
                 return
@@ -205,13 +221,27 @@ object HidController {
         }
 
         override fun onConnectionStateChanged(device: BluetoothDevice, state: Int) {
+            log("${device.name ?: device.address}: " + when (state) {
+                BluetoothProfile.STATE_CONNECTED -> "connected"
+                BluetoothProfile.STATE_CONNECTING -> "connecting"
+                BluetoothProfile.STATE_DISCONNECTING -> "disconnecting"
+                else -> "disconnected"
+            })
             when (state) {
                 BluetoothProfile.STATE_CONNECTED -> main.post { onConnected(device) }
                 BluetoothProfile.STATE_CONNECTING ->
                     _state.update { it.copy(status = Status.CONNECTING) }
                 BluetoothProfile.STATE_DISCONNECTED -> main.post {
                     // During a retry cycle the watchdog owns the state.
-                    if (target == null) _state.update { it.copy(status = Status.READY, host = null, message = "Disconnected") }
+                    if (target == null) {
+                        val quickDrop = _state.value.status == Status.CONNECTED &&
+                            System.currentTimeMillis() - connectedAt < 4000
+                        _state.update {
+                            it.copy(status = Status.READY, host = null, message = if (quickDrop)
+                                "The projector refused the keyboard/mouse connection. It only accepts devices it paired itself — follow “Pair from the projector” below."
+                            else "Disconnected")
+                        }
+                    }
                 }
             }
         }
