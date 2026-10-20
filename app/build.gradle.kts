@@ -33,7 +33,7 @@ android {
         resources.excludes += setOf(
             "/META-INF/{AL2.0,LGPL2.1}", "META-INF/LICENSE*", "META-INF/NOTICE*",
             "META-INF/DEPENDENCIES", "META-INF/INDEX.LIST", "META-INF/*.kotlin_module",
-            "META-INF/versions/9/previous-compilation-data.bin",
+            "META-INF/versions/9/previous-compilation-data.bin", "META-INF/versions/9/OSGI-INF/MANIFEST.MF",
         )
     }
     lint { checkReleaseBuilds = false; abortOnError = false }
@@ -48,6 +48,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.9.2")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
-    // ADB over Wi-Fi client (optional configuration channel)
-    implementation("dev.mobile:dadb:1.2.7")
+    // ADB over Wi-Fi (Wireless debugging pairing + TLS), diagnostics/config channel
+    implementation("io.github.muntashirakon:libadb-android:3.1.1")
+    implementation("org.bouncycastle:bcpkix-jdk15to18:1.81")
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:6.1")
 }

@@ -55,7 +55,9 @@ fun SettingsScreen() {
     var auto by remember { mutableStateOf(Prefs.autoReconnect) }
     var combo by remember { mutableStateOf(Prefs.layoutSwitch) }
     var host by remember { mutableStateOf(Prefs.adbHost) }
-    var port by remember { mutableStateOf(Prefs.adbPort.toString()) }
+    var port by remember { mutableStateOf("") }
+    var pairPort by remember { mutableStateOf("") }
+    var pairCode by remember { mutableStateOf("") }
     var shellCmd by remember { mutableStateOf("") }
     var confirm by remember { mutableStateOf<AdbActions.Action?>(null) }
 
@@ -88,31 +90,51 @@ fun SettingsScreen() {
             SwitchRow("Reconnect to last projector on launch", auto) { auto = it; Prefs.autoReconnect = it }
         }
 
-        SectionTitle("Projector configuration (Wi-Fi ADB, optional)")
+        SectionTitle("Projector over Wi-Fi (Wireless debugging)")
         Card {
             Text(
-                "Enable on projector: Settings → Device Preferences → About → tap Build 7× → Developer options → " +
-                    "turn on USB/Network debugging. Find the IP in Settings → Network.",
+                "Projector: Settings → System → Developer options → Wireless debugging → ON. " +
+                    "Phone and projector must be on the same Wi-Fi.",
                 fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
+            OutlinedTextField(
+                host, { host = it.trim() }, label = { Text("Projector IP (e.g. 192.168.1.47)") }, singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
+            )
+            Text("Step 1, once: tap “Pair device with pairing code” on the projector and enter what it shows:",
+                fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 OutlinedTextField(
-                    host, { host = it.trim() }, label = { Text("Projector IP") }, singleLine = true,
+                    pairPort, { pairPort = it.filter(Char::isDigit).take(5) }, label = { Text("Pairing port") }, singleLine = true,
                     modifier = Modifier.weight(1f),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 )
                 OutlinedTextField(
-                    port, { port = it.filter(Char::isDigit).take(5) }, label = { Text("Port") }, singleLine = true,
-                    modifier = Modifier.width(90.dp),
+                    pairCode, { pairCode = it.filter(Char::isDigit).take(6) }, label = { Text("Code") }, singleLine = true,
+                    modifier = Modifier.weight(1f),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 )
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(
+                enabled = host.isNotBlank() && pairPort.isNotBlank() && pairCode.length == 6 && !adb.busy,
+                onClick = { Prefs.adbHost = host; AdbController.pair(ctx, host, pairPort.toInt(), pairCode) },
+            ) { Text("Pair") }
+            Text("Step 2: connect. Port is the one under “IP address & Port” on the Wireless debugging screen (leave empty to auto-detect).",
+                fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                OutlinedTextField(
+                    port, { port = it.filter(Char::isDigit).take(5) }, label = { Text("Port") }, singleLine = true,
+                    modifier = Modifier.width(110.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                )
                 Button(
                     enabled = host.isNotBlank() && !adb.busy,
                     onClick = {
-                        Prefs.adbHost = host; Prefs.adbPort = port.toIntOrNull() ?: 5555
-                        AdbController.connect(ctx, host, Prefs.adbPort)
+                        Prefs.adbHost = host
+                        val p = port.toIntOrNull() ?: 0
+                        if (p > 0) Prefs.adbPort = p
+                        AdbController.connect(ctx, host, p)
                     },
                 ) { Text(if (adb.connected) "Reconnect" else "Connect") }
                 if (adb.connected) OutlinedButton(onClick = { AdbController.disconnect() }) { Text("Disconnect") }
@@ -140,6 +162,8 @@ fun SettingsScreen() {
                 OutlinedButton(enabled = shellCmd.isNotBlank(), onClick = { AdbController.shell(shellCmd) }) { Text("Run") }
             }
             if (adb.output.isNotBlank()) {
+                val clip = androidx.compose.ui.platform.LocalClipboardManager.current
+                OutlinedButton(onClick = { clip.setText(androidx.compose.ui.text.AnnotatedString(adb.output)) }) { Text("Copy output") }
                 Text(adb.output, fontFamily = FontFamily.Monospace, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
