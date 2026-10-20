@@ -25,6 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.t2remote.hid.HidController
+import app.t2remote.hid.Scanner
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.size
 import app.t2remote.hid.HidController.Status
 
 @SuppressLint("MissingPermission")
@@ -33,6 +37,8 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
     val st by HidController.state.collectAsState()
     var refresh by remember { mutableIntStateOf(0) }
     val devices = remember(refresh, st.status) { HidController.bondedDevices() }
+    val scan by Scanner.state.collectAsState()
+    val ctx = LocalContext.current
 
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
@@ -48,15 +54,43 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
             }
         }
 
-        SectionTitle("First time: pair from the projector")
+        SectionTitle("Find projector")
         Card {
-            Text("1. Tap the button below — the phone becomes visible for 2 minutes.")
+            Text("1. On the projector open Settings → Remotes & Accessories → Add accessory (this makes it visible).")
+            Text("2. Tap Search, then tap your projector and confirm the code on both screens.")
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Button(
+                    onClick = { refresh++; Scanner.start(ctx) },
+                    enabled = !scan.scanning && st.status != Status.OFF && st.status != Status.NO_BLUETOOTH,
+                ) { Text(if (scan.scanning) "Searching…" else "Search") }
+                if (scan.scanning) {
+                    CircularProgressIndicator(Modifier.size(22.dp), strokeWidth = 2.dp)
+                    OutlinedButton(onClick = { Scanner.stop() }) { Text("Stop") }
+                }
+            }
+            if (scan.message.isNotBlank()) Text(scan.message, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            scan.found.forEach { f ->
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f)) {
+                        Text(f.name, fontWeight = if (f.isTv) FontWeight.Bold else FontWeight.Normal)
+                        Text(f.device.address + if (f.isTv) " · likely projector" else "", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                    Button(
+                        onClick = { Scanner.pairAndConnect(ctx, f.device) },
+                        enabled = scan.pairing == null && st.status == Status.READY,
+                    ) { Text(if (scan.pairing == f.device.address) "Pairing…" else "Pair") }
+                }
+            }
+        }
+
+        SectionTitle("If Search finds nothing")
+        Card {
+            Text("Make the phone visible, then look for it on the projector's Add accessory screen (some firmwares list phones).")
             Button(onClick = onMakeDiscoverable, enabled = st.status == Status.READY || st.status == Status.CONNECTED) {
                 Text("Make phone visible")
             }
-            Text("2. On the projector: Settings → Remotes & Accessories → Add accessory (Pair accessory).")
-            Text("3. Select “${android.os.Build.MODEL}” and confirm the pairing code on both screens.")
-            Text("After that, the app reconnects automatically on launch.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("Or pair in the phone's own Settings → Bluetooth, then tap Refresh list below and Connect.",
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
 
         SectionTitle("Already paired devices")
