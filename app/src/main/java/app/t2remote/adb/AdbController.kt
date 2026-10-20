@@ -78,7 +78,7 @@ object AdbController {
         }
     }
 
-    fun keyevent(code: Int) = shell("input keyevent $code", quiet = true)
+    fun keyevent(code: Int) { shell("input keyevent $code", quiet = true) }
 
     /** Unicode text via ADBKeyBoard IME (com.android.adbkeyboard) — works for Russian without layout switching. */
     fun typeUnicode(text: String) {
