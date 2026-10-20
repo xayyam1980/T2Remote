@@ -52,6 +52,7 @@ object HidController {
         if (a == null) { _state.update { it.copy(status = Status.NO_BLUETOOTH, message = "Bluetooth not available") }; return }
         adapter = a
         if (!a.isEnabled) { _state.update { it.copy(status = Status.OFF, message = "Turn Bluetooth on") }; return }
+        AudioGuard.init(ctx)
         proxyRequested = a.getProfileProxy(ctx.applicationContext, profileListener, BluetoothProfile.HID_DEVICE)
         if (!proxyRequested) _state.update { it.copy(message = "This phone does not support HID device mode") }
     }
@@ -82,6 +83,19 @@ object HidController {
         main.removeCallbacks(watchdog)
         target = device; attempt = 1; waited = 0
         _state.update { it.copy(status = Status.CONNECTING, message = "Connecting to ${device.name ?: device.address}…") }
+        if (AudioGuard.isAudioConnected(device)) {
+            // Projector is using the phone as an audio source — drop that first.
+            _state.update { it.copy(message = "Projector is connected as a speaker — switching audio off…") }
+            Thread {
+                val off = AudioGuard.blockAudio(device)
+                main.post {
+                    if (!off) _state.update { it.copy(message = "Projector is still connected as a speaker. Turn off Media audio for it (button below), then Connect.") }
+                    hid?.connect(device)
+                    main.postDelayed(watchdog, 1000)
+                }
+            }.start()
+            return
+        }
         h.connect(device)
         main.postDelayed(watchdog, 1000)
     }
@@ -110,7 +124,9 @@ object HidController {
             target = null
             _state.update {
                 it.copy(status = Status.READY, host = null,
-                    message = "Projector paired but didn't open the keyboard/mouse channel. Tap “Forget & re-pair” below.")
+                    message = if (AudioGuard.isAudioConnected(dev))
+                        "Projector is connected as a speaker, so it ignores the keyboard/mouse. Turn off Media audio for it (button below), then Connect."
+                    else "Projector paired but didn't open the keyboard/mouse channel. Tap Forget, unpair on the projector, then Search and Pair again.")
             }
         }
     }

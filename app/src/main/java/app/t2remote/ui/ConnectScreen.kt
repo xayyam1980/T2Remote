@@ -28,6 +28,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.t2remote.hid.HidController
 import app.t2remote.hid.Scanner
+import app.t2remote.hid.AudioGuard
+import android.content.Intent
+import android.provider.Settings
+import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.delay
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.foundation.layout.size
@@ -42,6 +47,9 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
     val devices = remember(refresh, st.status) { HidController.bondedDevices() }
     val scan by Scanner.state.collectAsState()
     val ctx = LocalContext.current
+    val audioHosts by AudioGuard.audioHosts.collectAsState()
+    LaunchedEffect(Unit) { while (true) { AudioGuard.refresh(); HidController.adoptConnected(); delay(2000) } }
+    val speakerDevice = devices.firstOrNull { it.address in audioHosts && it.address != st.host?.address }
 
     Column(
         Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
@@ -56,6 +64,20 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
                     OutlinedButton(onClick = { HidController.disconnect() }) {
                         Text(if (st.status == Status.CONNECTING) "Cancel" else "Disconnect")
                     }
+            }
+        }
+
+        if (speakerDevice != null) {
+            SectionTitle("Projector is connected as a speaker")
+            Card {
+                Text("“${speakerDevice.name ?: speakerDevice.address}” is playing your phone's audio, so it ignores the keyboard/mouse.")
+                Text("Open Bluetooth settings → tap the gear next to it → turn off Media audio (and Call audio). Come back and tap Connect.")
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(onClick = {
+                        ctx.startActivity(Intent(Settings.ACTION_BLUETOOTH_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                    }) { Text("Open Bluetooth settings") }
+                    OutlinedButton(onClick = { Thread { AudioGuard.blockAudio(speakerDevice) }.start() }) { Text("Try auto-off") }
+                }
             }
         }
 
