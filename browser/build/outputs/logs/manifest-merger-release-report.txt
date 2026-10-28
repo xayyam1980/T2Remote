@@ -1,0 +1,105 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:2:1-36:12
+	package
+		INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:3:5-67
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:3:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:4:5-79
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:4:22-76
+uses-feature#android.software.leanback
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:5:5-87
+	android:required
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:5:60-84
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:5:19-59
+uses-feature#android.hardware.touchscreen
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:6:5-90
+	android:required
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:6:63-87
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:6:19-62
+application
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:8:5-35:19
+INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:8:5-35:19
+	android:extractNativeLibs
+		INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml
+	android:label
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:9:9-35
+	android:hardwareAccelerated
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:12:9-43
+	android:icon
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:10:9-40
+	android:banner
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:11:9-42
+	android:theme
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:14:9-82
+	android:usesCleartextTraffic
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:13:9-44
+activity#app.t2remote.browser.BrowserActivity
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:15:9-34:20
+	android:screenOrientation
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:19:13-50
+	android:launchMode
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:18:13-44
+	android:windowSoftInputMode
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:21:13-55
+	android:exported
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:17:13-36
+	android:configChanges
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:20:13-151
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:16:13-44
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER+category:name:android.intent.category.LEANBACK_LAUNCHER
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:22:13-26:29
+action#android.intent.action.MAIN
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:23:17-69
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:23:25-66
+category#android.intent.category.LEANBACK_LAUNCHER
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:24:17-86
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:24:27-83
+category#android.intent.category.LAUNCHER
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:25:17-77
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:25:27-74
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:http+data:scheme:https
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:27:13-33:29
+action#android.intent.action.VIEW
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:28:17-69
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:28:25-66
+category#android.intent.category.DEFAULT
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:29:17-76
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:29:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:30:17-78
+	android:name
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:30:27-75
+data
+ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:31:17-47
+	android:scheme
+		ADDED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml:31:23-44
+uses-sdk
+INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml
+INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/runner/work/T2Remote/T2Remote/browser/src/main/AndroidManifest.xml

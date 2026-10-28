@@ -1,0 +1,8 @@
+app.t2remote.home.TextService
+app.t2remote.home.TextReceiver
+app.t2remote.home.T2Ime
+app.t2remote.home.HomeActivity
+app.t2remote.home.T2Ime: T2Ime()
+app.t2remote.home.TextService: TextService()
+app.t2remote.home.TextReceiver: TextReceiver()
+app.t2remote.home.HomeActivity: HomeActivity()

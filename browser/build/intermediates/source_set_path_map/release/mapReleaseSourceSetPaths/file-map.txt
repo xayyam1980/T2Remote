@@ -1,0 +1,8 @@
+app.t2remote.browser-pngs-0 /home/runner/work/T2Remote/T2Remote/browser/build/generated/res/pngs/release
+app.t2remote.browser-resValues-1 /home/runner/work/T2Remote/T2Remote/browser/build/generated/res/resValues/release
+app.t2remote.browser-packageReleaseResources-2 /home/runner/work/T2Remote/T2Remote/browser/build/intermediates/incremental/release/packageReleaseResources/merged.dir
+app.t2remote.browser-packageReleaseResources-3 /home/runner/work/T2Remote/T2Remote/browser/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
+app.t2remote.browser-merged-not-compiled-resources-4 /home/runner/work/T2Remote/T2Remote/browser/build/intermediates/merged-not-compiled-resources/release
+app.t2remote.browser-release-5 /home/runner/work/T2Remote/T2Remote/browser/build/intermediates/merged_res/release/mergeReleaseResources
+app.t2remote.browser-main-6 /home/runner/work/T2Remote/T2Remote/browser/src/main/res
+app.t2remote.browser-release-7 /home/runner/work/T2Remote/T2Remote/browser/src/release/res

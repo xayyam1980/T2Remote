@@ -1,0 +1,1 @@
+-keep class app.t2remote.browser.BrowserActivity { <init>(); }

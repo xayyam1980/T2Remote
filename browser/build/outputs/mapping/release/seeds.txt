@@ -1,0 +1,2 @@
+app.t2remote.browser.BrowserActivity
+app.t2remote.browser.BrowserActivity: BrowserActivity()

@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "app.t2remote.home.launcher-release-5:/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/runner/work/T2Remote/T2Remote/launcher/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endColumns": "128",
+                        "endOffsets": "140"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "128",
+                        "endOffsets": "179"
+                    }
+                }
+            ]
+        }
+    ]
+}

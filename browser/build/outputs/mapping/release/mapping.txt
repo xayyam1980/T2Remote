@@ -1,0 +1,1385 @@
+# compiler: R8
+# compiler_version: 8.5.35
+# min_api: 26
+# common_typos_disable
+# {"id":"com.android.tools.r8.mapping","version":"2.2"}
+# pg_map_id: f9df8b5
+# pg_map_hash: SHA-256 f9df8b59ccefde228ce797f856336492d2b975a5f95feaccfb944a15ab6346d5
+app.t2remote.browser.BrowserActivity -> app.t2remote.browser.BrowserActivity:
+# {"id":"sourceFile","fileName":"BrowserActivity.kt"}
+    android.webkit.WebView web -> a
+    android.widget.EditText url -> b
+    android.widget.LinearLayout bar -> c
+    android.widget.ProgressBar progress -> d
+    android.widget.FrameLayout fullscreen -> e
+    android.widget.TextView modeBtn -> f
+    android.view.View customView -> g
+    android.webkit.WebChromeClient$CustomViewCallback customCallback -> h
+    java.lang.String defaultUa -> i
+    kotlin.Lazy prefs$delegate -> j
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lb/b;"}
+    java.lang.String V -> k
+    java.util.Set BLOCK -> l
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Ljava/util/LinkedHashSet;"}
+    0:105:void <clinit>():70:70 -> <clinit>
+    106:123:java.util.Set kotlin.collections.ArraysKt___ArraysKt.toSet(java.lang.Object[]):9958:9958 -> <clinit>
+    106:123:java.util.Set kotlin.collections.SetsKt__SetsKt.setOf(java.lang.Object[]):44 -> <clinit>
+    106:123:void <clinit>():61 -> <clinit>
+    124:125:java.util.Collection kotlin.collections.ArraysKt___ArraysKt.toCollection(java.lang.Object[],java.util.Collection):9622:9622 -> <clinit>
+    124:125:java.util.Set kotlin.collections.ArraysKt___ArraysKt.toSet(java.lang.Object[]):9958 -> <clinit>
+    124:125:java.util.Set kotlin.collections.SetsKt__SetsKt.setOf(java.lang.Object[]):44 -> <clinit>
+    124:125:void <clinit>():61 -> <clinit>
+    126:131:java.util.Collection kotlin.collections.ArraysKt___ArraysKt.toCollection(java.lang.Object[],java.util.Collection):9623:9623 -> <clinit>
+    126:131:java.util.Set kotlin.collections.ArraysKt___ArraysKt.toSet(java.lang.Object[]):9958 -> <clinit>
+    126:131:java.util.Set kotlin.collections.SetsKt__SetsKt.setOf(java.lang.Object[]):44 -> <clinit>
+    126:131:void <clinit>():61 -> <clinit>
+    132:134:void <clinit>():61:61 -> <clinit>
+    0:2:void access$exitFullscreen(app.t2remote.browser.BrowserActivity):40:40 -> <init>
+    0:2:void <init>():40 -> <init>
+    3:6:void <init>():50:50 -> <init>
+    7:12:android.content.SharedPreferences prefs_delegate$lambda$0(app.t2remote.browser.BrowserActivity):52:52 -> <init>
+    7:12:void <init>():52 -> <init>
+    13:17:kotlin.Lazy kotlin.LazyKt__LazyJVMKt.lazy(kotlin.jvm.functions.Function0):21:21 -> <init>
+    13:17:void <init>():52 -> <init>
+    18:19:android.content.SharedPreferences prefs_delegate$lambda$0(app.t2remote.browser.BrowserActivity):52:52 -> <init>
+    18:19:void <init>():52 -> <init>
+    20:24:void <init>():301:301 -> <init>
+    0:15:java.util.List bookmarks():241:241 -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()Ljava/util/ArrayList;"}
+    16:25:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.lineSequence(java.lang.CharSequence):1406:1406 -> a
+    16:25:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    16:25:java.util.List bookmarks():241 -> a
+    26:29:java.util.List kotlin.collections.ArraysUtilJVM.asList(java.lang.Object[]):13:13 -> a
+    26:29:java.util.List kotlin.collections.ArraysKt___ArraysJvmKt.asList(java.lang.Object[]):133 -> a
+    26:29:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.rangesDelimitedBy$StringsKt__StringsKt(java.lang.CharSequence,java.lang.String[],int,boolean,int):1276 -> a
+    26:29:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.rangesDelimitedBy$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.String[],int,boolean,int,int,java.lang.Object):1274 -> a
+    26:29:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.splitToSequence(java.lang.CharSequence,java.lang.String[],boolean,int):1300 -> a
+    26:29:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.splitToSequence$default(java.lang.CharSequence,java.lang.String[],boolean,int,int,java.lang.Object):1299 -> a
+    26:29:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.lineSequence(java.lang.CharSequence):1406 -> a
+    26:29:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    26:29:java.util.List bookmarks():241 -> a
+    30:34:void onCreate(android.os.Bundle):133:133 -> a
+    30:34:java.util.List kotlin.collections.ArraysKt___ArraysJvmKt.asList(java.lang.Object[]):133 -> a
+    30:34:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.rangesDelimitedBy$StringsKt__StringsKt(java.lang.CharSequence,java.lang.String[],int,boolean,int):1276 -> a
+    30:34:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.rangesDelimitedBy$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.String[],int,boolean,int,int,java.lang.Object):1274 -> a
+    30:34:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.splitToSequence(java.lang.CharSequence,java.lang.String[],boolean,int):1300 -> a
+    30:34:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.splitToSequence$default(java.lang.CharSequence,java.lang.String[],boolean,int,int,java.lang.Object):1299 -> a
+    30:34:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.lineSequence(java.lang.CharSequence):1406 -> a
+    30:34:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    30:34:java.util.List bookmarks():241 -> a
+    35:45:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.rangesDelimitedBy$StringsKt__StringsKt(java.lang.CharSequence,java.lang.String[],int,boolean,int):1278:1278 -> a
+    35:45:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.rangesDelimitedBy$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.String[],int,boolean,int,int,java.lang.Object):1274 -> a
+    35:45:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.splitToSequence(java.lang.CharSequence,java.lang.String[],boolean,int):1300 -> a
+    35:45:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.splitToSequence$default(java.lang.CharSequence,java.lang.String[],boolean,int,int,java.lang.Object):1299 -> a
+    35:45:kotlin.sequences.Sequence kotlin.text.StringsKt__StringsKt.lineSequence(java.lang.CharSequence):1406 -> a
+    35:45:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    35:45:java.util.List bookmarks():241 -> a
+    46:49:void kotlin.sequences.TransformingSequence$iterator$1.<init>(kotlin.sequences.TransformingSequence):208:208 -> a
+    46:49:java.util.Iterator kotlin.sequences.TransformingSequence.iterator():207 -> a
+    46:49:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):812 -> a
+    46:49:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    46:49:java.util.List bookmarks():241 -> a
+    50:53:void go(java.lang.String):214:214 -> a
+    50:53:boolean kotlin.sequences.TransformingSequence$iterator$1.hasNext():214 -> a
+    50:53:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):813 -> a
+    50:53:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    50:53:java.util.List bookmarks():241 -> a
+    54:57:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):813:813 -> a
+    54:57:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    54:57:java.util.List bookmarks():241 -> a
+    58:60:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):814:814 -> a
+    58:60:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    58:60:java.util.List bookmarks():241 -> a
+    61:64:void go(java.lang.String):210:210 -> a
+    61:64:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    61:64:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):815 -> a
+    61:64:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    61:64:java.util.List bookmarks():241 -> a
+    65:66:java.lang.Object kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(java.lang.Object):1300:1300 -> a
+    65:66:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    65:66:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):815 -> a
+    65:66:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    65:66:java.util.List bookmarks():241 -> a
+    67:71:java.lang.String kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(kotlin.ranges.IntRange):0:0 -> a
+    67:71:java.lang.Object kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(java.lang.Object):1300 -> a
+    67:71:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    67:71:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):815 -> a
+    67:71:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    67:71:java.util.List bookmarks():241 -> a
+    72:85:java.lang.String kotlin.text.StringsKt__StringsKt.substring(java.lang.CharSequence,kotlin.ranges.IntRange):435:435 -> a
+    72:85:java.lang.String kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(kotlin.ranges.IntRange):1300 -> a
+    72:85:java.lang.Object kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(java.lang.Object):1300 -> a
+    72:85:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    72:85:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):815 -> a
+    72:85:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    72:85:java.util.List bookmarks():241 -> a
+    86:91:void go(java.lang.String):214:214 -> a
+    86:91:boolean kotlin.sequences.TransformingSequence$iterator$1.hasNext():214 -> a
+    86:91:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):816 -> a
+    86:91:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    86:91:java.util.List bookmarks():241 -> a
+    92:101:java.util.List kotlin.collections.CollectionsKt__CollectionsJVMKt.listOf(java.lang.Object):22:22 -> a
+    92:101:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):817 -> a
+    92:101:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    92:101:java.util.List bookmarks():241 -> a
+    102:106:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):818:818 -> a
+    102:106:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    102:106:java.util.List bookmarks():241 -> a
+    107:109:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):819:819 -> a
+    107:109:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    107:109:java.util.List bookmarks():241 -> a
+    110:115:void go(java.lang.String):214:214 -> a
+    110:115:boolean kotlin.sequences.TransformingSequence$iterator$1.hasNext():214 -> a
+    110:115:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):820 -> a
+    110:115:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    110:115:java.util.List bookmarks():241 -> a
+    116:119:void go(java.lang.String):210:210 -> a
+    116:119:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    116:119:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):820 -> a
+    116:119:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    116:119:java.util.List bookmarks():241 -> a
+    120:121:java.lang.Object kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(java.lang.Object):1300:1300 -> a
+    120:121:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    120:121:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):820 -> a
+    120:121:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    120:121:java.util.List bookmarks():241 -> a
+    122:124:java.lang.String kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(kotlin.ranges.IntRange):0:0 -> a
+    122:124:java.lang.Object kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(java.lang.Object):1300 -> a
+    122:124:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    122:124:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):820 -> a
+    122:124:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    122:124:java.util.List bookmarks():241 -> a
+    125:138:java.lang.String kotlin.text.StringsKt__StringsKt.substring(java.lang.CharSequence,kotlin.ranges.IntRange):435:435 -> a
+    125:138:java.lang.String kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(kotlin.ranges.IntRange):1300 -> a
+    125:138:java.lang.Object kotlin.text.StringsKt__StringsKt$splitToSequence$1.invoke(java.lang.Object):1300 -> a
+    125:138:java.lang.Object kotlin.sequences.TransformingSequence$iterator$1.next():210 -> a
+    125:138:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):820 -> a
+    125:138:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    125:138:java.util.List bookmarks():241 -> a
+    139:143:java.util.List kotlin.sequences.SequencesKt___SequencesKt.toList(kotlin.sequences.Sequence):820:820 -> a
+    139:143:java.util.List kotlin.text.StringsKt__StringsKt.lines(java.lang.CharSequence):1413 -> a
+    139:143:java.util.List bookmarks():241 -> a
+    144:148:java.util.List kotlin.collections.CollectionsKt___CollectionsKt.filter(java.lang.Iterable,kotlin.jvm.functions.Function1):774:774 -> a
+    144:148:java.util.List bookmarks():241 -> a
+    149:167:java.util.Collection kotlin.collections.CollectionsKt___CollectionsKt.filterTo(java.lang.Iterable,java.util.Collection,kotlin.jvm.functions.Function1):865:865 -> a
+    149:167:java.util.List bookmarks():241 -> a
+    168:173:java.util.List bookmarks():241:241 -> a
+    174:177:java.util.Collection kotlin.collections.CollectionsKt___CollectionsKt.filterTo(java.lang.Iterable,java.util.Collection,kotlin.jvm.functions.Function1):865:865 -> a
+    174:177:java.util.List bookmarks():241 -> a
+    178:179:java.util.List kotlin.collections.CollectionsKt___CollectionsKt.map(java.lang.Iterable,kotlin.jvm.functions.Function1):1557:1557 -> a
+    178:179:java.util.List bookmarks():242 -> a
+    180:183:int kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(java.lang.Iterable,int):39:39 -> a
+    180:183:java.util.List bookmarks():360 -> a
+    184:186:java.util.List kotlin.collections.CollectionsKt___CollectionsKt.map(java.lang.Iterable,kotlin.jvm.functions.Function1):1557:1557 -> a
+    184:186:java.util.List bookmarks():242 -> a
+    187:200:java.util.Collection kotlin.collections.CollectionsKt___CollectionsKt.mapTo(java.lang.Iterable,java.util.Collection,kotlin.jvm.functions.Function1):1628:1628 -> a
+    187:200:java.util.List bookmarks():242 -> a
+    201:202:java.util.Collection kotlin.collections.CollectionsKt___CollectionsKt.mapTo(java.lang.Iterable,java.util.Collection,kotlin.jvm.functions.Function1):1629:1629 -> a
+    201:202:java.util.List bookmarks():242 -> a
+    203:206:java.lang.String kotlin.text.StringsKt__StringsKt.substringBefore(java.lang.String,char,java.lang.String):0:0 -> a
+    203:206:java.lang.String kotlin.text.StringsKt__StringsKt.substringBefore$default(java.lang.String,char,java.lang.String,int,java.lang.Object):441 -> a
+    203:206:java.util.List bookmarks():242 -> a
+    207:210:java.lang.String kotlin.text.StringsKt__StringsKt.substringBefore(java.lang.String,char,java.lang.String):442:442 -> a
+    207:210:java.lang.String kotlin.text.StringsKt__StringsKt.substringBefore$default(java.lang.String,char,java.lang.String,int,java.lang.Object):441 -> a
+    207:210:java.util.List bookmarks():242 -> a
+    211:224:java.lang.String kotlin.text.StringsKt__StringsKt.substringBefore(java.lang.String,char,java.lang.String):443:443 -> a
+    211:224:java.lang.String kotlin.text.StringsKt__StringsKt.substringBefore$default(java.lang.String,char,java.lang.String,int,java.lang.Object):441 -> a
+    211:224:java.util.List bookmarks():242 -> a
+    225:233:java.lang.String kotlin.text.StringsKt__StringsKt.substringAfter(java.lang.String,char,java.lang.String):460:460 -> a
+    225:233:java.lang.String kotlin.text.StringsKt__StringsKt.substringAfter$default(java.lang.String,char,java.lang.String,int,java.lang.Object):459 -> a
+    225:233:java.util.List bookmarks():242 -> a
+    234:244:java.lang.String kotlin.text.StringsKt__StringsKt.substringAfter(java.lang.String,char,java.lang.String):461:461 -> a
+    234:244:java.lang.String kotlin.text.StringsKt__StringsKt.substringAfter$default(java.lang.String,char,java.lang.String,int,java.lang.Object):459 -> a
+    234:244:java.util.List bookmarks():242 -> a
+    245:249:kotlin.Pair kotlin.TuplesKt.to(java.lang.Object,java.lang.Object):43:43 -> a
+    245:249:java.util.List bookmarks():242 -> a
+    250:253:java.util.Collection kotlin.collections.CollectionsKt___CollectionsKt.mapTo(java.lang.Iterable,java.util.Collection,kotlin.jvm.functions.Function1):1629:1629 -> a
+    250:253:java.util.List bookmarks():242 -> a
+    254:259:java.util.List kotlin.collections.CollectionsKt___CollectionsKt.toMutableList(java.util.Collection):1343:1343 -> a
+    254:259:java.util.List bookmarks():242 -> a
+    0:4:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):343:343 -> b
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;La/a;)Landroid/widget/TextView;"}
+    5:19:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):344:344 -> b
+    20:31:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):345:345 -> b
+    32:61:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):346:346 -> b
+    62:69:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):347:347 -> b
+    70:73:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):348:348 -> b
+    74:95:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):349:349 -> b
+    96:99:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):348:348 -> b
+    100:120:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):350:350 -> b
+    121:123:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):347:347 -> b
+    124:132:void btn$lambda$32$lambda$31(kotlin.jvm.functions.Function0,android.view.View):352:352 -> b
+    124:132:android.widget.TextView btn(java.lang.String,kotlin.jvm.functions.Function0):352 -> b
+    0:14:int dp(float):53:53 -> c
+    0:32:java.lang.String esc(java.lang.String):264:264 -> d
+    5:10:boolean dispatchKeyEvent(android.view.KeyEvent):304:304 -> dispatchKeyEvent
+    11:39:boolean dispatchKeyEvent(android.view.KeyEvent):305:305 -> dispatchKeyEvent
+    40:56:boolean dispatchKeyEvent(android.view.KeyEvent):311:311 -> dispatchKeyEvent
+    57:77:boolean dispatchKeyEvent(android.view.KeyEvent):313:313 -> dispatchKeyEvent
+    78:96:boolean dispatchKeyEvent(android.view.KeyEvent):314:314 -> dispatchKeyEvent
+    97:115:boolean dispatchKeyEvent(android.view.KeyEvent):315:315 -> dispatchKeyEvent
+    116:136:boolean dispatchKeyEvent(android.view.KeyEvent):307:307 -> dispatchKeyEvent
+    137:155:boolean dispatchKeyEvent(android.view.KeyEvent):308:308 -> dispatchKeyEvent
+    156:174:boolean dispatchKeyEvent(android.view.KeyEvent):306:306 -> dispatchKeyEvent
+    175:189:boolean dispatchKeyEvent(android.view.KeyEvent):309:309 -> dispatchKeyEvent
+    190:195:boolean dispatchKeyEvent(android.view.KeyEvent):318:318 -> dispatchKeyEvent
+    0:4:void exitFullscreen():221:221 -> e
+    5:23:void exitFullscreen():222:222 -> e
+    24:25:void exitFullscreen():223:223 -> e
+    26:34:void exitFullscreen():224:224 -> e
+    35:46:void exitFullscreen():225:225 -> e
+    47:60:void exitFullscreen():226:226 -> e
+    61:68:void exitFullscreen():222:222 -> e
+    0:11:boolean getDesktop():139:139 -> f
+    0:8:android.content.SharedPreferences prefs_delegate$lambda$0(app.t2remote.browser.BrowserActivity):52:52 -> g
+    0:8:android.content.SharedPreferences getPrefs():52 -> g
+    0:4:java.lang.CharSequence kotlin.text.StringsKt__StringsKt.trim(java.lang.CharSequence):0:0 -> h
+    0:4:void go(java.lang.String):209 -> h
+    5:20:java.lang.CharSequence kotlin.text.StringsKt__StringsKt.trim(java.lang.CharSequence):1600:1600 -> h
+    5:20:void go(java.lang.String):209 -> h
+    21:24:java.lang.CharSequence kotlin.text.StringsKt__StringsKt.trim(java.lang.CharSequence):1605:1605 -> h
+    21:24:void go(java.lang.String):209 -> h
+    25:56:kotlin.Unit onCreate$lambda$5(app.t2remote.browser.BrowserActivity):103:103 -> h
+    25:56:boolean kotlin.text.CharsKt__CharJVMKt.isWhitespace(char):103 -> h
+    25:56:java.lang.CharSequence kotlin.text.StringsKt__StringsKt.trim(java.lang.CharSequence):177 -> h
+    25:56:void go(java.lang.String):209 -> h
+    57:60:java.lang.CharSequence kotlin.text.StringsKt__StringsKt.trim(java.lang.CharSequence):1620:1620 -> h
+    57:60:void go(java.lang.String):209 -> h
+    61:64:void go(java.lang.String):209:209 -> h
+    65:71:void go(java.lang.String):210:210 -> h
+    72:90:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> h
+    72:90:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> h
+    72:90:void go(java.lang.String):212 -> h
+    91:109:void go(java.lang.String):213:213 -> h
+    110:127:void go(java.lang.String):214:214 -> h
+    128:137:void go(java.lang.String):216:216 -> h
+    138:149:void go(java.lang.String):217:217 -> h
+    150:153:void go(java.lang.String):216:216 -> h
+    0:14:void js(java.lang.String):300:300 -> i
+    0:28:java.lang.CharSequence saveBookmarks$lambda$20(kotlin.Pair):245:245 -> j
+    0:28:void saveBookmarks(java.util.List):245 -> j
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/util/ArrayList;)V"}
+    0:9:void showStart():267:267 -> k
+    10:23:java.lang.CharSequence showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):268:268 -> k
+    10:23:void showStart():268 -> k
+    24:31:void showStart():273:273 -> k
+    32:50:void showStart():294:294 -> k
+    51:71:void showStart():295:295 -> k
+    72:77:void showStart():267:267 -> k
+    0:7:void onBackPressed():324:324 -> onBackPressed
+    8:32:void onBackPressed():325:325 -> onBackPressed
+    33:54:void onBackPressed():326:326 -> onBackPressed
+    55:64:void onBackPressed():327:327 -> onBackPressed
+    65:73:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> onBackPressed
+    65:73:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> onBackPressed
+    65:73:void onBackPressed():327 -> onBackPressed
+    74:77:void onBackPressed():328:328 -> onBackPressed
+    78:85:void onBackPressed():327:327 -> onBackPressed
+    86:89:void onBackPressed():326:326 -> onBackPressed
+    90:95:void onBackPressed():325:325 -> onBackPressed
+    2:4:void onCreate(android.os.Bundle):90:90 -> onCreate
+    5:13:void onCreate(android.os.Bundle):91:91 -> onCreate
+    14:27:void onCreate(android.os.Bundle):93:93 -> onCreate
+    28:36:void onCreate(android.os.Bundle):94:94 -> onCreate
+    37:43:void onCreate(android.os.Bundle):97:97 -> onCreate
+    44:46:void onCreate(android.os.Bundle):98:98 -> onCreate
+    47:57:void onCreate(android.os.Bundle):99:99 -> onCreate
+    58:78:void onCreate(android.os.Bundle):100:100 -> onCreate
+    79:80:void onCreate(android.os.Bundle):97:97 -> onCreate
+    81:95:kotlin.Unit onCreate$lambda$4(app.t2remote.browser.BrowserActivity):102:102 -> onCreate
+    81:95:void onCreate(android.os.Bundle):102 -> onCreate
+    96:117:kotlin.Unit onCreate$lambda$5(app.t2remote.browser.BrowserActivity):103:103 -> onCreate
+    96:117:void onCreate(android.os.Bundle):103 -> onCreate
+    118:136:kotlin.Unit onCreate$lambda$6(app.t2remote.browser.BrowserActivity):104:104 -> onCreate
+    118:136:void onCreate(android.os.Bundle):104 -> onCreate
+    137:155:kotlin.Unit onCreate$lambda$7(app.t2remote.browser.BrowserActivity):105:105 -> onCreate
+    137:155:void onCreate(android.os.Bundle):105 -> onCreate
+    156:160:void onCreate(android.os.Bundle):106:106 -> onCreate
+    161:176:void onCreate(android.os.Bundle):107:107 -> onCreate
+    177:187:void onCreate(android.os.Bundle):108:108 -> onCreate
+    188:190:void onCreate(android.os.Bundle):109:109 -> onCreate
+    191:193:void onCreate(android.os.Bundle):110:110 -> onCreate
+    194:222:void onCreate(android.os.Bundle):111:111 -> onCreate
+    223:241:void onCreate(android.os.Bundle):112:112 -> onCreate
+    242:244:void onCreate(android.os.Bundle):113:113 -> onCreate
+    245:252:boolean onCreate$lambda$10$lambda$9(app.t2remote.browser.BrowserActivity,android.widget.EditText,android.widget.TextView,int,android.view.KeyEvent):114:114 -> onCreate
+    245:252:void onCreate(android.os.Bundle):114 -> onCreate
+    253:254:void onCreate(android.os.Bundle):106:106 -> onCreate
+    255:283:void onCreate(android.os.Bundle):116:116 -> onCreate
+    284:302:kotlin.Unit onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117:117 -> onCreate
+    284:302:void onCreate(android.os.Bundle):117 -> onCreate
+    303:325:kotlin.Unit onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118:118 -> onCreate
+    303:325:void onCreate(android.os.Bundle):118 -> onCreate
+    326:332:void onCreate(android.os.Bundle):119:119 -> onCreate
+    333:339:void onCreate(android.os.Bundle):120:120 -> onCreate
+    340:359:void onCreate(android.os.Bundle):122:122 -> onCreate
+    360:373:void onCreate(android.os.Bundle):123:123 -> onCreate
+    374:380:void onCreate(android.os.Bundle):125:125 -> onCreate
+    381:388:void onCreate(android.os.Bundle):126:126 -> onCreate
+    389:391:void onCreate(android.os.Bundle):127:127 -> onCreate
+    392:406:void onCreate(android.os.Bundle):129:129 -> onCreate
+    407:409:void onCreate(android.os.Bundle):130:130 -> onCreate
+    410:412:void onCreate(android.os.Bundle):131:131 -> onCreate
+    413:425:void setupWeb():143:143 -> onCreate
+    413:425:void onCreate(android.os.Bundle):133 -> onCreate
+    426:438:void setupWeb():144:144 -> onCreate
+    426:438:void onCreate(android.os.Bundle):133 -> onCreate
+    439:444:void setupWeb():145:145 -> onCreate
+    439:444:void onCreate(android.os.Bundle):133 -> onCreate
+    445:447:void setupWeb():146:146 -> onCreate
+    445:447:void onCreate(android.os.Bundle):133 -> onCreate
+    448:450:void setupWeb():147:147 -> onCreate
+    448:450:void onCreate(android.os.Bundle):133 -> onCreate
+    451:453:void setupWeb():148:148 -> onCreate
+    451:453:void onCreate(android.os.Bundle):133 -> onCreate
+    454:456:void setupWeb():149:149 -> onCreate
+    454:456:void onCreate(android.os.Bundle):133 -> onCreate
+    457:459:void setupWeb():150:150 -> onCreate
+    457:459:void onCreate(android.os.Bundle):133 -> onCreate
+    460:469:void setupWeb():151:151 -> onCreate
+    460:469:void onCreate(android.os.Bundle):133 -> onCreate
+    470:472:void setupWeb():152:152 -> onCreate
+    470:472:void onCreate(android.os.Bundle):133 -> onCreate
+    473:475:void setupWeb():153:153 -> onCreate
+    473:475:void onCreate(android.os.Bundle):133 -> onCreate
+    476:478:void setupWeb():154:154 -> onCreate
+    476:478:void onCreate(android.os.Bundle):133 -> onCreate
+    479:492:void setupWeb():155:155 -> onCreate
+    479:492:void onCreate(android.os.Bundle):133 -> onCreate
+    493:503:void setupWeb():156:156 -> onCreate
+    493:503:void onCreate(android.os.Bundle):133 -> onCreate
+    504:515:void setupWeb():158:158 -> onCreate
+    504:515:void onCreate(android.os.Bundle):133 -> onCreate
+    516:527:void setupWeb():189:189 -> onCreate
+    516:527:void onCreate(android.os.Bundle):133 -> onCreate
+    528:539:void onCreate(android.os.Bundle):134:134 -> onCreate
+    540:543:void onCreate(android.os.Bundle):135:135 -> onCreate
+    544:549:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> onCreate
+    544:549:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> onCreate
+    544:549:void onCreate(android.os.Bundle):135 -> onCreate
+    550:561:void onCreate(android.os.Bundle):135:135 -> onCreate
+    562:573:void onCreate(android.os.Bundle):136:136 -> onCreate
+    574:583:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> onCreate
+    574:583:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> onCreate
+    574:583:void onCreate(android.os.Bundle):136 -> onCreate
+    584:599:void onCreate(android.os.Bundle):136:136 -> onCreate
+    600:603:void setupWeb():189:189 -> onCreate
+    600:603:void onCreate(android.os.Bundle):133 -> onCreate
+    604:607:void setupWeb():158:158 -> onCreate
+    604:607:void onCreate(android.os.Bundle):133 -> onCreate
+    608:611:void setupWeb():156:156 -> onCreate
+    608:611:void onCreate(android.os.Bundle):133 -> onCreate
+    612:615:void setupWeb():144:144 -> onCreate
+    612:615:void onCreate(android.os.Bundle):133 -> onCreate
+    616:619:void setupWeb():143:143 -> onCreate
+    616:619:void onCreate(android.os.Bundle):133 -> onCreate
+    620:623:void onCreate(android.os.Bundle):120:120 -> onCreate
+    624:627:void onCreate(android.os.Bundle):119:119 -> onCreate
+    628:631:kotlin.Unit onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117:117 -> onCreate
+    628:631:void onCreate(android.os.Bundle):117 -> onCreate
+    632:635:void onCreate(android.os.Bundle):116:116 -> onCreate
+    636:639:kotlin.Unit onCreate$lambda$7(app.t2remote.browser.BrowserActivity):105:105 -> onCreate
+    636:639:void onCreate(android.os.Bundle):105 -> onCreate
+    640:643:kotlin.Unit onCreate$lambda$6(app.t2remote.browser.BrowserActivity):104:104 -> onCreate
+    640:643:void onCreate(android.os.Bundle):104 -> onCreate
+    644:647:kotlin.Unit onCreate$lambda$5(app.t2remote.browser.BrowserActivity):103:103 -> onCreate
+    644:647:void onCreate(android.os.Bundle):103 -> onCreate
+    0:17:void onDestroy():339:339 -> onDestroy
+    5:7:void onNewIntent(android.content.Intent):333:333 -> onNewIntent
+    8:13:void onNewIntent(android.content.Intent):334:334 -> onNewIntent
+    14:26:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> onNewIntent
+    14:26:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> onNewIntent
+    14:26:void onNewIntent(android.content.Intent):334 -> onNewIntent
+    27:41:void onNewIntent(android.content.Intent):334:334 -> onNewIntent
+    0:17:void onPause():337:337 -> onPause
+    0:17:void onResume():338:338 -> onResume
+app.t2remote.browser.BrowserActivity$$ExternalSyntheticLambda0 -> a.a:
+# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
+# {"id":"com.android.tools.r8.synthesized"}
+    int a.BrowserActivity$$ExternalSyntheticLambda0.$r8$classId -> a
+      # {"id":"com.android.tools.r8.synthesized"}
+    app.t2remote.browser.BrowserActivity app.t2remote.browser.BrowserActivity$$InternalSyntheticLambda$1$4913f9005e2aacee08016b04f44520fb55587d9f2d61ee020cc8ba22c4f0cc9e$0.f$0 -> b
+      # {"id":"com.android.tools.r8.synthesized"}
+    0:7:void a.BrowserActivity$$ExternalSyntheticLambda0.<init>(app.t2remote.browser.BrowserActivity,int):0:0 -> <init>
+      # {"id":"com.android.tools.r8.synthesized"}
+    4:8:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):0:0 -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/Object;)Ljava/lang/String;"}
+    9:16:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):268:268 -> a
+    17:28:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):269:269 -> a
+    29:37:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):270:270 -> a
+    38:56:java.lang.String kotlin.text.StringsKt___StringsKt.take(java.lang.String,int):572:572 -> a
+    38:56:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):270 -> a
+    57:71:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):270:270 -> a
+    72:79:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):271:271 -> a
+    80:135:java.lang.CharSequence app.t2remote.browser.BrowserActivity.showStart$lambda$24(app.t2remote.browser.BrowserActivity,kotlin.Pair):272:272 -> a
+    14:20:android.content.SharedPreferences app.t2remote.browser.BrowserActivity.prefs_delegate$lambda$0(app.t2remote.browser.BrowserActivity):52:52 -> b
+    14:20:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+      # {"id":"com.android.tools.r8.synthesized"}
+    21:22:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    23:27:void app.t2remote.browser.BrowserActivity.toggleMode():230:230 -> b
+    23:27:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+      # {"id":"com.android.tools.r8.rewriteFrame","conditions":["throws(Ljava/lang/NullPointerException;)"],"actions":["removeInnerFrames(1)"]}
+    23:27:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    28:44:void app.t2remote.browser.BrowserActivity.toggleMode():231:231 -> b
+    28:44:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    28:44:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    45:62:void app.t2remote.browser.BrowserActivity.toggleMode():232:232 -> b
+    45:62:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    45:62:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    63:78:void app.t2remote.browser.BrowserActivity.toggleMode():233:233 -> b
+    63:78:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    63:78:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    79:90:void app.t2remote.browser.BrowserActivity.toggleMode():234:234 -> b
+    79:90:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    79:90:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    91:97:void app.t2remote.browser.BrowserActivity.toggleMode():235:235 -> b
+    91:97:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    91:97:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    98:100:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    101:104:void app.t2remote.browser.BrowserActivity.toggleMode():235:235 -> b
+    101:104:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    101:104:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    105:110:void app.t2remote.browser.BrowserActivity.toggleMode():233:233 -> b
+    105:110:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    105:110:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    111:114:void app.t2remote.browser.BrowserActivity.toggleMode():232:232 -> b
+    111:114:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$13(app.t2remote.browser.BrowserActivity):118 -> b
+    111:114:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    115:118:void app.t2remote.browser.BrowserActivity.addBookmark():248:248 -> b
+    115:118:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+      # {"id":"com.android.tools.r8.rewriteFrame","conditions":["throws(Ljava/lang/NullPointerException;)"],"actions":["removeInnerFrames(1)"]}
+    115:118:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    119:126:void app.t2remote.browser.BrowserActivity.addBookmark():248:248 -> b
+    119:126:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    119:126:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    127:136:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> b
+    127:136:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> b
+    127:136:void app.t2remote.browser.BrowserActivity.addBookmark():249 -> b
+    127:136:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    127:136:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    137:140:void app.t2remote.browser.BrowserActivity.addBookmark():250:250 -> b
+    137:140:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    137:140:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    141:147:void app.t2remote.browser.BrowserActivity.addBookmark():364:364 -> b
+    141:147:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    141:147:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    148:163:void app.t2remote.browser.BrowserActivity.addBookmark():365:365 -> b
+    148:163:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    148:163:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    164:165:java.lang.Object kotlin.Pair.getSecond():28:28 -> b
+    164:165:void app.t2remote.browser.BrowserActivity.addBookmark():251 -> b
+      # {"id":"com.android.tools.r8.rewriteFrame","conditions":["throws(Ljava/lang/NullPointerException;)"],"actions":["removeInnerFrames(1)"]}
+    164:165:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    164:165:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    166:181:void app.t2remote.browser.BrowserActivity.addBookmark():251:251 -> b
+    166:181:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    166:181:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    182:192:void app.t2remote.browser.BrowserActivity.addBookmark():252:252 -> b
+    182:192:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    182:192:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    193:202:boolean kotlin.text.StringsKt__StringsKt.isBlank(java.lang.CharSequence):1631:1631 -> b
+    193:202:void app.t2remote.browser.BrowserActivity.addBookmark():252 -> b
+    193:202:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    193:202:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    203:226:boolean kotlin.text.CharsKt__CharJVMKt.isWhitespace(char):103:103 -> b
+    203:226:boolean kotlin.text.StringsKt__StringsKt.isBlank(java.lang.CharSequence):312 -> b
+    203:226:void app.t2remote.browser.BrowserActivity.addBookmark():252 -> b
+    203:226:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    203:226:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    227:249:void app.t2remote.browser.BrowserActivity.addBookmark():252:252 -> b
+    227:249:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    227:249:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    250:254:kotlin.Pair kotlin.TuplesKt.to(java.lang.Object,java.lang.Object):43:43 -> b
+    250:254:void app.t2remote.browser.BrowserActivity.addBookmark():253 -> b
+    250:254:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    250:254:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    255:260:void app.t2remote.browser.BrowserActivity.addBookmark():253:253 -> b
+    255:260:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    255:260:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    261:273:void app.t2remote.browser.BrowserActivity.addBookmark():254:254 -> b
+    261:273:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    261:273:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    274:276:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    277:280:void app.t2remote.browser.BrowserActivity.addBookmark():252:252 -> b
+    277:280:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    277:280:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    281:284:void app.t2remote.browser.BrowserActivity.addBookmark():248:248 -> b
+    281:284:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$12(app.t2remote.browser.BrowserActivity):117 -> b
+    281:284:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    285:286:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    287:289:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$7(app.t2remote.browser.BrowserActivity):105:105 -> b
+    287:289:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    290:292:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    293:299:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$6(app.t2remote.browser.BrowserActivity):104:104 -> b
+    293:299:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    300:302:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    303:306:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$6(app.t2remote.browser.BrowserActivity):104:104 -> b
+    303:306:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    307:328:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$5(app.t2remote.browser.BrowserActivity):103:103 -> b
+    307:328:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    329:331:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    332:335:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$5(app.t2remote.browser.BrowserActivity):103:103 -> b
+    332:335:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    336:357:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$4(app.t2remote.browser.BrowserActivity):102:102 -> b
+    336:357:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+    358:360:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0:0 -> b
+    361:365:kotlin.Unit app.t2remote.browser.BrowserActivity.onCreate$lambda$4(app.t2remote.browser.BrowserActivity):102:102 -> b
+    361:365:java.lang.Object a.BrowserActivity$$ExternalSyntheticLambda0.invoke():0 -> b
+app.t2remote.browser.BrowserActivity$$ExternalSyntheticLambda10 -> a.b:
+# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
+# {"id":"com.android.tools.r8.synthesized"}
+    4:8:java.lang.CharSequence app.t2remote.browser.BrowserActivity.saveBookmarks$lambda$20(kotlin.Pair):0:0 -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/Object;)Ljava/lang/String;"}
+    9:33:java.lang.CharSequence app.t2remote.browser.BrowserActivity.saveBookmarks$lambda$20(kotlin.Pair):245:245 -> a
+app.t2remote.browser.BrowserActivity$$ExternalSyntheticLambda4 -> a.c:
+# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
+# {"id":"com.android.tools.r8.synthesized"}
+    app.t2remote.browser.BrowserActivity app.t2remote.browser.BrowserActivity$$InternalSyntheticLambda$1$4913f9005e2aacee08016b04f44520fb55587d9f2d61ee020cc8ba22c4f0cc9e$4.f$0 -> a
+      # {"id":"com.android.tools.r8.synthesized"}
+    android.widget.EditText app.t2remote.browser.BrowserActivity$$InternalSyntheticLambda$1$4913f9005e2aacee08016b04f44520fb55587d9f2d61ee020cc8ba22c4f0cc9e$4.f$1 -> b
+      # {"id":"com.android.tools.r8.synthesized"}
+    0:7:void a.BrowserActivity$$ExternalSyntheticLambda4.<init>(app.t2remote.browser.BrowserActivity,android.widget.EditText):0:0 -> <init>
+      # {"id":"com.android.tools.r8.synthesized"}
+    2:18:boolean app.t2remote.browser.BrowserActivity.onCreate$lambda$10$lambda$9(app.t2remote.browser.BrowserActivity,android.widget.EditText,android.widget.TextView,int,android.view.KeyEvent):114:114 -> onEditorAction
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/widget/TextView;ILandroid/view/KeyEvent;)Z"}
+app.t2remote.browser.BrowserActivity$$ExternalSyntheticLambda9 -> a.d:
+# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
+# {"id":"com.android.tools.r8.synthesized"}
+    kotlin.jvm.functions.Function0 app.t2remote.browser.BrowserActivity$$InternalSyntheticLambda$2$175e42cf7a8d8757815b9fdcbb462a3be76817abde579fc5fe817287cbf84cfd$0.f$0 -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"La/a;"}
+      # {"id":"com.android.tools.r8.synthesized"}
+    0:5:void a.BrowserActivity$$ExternalSyntheticLambda9.<init>(a.BrowserActivity$$ExternalSyntheticLambda0):0:0 -> <init>
+      # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(La/a;)V"}
+    2:7:void app.t2remote.browser.BrowserActivity.btn$lambda$32$lambda$31(kotlin.jvm.functions.Function0,android.view.View):352:352 -> onClick
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/view/View;)V"}
+app.t2remote.browser.BrowserActivity$Companion -> a.e:
+# {"id":"sourceFile","fileName":"BrowserActivity.kt"}
+    8:18:boolean blocked(java.lang.String):75:75 -> a
+    8:18:boolean access$blocked(app.t2remote.browser.BrowserActivity$Companion,java.lang.String):55 -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;)Z"}
+    19:20:java.util.Set app.t2remote.browser.BrowserActivity.access$getBLOCK$cp():40:40 -> a
+    19:20:boolean blocked(java.lang.String):77 -> a
+    19:20:boolean access$blocked(app.t2remote.browser.BrowserActivity$Companion,java.lang.String):55 -> a
+    21:30:boolean blocked(java.lang.String):77:77 -> a
+    21:30:boolean access$blocked(app.t2remote.browser.BrowserActivity$Companion,java.lang.String):55 -> a
+    31:38:boolean blocked(java.lang.String):78:78 -> a
+    31:38:boolean access$blocked(app.t2remote.browser.BrowserActivity$Companion,java.lang.String):55 -> a
+    39:45:boolean blocked(java.lang.String):79:79 -> a
+    39:45:boolean access$blocked(app.t2remote.browser.BrowserActivity$Companion,java.lang.String):55 -> a
+    46:56:boolean blocked(java.lang.String):80:80 -> a
+    46:56:boolean access$blocked(app.t2remote.browser.BrowserActivity$Companion,java.lang.String):55 -> a
+app.t2remote.browser.BrowserActivity$setupWeb$1 -> a.f:
+# {"id":"sourceFile","fileName":"BrowserActivity.kt"}
+    app.t2remote.browser.BrowserActivity this$0 -> a
+    2:5:void <init>(app.t2remote.browser.BrowserActivity):158:158 -> <init>
+    5:12:android.widget.ProgressBar app.t2remote.browser.BrowserActivity.access$getProgress$p(app.t2remote.browser.BrowserActivity):40:40 -> onPageFinished
+    5:12:void onPageFinished(android.webkit.WebView,java.lang.String):184 -> onPageFinished
+    13:17:void onPageFinished(android.webkit.WebView,java.lang.String):184:184 -> onPageFinished
+    18:33:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> onPageFinished
+    18:33:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> onPageFinished
+    18:33:void onPageFinished(android.webkit.WebView,java.lang.String):185 -> onPageFinished
+    34:37:android.content.SharedPreferences app.t2remote.browser.BrowserActivity.access$getPrefs(app.t2remote.browser.BrowserActivity):40:40 -> onPageFinished
+    34:37:void onPageFinished(android.webkit.WebView,java.lang.String):185 -> onPageFinished
+    38:51:void onPageFinished(android.webkit.WebView,java.lang.String):185:185 -> onPageFinished
+    52:58:void onPageFinished(android.webkit.WebView,java.lang.String):184:184 -> onPageFinished
+    5:12:android.widget.ProgressBar app.t2remote.browser.BrowserActivity.access$getProgress$p(app.t2remote.browser.BrowserActivity):40:40 -> onPageStarted
+    5:12:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):172 -> onPageStarted
+    13:17:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):172:172 -> onPageStarted
+    18:33:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> onPageStarted
+    18:33:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> onPageStarted
+    18:33:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):173 -> onPageStarted
+    34:35:android.widget.EditText app.t2remote.browser.BrowserActivity.access$getUrl$p(app.t2remote.browser.BrowserActivity):40:40 -> onPageStarted
+    34:35:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):173 -> onPageStarted
+    36:45:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):173:173 -> onPageStarted
+    46:49:android.widget.EditText app.t2remote.browser.BrowserActivity.access$getUrl$p(app.t2remote.browser.BrowserActivity):40:40 -> onPageStarted
+    46:49:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):173 -> onPageStarted
+    50:62:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):173:173 -> onPageStarted
+    63:68:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap):172:172 -> onPageStarted
+    10:21:boolean onRenderProcessGone(android.webkit.WebView,android.webkit.RenderProcessGoneDetail):178:178 -> onRenderProcessGone
+    22:26:boolean onRenderProcessGone(android.webkit.WebView,android.webkit.RenderProcessGoneDetail):179:179 -> onRenderProcessGone
+    10:25:android.webkit.WebResourceResponse shouldInterceptRequest(android.webkit.WebView,android.webkit.WebResourceRequest):160:160 -> shouldInterceptRequest
+    26:45:android.webkit.WebResourceResponse app.t2remote.browser.BrowserActivity$Companion.getEMPTY():83:83 -> shouldInterceptRequest
+    26:45:android.webkit.WebResourceResponse app.t2remote.browser.BrowserActivity$Companion.access$getEMPTY(app.t2remote.browser.BrowserActivity$Companion):55 -> shouldInterceptRequest
+    26:45:android.webkit.WebResourceResponse shouldInterceptRequest(android.webkit.WebView,android.webkit.WebResourceRequest):160 -> shouldInterceptRequest
+    10:13:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):163:163 -> shouldOverrideUrlLoading
+    14:28:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164:164 -> shouldOverrideUrlLoading
+    29:33:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40:40 -> shouldOverrideUrlLoading
+    29:33:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    34:63:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):258:258 -> shouldOverrideUrlLoading
+    34:63:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    34:63:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    64:77:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):260:260 -> shouldOverrideUrlLoading
+    64:77:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    64:77:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    78:85:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):258:258 -> shouldOverrideUrlLoading
+    78:85:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    78:85:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    86:95:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):259:259 -> shouldOverrideUrlLoading
+    86:95:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    86:95:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    96:100:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):367:367 -> shouldOverrideUrlLoading
+    96:100:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    96:100:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    101:117:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):368:368 -> shouldOverrideUrlLoading
+    101:117:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    101:117:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    118:119:java.lang.Object kotlin.Pair.getSecond():28:28 -> shouldOverrideUrlLoading
+    118:119:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):259 -> shouldOverrideUrlLoading
+      # {"id":"com.android.tools.r8.rewriteFrame","conditions":["throws(Ljava/lang/NullPointerException;)"],"actions":["removeInnerFrames(1)"]}
+    118:119:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    118:119:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    120:126:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):259:259 -> shouldOverrideUrlLoading
+    120:126:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    120:126:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    127:130:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):368:368 -> shouldOverrideUrlLoading
+    127:130:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    127:130:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    131:137:void app.t2remote.browser.BrowserActivity.handleInternal(android.net.Uri):259:259 -> shouldOverrideUrlLoading
+    131:137:void app.t2remote.browser.BrowserActivity.access$handleInternal(app.t2remote.browser.BrowserActivity,android.net.Uri):40 -> shouldOverrideUrlLoading
+    131:137:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):164 -> shouldOverrideUrlLoading
+    138:146:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):165:165 -> shouldOverrideUrlLoading
+    147:155:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith(java.lang.String,java.lang.String,boolean):419:419 -> shouldOverrideUrlLoading
+    147:155:boolean kotlin.text.StringsKt__StringsJVMKt.startsWith$default(java.lang.String,java.lang.String,boolean,int,java.lang.Object):417 -> shouldOverrideUrlLoading
+    147:155:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):165 -> shouldOverrideUrlLoading
+    156:180:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):166:166 -> shouldOverrideUrlLoading
+    181:195:boolean shouldOverrideUrlLoading(android.webkit.WebView,android.webkit.WebResourceRequest):167:167 -> shouldOverrideUrlLoading
+app.t2remote.browser.BrowserActivity$setupWeb$2 -> a.g:
+# {"id":"sourceFile","fileName":"BrowserActivity.kt"}
+    app.t2remote.browser.BrowserActivity this$0 -> a
+    2:5:void <init>(app.t2remote.browser.BrowserActivity):189:189 -> <init>
+    0:1:void onHideCustomView():202:202 -> onHideCustomView
+    2:7:void app.t2remote.browser.BrowserActivity.access$exitFullscreen(app.t2remote.browser.BrowserActivity):40:40 -> onHideCustomView
+    2:7:void onHideCustomView():202 -> onHideCustomView
+    0:5:android.widget.ProgressBar app.t2remote.browser.BrowserActivity.access$getProgress$p(app.t2remote.browser.BrowserActivity):40:40 -> onProgressChanged
+    0:5:void onProgressChanged(android.webkit.WebView,int):190 -> onProgressChanged
+    6:16:void onProgressChanged(android.webkit.WebView,int):190:190 -> onProgressChanged
+    10:15:android.view.View app.t2remote.browser.BrowserActivity.access$getCustomView$p(app.t2remote.browser.BrowserActivity):40:40 -> onShowCustomView
+    10:15:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):193 -> onShowCustomView
+    16:19:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):193:193 -> onShowCustomView
+    20:21:void app.t2remote.browser.BrowserActivity.access$setCustomView$p(app.t2remote.browser.BrowserActivity,android.view.View):40:40 -> onShowCustomView
+    20:21:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):194 -> onShowCustomView
+    22:23:void app.t2remote.browser.BrowserActivity.access$setCustomCallback$p(app.t2remote.browser.BrowserActivity,android.webkit.WebChromeClient$CustomViewCallback):40:40 -> onShowCustomView
+    22:23:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):194 -> onShowCustomView
+    24:26:android.widget.FrameLayout app.t2remote.browser.BrowserActivity.access$getFullscreen$p(app.t2remote.browser.BrowserActivity):40:40 -> onShowCustomView
+    24:26:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):195 -> onShowCustomView
+    27:39:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):195:195 -> onShowCustomView
+    40:44:android.widget.FrameLayout app.t2remote.browser.BrowserActivity.access$getFullscreen$p(app.t2remote.browser.BrowserActivity):40:40 -> onShowCustomView
+    40:44:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):196 -> onShowCustomView
+    45:47:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):196:196 -> onShowCustomView
+    48:60:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):197:197 -> onShowCustomView
+    61:64:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):199:199 -> onShowCustomView
+    65:68:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):196:196 -> onShowCustomView
+    69:72:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):195:195 -> onShowCustomView
+kotlin.LazyKt__LazyJVMKt -> R8$$REMOVED$$CLASS$$0:
+# {"id":"sourceFile","fileName":"LazyJVM.kt"}
+kotlin.Pair -> b.a:
+# {"id":"sourceFile","fileName":"Tuples.kt"}
+    java.lang.Object first -> a
+    java.lang.Object second -> b
+    0:2:void <init>(java.lang.Object,java.lang.Object):26:26 -> <init>
+    3:4:void <init>(java.lang.Object,java.lang.Object):27:27 -> <init>
+    5:7:void <init>(java.lang.Object,java.lang.Object):28:28 -> <init>
+    4:34:boolean equals(java.lang.Object):0:0 -> equals
+    1:23:int hashCode():0:0 -> hashCode
+    0:31:java.lang.String toString():34:34 -> toString
+kotlin.SynchronizedLazyImpl -> b.b:
+# {"id":"sourceFile","fileName":"LazyJVM.kt"}
+    kotlin.jvm.functions.Function0 initializer -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"La/a;"}
+    java.lang.Object _value -> b
+    java.lang.Object lock -> c
+    0:2:void <init>(kotlin.jvm.functions.Function0,java.lang.Object):55:55 -> <init>
+    0:2:void <init>(kotlin.jvm.functions.Function0,java.lang.Object,int,kotlin.jvm.internal.DefaultConstructorMarker):55 -> <init>
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(La/a;)V"}
+    3:4:void <init>(kotlin.jvm.functions.Function0,java.lang.Object):56:56 -> <init>
+    3:4:void <init>(kotlin.jvm.functions.Function0,java.lang.Object,int,kotlin.jvm.internal.DefaultConstructorMarker):55 -> <init>
+    5:8:void <init>(kotlin.jvm.functions.Function0,java.lang.Object):57:57 -> <init>
+    5:8:void <init>(kotlin.jvm.functions.Function0,java.lang.Object,int,kotlin.jvm.internal.DefaultConstructorMarker):55 -> <init>
+    9:11:void <init>(kotlin.jvm.functions.Function0,java.lang.Object):59:59 -> <init>
+    9:11:void <init>(kotlin.jvm.functions.Function0,java.lang.Object,int,kotlin.jvm.internal.DefaultConstructorMarker):55 -> <init>
+    0:1:java.lang.Object getValue():63:63 -> a
+    2:6:java.lang.Object getValue():64:64 -> a
+    7:9:java.lang.Object getValue():69:69 -> a
+    10:14:java.lang.Object getValue():70:70 -> a
+    15:22:java.lang.Object getValue():74:74 -> a
+    23:25:java.lang.Object getValue():75:75 -> a
+    26:27:java.lang.Object getValue():76:76 -> a
+    28:31:java.lang.Object getValue():69:69 -> a
+    32:40:void kotlin.jvm.internal.Intrinsics.throwJavaNpe():45:45 -> a
+    32:40:void kotlin.jvm.internal.Intrinsics.checkNotNull(java.lang.Object):25 -> a
+    32:40:java.lang.Object getValue():74 -> a
+    41:42:java.lang.Object getValue():69:69 -> a
+    0:5:boolean isInitialized():82:82 -> toString
+    0:5:java.lang.String toString():84 -> toString
+    6:17:java.lang.String toString():84:84 -> toString
+kotlin.TuplesKt -> R8$$REMOVED$$CLASS$$1:
+# {"id":"sourceFile","fileName":"Tuples.kt"}
+kotlin.UNINITIALIZED_VALUE -> b.c:
+# {"id":"sourceFile","fileName":"Lazy.kt"}
+    int b.UNINITIALIZED_VALUE.$r8$classId -> a
+      # {"id":"com.android.tools.r8.synthesized"}
+    kotlin.UNINITIALIZED_VALUE INSTANCE -> b
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lb/c;"}
+    kotlin.Unit kotlin.Unit.INSTANCE -> c
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lb/c;"}
+    3:5:void <init>():0:0 -> <clinit>
+    3:5:void <clinit>():0 -> <clinit>
+    3:5:void b.UNINITIALIZED_VALUE.<clinit>():0 -> <clinit>
+      # {"id":"com.android.tools.r8.synthesized"}
+    6:7:void <clinit>():0:0 -> <clinit>
+    6:7:void b.UNINITIALIZED_VALUE.<clinit>():0 -> <clinit>
+    8:10:void b.UNINITIALIZED_VALUE.<clinit>():0:0 -> <clinit>
+    11:13:void kotlin.Unit.<init>():0:0 -> <clinit>
+    11:13:void kotlin.Unit.<clinit>():0 -> <clinit>
+    11:13:void b.UNINITIALIZED_VALUE.<clinit>():0 -> <clinit>
+    14:16:void kotlin.Unit.<clinit>():0:0 -> <clinit>
+    14:16:void b.UNINITIALIZED_VALUE.<clinit>():0 -> <clinit>
+    0:5:void b.UNINITIALIZED_VALUE.<init>(int):0:0 -> <init>
+      # {"id":"com.android.tools.r8.synthesized"}
+    10:13:java.lang.String kotlin.Unit.toString():23:23 -> toString
+kotlin.UninitializedPropertyAccessException -> b.d:
+# {"id":"sourceFile","fileName":"UninitializedPropertyAccessException.kt"}
+kotlin.collections.ArraysKt___ArraysJvmKt -> R8$$REMOVED$$CLASS$$2:
+# {"id":"sourceFile","fileName":"_ArraysJvm.kt"}
+kotlin.collections.ArraysKt___ArraysKt -> R8$$REMOVED$$CLASS$$3:
+# {"id":"sourceFile","fileName":"_Arrays.kt"}
+kotlin.collections.ArraysUtilJVM -> R8$$REMOVED$$CLASS$$4:
+# {"id":"sourceFile","fileName":"ArraysUtilJVM.java"}
+kotlin.collections.CollectionsKt -> c.a:
+    0:4:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3510:3510 -> b
+    0:4:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString$default(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object):3509 -> b
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/util/ArrayList;Ljava/lang/String;Ld/a;)Ljava/lang/String;"}
+    5:9:java.lang.Appendable kotlin.collections.CollectionsKt___CollectionsKt.joinTo(java.lang.Iterable,java.lang.Appendable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3488:3488 -> b
+    5:9:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3510 -> b
+    5:9:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString$default(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object):3509 -> b
+    10:28:java.lang.Appendable kotlin.collections.CollectionsKt___CollectionsKt.joinTo(java.lang.Iterable,java.lang.Appendable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3490:3490 -> b
+    10:28:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3510 -> b
+    10:28:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString$default(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object):3509 -> b
+    29:31:java.lang.Appendable kotlin.collections.CollectionsKt___CollectionsKt.joinTo(java.lang.Iterable,java.lang.Appendable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3491:3491 -> b
+    29:31:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3510 -> b
+    29:31:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString$default(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object):3509 -> b
+    32:39:void kotlin.text.StringsKt__AppendableKt.appendElement(java.lang.Appendable,java.lang.Object,kotlin.jvm.functions.Function1):84:84 -> b
+    32:39:java.lang.Appendable kotlin.collections.CollectionsKt___CollectionsKt.joinTo(java.lang.Iterable,java.lang.Appendable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3493 -> b
+    32:39:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3510 -> b
+    32:39:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString$default(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object):3509 -> b
+    40:42:java.lang.Appendable kotlin.collections.CollectionsKt___CollectionsKt.joinTo(java.lang.Iterable,java.lang.Appendable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3497:3497 -> b
+    40:42:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3510 -> b
+    40:42:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString$default(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object):3509 -> b
+    43:52:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1):3510:3510 -> b
+    43:52:java.lang.String kotlin.collections.CollectionsKt___CollectionsKt.joinToString$default(java.lang.Iterable,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object):3509 -> b
+kotlin.collections.CollectionsKt__CollectionsJVMKt -> c.b:
+# {"id":"sourceFile","fileName":"CollectionsJVM.kt"}
+    8:11:boolean kotlin.text.CharsKt__CharKt.equals(char,char,boolean):237:237 -> a
+    12:17:boolean kotlin.text.CharsKt__CharKt.equals(char,char,boolean):238:238 -> a
+    18:30:boolean kotlin.text.CharsKt__CharKt.equals(char,char,boolean):240:240 -> a
+kotlin.collections.CollectionsKt__CollectionsKt -> c.c:
+# {"id":"sourceFile","fileName":"Collections.kt"}
+kotlin.collections.CollectionsKt__IterablesKt -> c.d:
+# {"id":"sourceFile","fileName":"Iterables.kt"}
+kotlin.collections.CollectionsKt__IteratorsJVMKt -> c.e:
+# {"id":"sourceFile","fileName":"IteratorsJVM.kt"}
+kotlin.collections.CollectionsKt__IteratorsKt -> c.f:
+# {"id":"sourceFile","fileName":"Iterators.kt"}
+kotlin.collections.CollectionsKt__MutableCollectionsJVMKt -> c.g:
+# {"id":"sourceFile","fileName":"MutableCollectionsJVM.kt"}
+kotlin.collections.CollectionsKt__MutableCollectionsKt -> c.h:
+# {"id":"sourceFile","fileName":"MutableCollections.kt"}
+kotlin.collections.CollectionsKt___CollectionsKt -> R8$$REMOVED$$CLASS$$5:
+# {"id":"sourceFile","fileName":"_Collections.kt"}
+kotlin.collections.EmptyIterator -> c.i:
+# {"id":"sourceFile","fileName":"Collections.kt"}
+    kotlin.collections.EmptyIterator INSTANCE -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lc/i;"}
+    2:4:void <init>():0:0 -> <clinit>
+    2:4:void <clinit>():0 -> <clinit>
+    5:7:void <clinit>():0:0 -> <clinit>
+    0:7:void add(java.lang.Object):0:0 -> add
+    0:1:boolean hasNext():17:17 -> hasNext
+    0:1:boolean hasPrevious():18:18 -> hasPrevious
+    0:5:java.lang.Void next():21:21 -> next
+    0:5:java.lang.Object next():16 -> next
+    0:1:int nextIndex():19:19 -> nextIndex
+    0:5:java.lang.Void previous():22:22 -> previous
+    0:5:java.lang.Object previous():16 -> previous
+    0:1:int previousIndex():20:20 -> previousIndex
+    0:7:void remove():0:0 -> remove
+    0:7:void set(java.lang.Object):0:0 -> set
+kotlin.collections.EmptyList -> c.j:
+# {"id":"sourceFile","fileName":"Collections.kt"}
+    kotlin.collections.EmptyList INSTANCE -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lc/j;"}
+    2:4:void <init>():0:0 -> <clinit>
+    2:4:void <clinit>():0 -> <clinit>
+    5:7:void <clinit>():0:0 -> <clinit>
+    1:1:void add(int,java.lang.Object):0:0 -> add
+    2:2:boolean add(java.lang.Object):0:0 -> add
+    1:1:boolean addAll(int,java.util.Collection):0:0 -> addAll
+    2:2:boolean addAll(java.util.Collection):0:0 -> addAll
+    0:7:void clear():0:0 -> clear
+    0:7:boolean contains(java.lang.Object):25:25 -> contains
+    8:13:boolean contains(java.lang.Void):0:0 -> contains
+    8:13:boolean contains(java.lang.Object):25 -> contains
+    5:9:boolean containsAll(java.util.Collection):35:35 -> containsAll
+    0:15:boolean equals(java.lang.Object):28:28 -> equals
+    0:24:java.lang.Void get(int):37:37 -> get
+    0:24:java.lang.Object get(int):25 -> get
+    0:1:int hashCode():29:29 -> hashCode
+    0:7:int indexOf(java.lang.Object):25:25 -> indexOf
+    8:13:int indexOf(java.lang.Void):0:0 -> indexOf
+    8:13:int indexOf(java.lang.Object):25 -> indexOf
+    0:1:boolean isEmpty():33:33 -> isEmpty
+    0:2:java.util.Iterator iterator():41:41 -> iterator
+    0:7:int lastIndexOf(java.lang.Object):25:25 -> lastIndexOf
+    8:13:int lastIndexOf(java.lang.Void):0:0 -> lastIndexOf
+    8:13:int lastIndexOf(java.lang.Object):25 -> lastIndexOf
+    1:1:java.util.ListIterator listIterator():42:42 -> listIterator
+    2:2:java.util.ListIterator listIterator(int):45:45 -> listIterator
+    3:3:java.util.ListIterator listIterator(int):44:44 -> listIterator
+    1:1:java.lang.Object remove(int):0:0 -> remove
+    2:2:boolean remove(java.lang.Object):0:0 -> remove
+    0:7:boolean removeAll(java.util.Collection):0:0 -> removeAll
+    0:7:boolean retainAll(java.util.Collection):0:0 -> retainAll
+    0:7:java.lang.Object set(int,java.lang.Object):0:0 -> set
+    0:1:int size():25:25 -> size
+    5:32:java.util.List subList(int,int):50:50 -> subList
+    1:1:java.lang.Object[] toArray():0:0 -> toArray
+    2:5:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection):89:92 -> toArray
+    2:5:java.lang.Object[] toArray():0 -> toArray
+    6:6:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection):25:25 -> toArray
+    6:6:java.lang.Object[] toArray():0 -> toArray
+    7:9:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection):97:99 -> toArray
+    7:9:java.lang.Object[] toArray():0 -> toArray
+    10:10:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection):105:105 -> toArray
+    10:10:java.lang.Object[] toArray():0 -> toArray
+    11:11:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection):108:108 -> toArray
+    11:11:java.lang.Object[] toArray():0 -> toArray
+    12:12:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection):110:110 -> toArray
+    12:12:java.lang.Object[] toArray():0 -> toArray
+    13:13:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection):26:26 -> toArray
+    13:13:java.lang.Object[] toArray():0 -> toArray
+    14:14:java.lang.Object[] toArray(java.lang.Object[]):0:0 -> toArray
+    15:15:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):36:36 -> toArray
+    15:15:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    16:16:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):111:111 -> toArray
+    16:16:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    17:17:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):40:40 -> toArray
+    17:17:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    18:19:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):113:114 -> toArray
+    18:19:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    20:20:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):40:40 -> toArray
+    20:20:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    21:21:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):45:45 -> toArray
+    21:21:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    22:24:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):119:121 -> toArray
+    22:24:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    25:25:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):127:127 -> toArray
+    25:25:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    26:26:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):130:130 -> toArray
+    26:26:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    27:27:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):132:132 -> toArray
+    27:27:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    28:28:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):49:49 -> toArray
+    28:28:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    29:29:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):52:52 -> toArray
+    29:29:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    30:30:void kotlin.jvm.internal.Intrinsics.throwJavaNpe(java.lang.String):50:50 -> toArray
+    30:30:void kotlin.jvm.internal.Intrinsics.checkNotNull(java.lang.Object,java.lang.String):31 -> toArray
+    30:30:java.lang.Object[] kotlin.jvm.internal.CollectionToArray.toArray(java.util.Collection,java.lang.Object[]):45 -> toArray
+    30:30:java.lang.Object[] toArray(java.lang.Object[]):0 -> toArray
+    0:2:java.lang.String toString():30:30 -> toString
+kotlin.collections.IntIterator -> R8$$REMOVED$$CLASS$$6:
+# {"id":"sourceFile","fileName":"PrimitiveIterators.kt"}
+kotlin.collections.SetsKt__SetsKt -> R8$$REMOVED$$CLASS$$7:
+# {"id":"sourceFile","fileName":"Sets.kt"}
+kotlin.internal.ProgressionUtilKt -> R8$$REMOVED$$CLASS$$8:
+# {"id":"sourceFile","fileName":"progressionUtil.kt"}
+kotlin.jvm.functions.Function1 -> d.a:
+# {"id":"sourceFile","fileName":"Functions.kt"}
+    java.lang.Object invoke(java.lang.Object) -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/Object;)Ljava/lang/String;"}
+kotlin.jvm.internal.Intrinsics -> e.a:
+# {"id":"sourceFile","fileName":"Intrinsics.java"}
+    java.lang.Object[] kotlin.jvm.internal.CollectionToArray.EMPTY -> a
+    1:5:void kotlin.jvm.internal.CollectionToArray.<clinit>():14:14 -> <clinit>
+    8:12:boolean areEqual(java.lang.Object,java.lang.Object):169:169 -> a
+    3:17:void checkNotNullExpressionValue(java.lang.Object,java.lang.String):93:93 -> b
+    2:3:void throwParameterIsNullNPE(java.lang.String):140:140 -> c
+    2:3:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    4:11:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):144:144 -> c
+    4:11:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    4:11:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    12:18:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):146:146 -> c
+    12:18:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    12:18:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    19:33:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):149:149 -> c
+    19:33:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    19:33:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    34:48:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):151:151 -> c
+    34:48:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    34:48:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    49:50:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):153:153 -> c
+    49:50:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    49:50:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    51:54:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):154:154 -> c
+    51:54:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    51:54:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    55:58:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):155:155 -> c
+    55:58:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    55:58:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    59:88:java.lang.String createParameterIsNullExceptionMessage(java.lang.String):157:157 -> c
+    59:88:void throwParameterIsNullNPE(java.lang.String):140 -> c
+    59:88:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    89:96:void throwParameterIsNullNPE(java.lang.String):140:140 -> c
+    89:96:void checkNotNullParameter(java.lang.Object,java.lang.String):131 -> c
+    0:5:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable):253:253 -> d
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/RuntimeException;)V"}
+    6:9:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable,java.lang.String):257:257 -> d
+    6:9:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable):253 -> d
+    10:14:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable,java.lang.String):258:258 -> d
+    10:14:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable):253 -> d
+    15:32:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable,java.lang.String):262:262 -> d
+    15:32:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable):253 -> d
+    33:38:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable,java.lang.String):267:267 -> d
+    33:38:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable):253 -> d
+    39:42:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable,java.lang.String):268:268 -> d
+    39:42:java.lang.Throwable sanitizeStackTrace(java.lang.Throwable):253 -> d
+    0:18:void throwUninitializedPropertyAccessException(java.lang.String):58:58 -> e
+    19:20:void throwUninitializedProperty(java.lang.String):54:54 -> e
+    19:20:void throwUninitializedPropertyAccessException(java.lang.String):58 -> e
+    21:23:void kotlin.UninitializedPropertyAccessException.<init>(java.lang.String):11:11 -> e
+    21:23:void throwUninitializedProperty(java.lang.String):54 -> e
+    21:23:void throwUninitializedPropertyAccessException(java.lang.String):58 -> e
+    24:27:void throwUninitializedProperty(java.lang.String):54:54 -> e
+    24:27:void throwUninitializedPropertyAccessException(java.lang.String):58 -> e
+kotlin.jvm.internal.Reflection -> e.b:
+# {"id":"sourceFile","fileName":"Reflection.java"}
+    kotlin.jvm.internal.ReflectionFactory factory -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Le/c;"}
+    1:6:void <clinit>():26:26 -> <clinit>
+    7:16:void <clinit>():27:27 -> <clinit>
+    17:18:void <clinit>():34:34 -> <clinit>
+    19:21:void kotlin.jvm.internal.ReflectionFactory.<init>():0:0 -> <clinit>
+    19:21:void <clinit>():34 -> <clinit>
+    22:24:void <clinit>():34:34 -> <clinit>
+kotlin.jvm.internal.ReflectionFactory -> e.c:
+# {"id":"sourceFile","fileName":"ReflectionFactory.java"}
+kotlin.ranges.IntProgression -> f.a:
+# {"id":"sourceFile","fileName":"Progressions.kt"}
+    int first -> a
+    int last -> b
+    int step -> c
+    0:8:void <init>(int,int,int):78:78 -> <init>
+    9:15:void <init>(int,int,int):93:93 -> <init>
+    16:40:int kotlin.internal.ProgressionUtilKt.mod(int,int):10:10 -> <init>
+    16:40:int kotlin.internal.ProgressionUtilKt.differenceModulo(int,int,int):21 -> <init>
+    16:40:int kotlin.internal.ProgressionUtilKt.getProgressionLastElement(int,int,int):46 -> <init>
+    16:40:void <init>(int,int,int):98 -> <init>
+    41:58:int kotlin.internal.ProgressionUtilKt.mod(int,int):10:10 -> <init>
+    41:58:int kotlin.internal.ProgressionUtilKt.differenceModulo(int,int,int):21 -> <init>
+    41:58:int kotlin.internal.ProgressionUtilKt.getProgressionLastElement(int,int,int):47 -> <init>
+    41:58:void <init>(int,int,int):98 -> <init>
+    59:60:void <init>(int,int,int):98:98 -> <init>
+    61:63:void <init>(int,int,int):103:103 -> <init>
+    64:71:int kotlin.internal.ProgressionUtilKt.getProgressionLastElement(int,int,int):48:48 -> <init>
+    64:71:void <init>(int,int,int):98 -> <init>
+    72:79:void <init>(int,int,int):87:87 -> <init>
+    80:87:void <init>(int,int,int):86:86 -> <init>
+    0:11:kotlin.collections.IntIterator iterator():105:105 -> iterator
+    0:11:java.util.Iterator iterator():78 -> iterator
+kotlin.ranges.IntProgressionIterator -> f.b:
+# {"id":"sourceFile","fileName":"ProgressionIterators.kt"}
+    int step -> a
+    int finalElement -> b
+    boolean hasNext -> c
+    int next -> d
+    0:2:void kotlin.collections.IntIterator.<init>():0:0 -> <init>
+    0:2:void <init>(int,int,int):39 -> <init>
+    3:4:void <init>(int,int,int):39:39 -> <init>
+    5:17:void <init>(int,int,int):40:40 -> <init>
+    18:23:void <init>(int,int,int):41:41 -> <init>
+    24:26:void <init>(int,int,int):42:42 -> <init>
+    0:2:boolean hasNext():44:44 -> hasNext
+    0:1:int nextInt():47:47 -> next
+    0:1:java.lang.Object kotlin.collections.IntIterator.next():36 -> next
+    2:5:int nextInt():48:48 -> next
+    2:5:java.lang.Object kotlin.collections.IntIterator.next():36 -> next
+    6:10:int nextInt():49:49 -> next
+    6:10:java.lang.Object kotlin.collections.IntIterator.next():36 -> next
+    11:13:int nextInt():50:50 -> next
+    11:13:java.lang.Object kotlin.collections.IntIterator.next():36 -> next
+    14:19:int nextInt():49:49 -> next
+    14:19:java.lang.Object kotlin.collections.IntIterator.next():36 -> next
+    20:24:int nextInt():53:53 -> next
+    20:24:java.lang.Object kotlin.collections.IntIterator.next():36 -> next
+    25:29:java.lang.Object kotlin.collections.IntIterator.next():36:36 -> next
+    0:7:void kotlin.collections.IntIterator.remove():0:0 -> remove
+kotlin.ranges.IntRange -> f.c:
+# {"id":"sourceFile","fileName":"PrimitiveRanges.kt"}
+    kotlin.ranges.IntRange EMPTY -> d
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lf/c;"}
+    0:3:void <clinit>():85:85 -> <clinit>
+    4:6:void <init>(int,int):53:53 -> <clinit>
+    4:6:void <clinit>():85 -> <clinit>
+    7:9:void <clinit>():85:85 -> <clinit>
+    0:18:boolean equals(java.lang.Object):75:75 -> equals
+    19:20:boolean equals(java.lang.Object):76:76 -> equals
+    21:22:int kotlin.ranges.IntProgression.getFirst():93:93 -> equals
+    21:22:boolean equals(java.lang.Object):76 -> equals
+      # {"id":"com.android.tools.r8.rewriteFrame","conditions":["throws(Ljava/lang/NullPointerException;)"],"actions":["removeInnerFrames(1)"]}
+    23:26:boolean equals(java.lang.Object):76:76 -> equals
+    27:28:int kotlin.ranges.IntProgression.getLast():98:98 -> equals
+    27:28:boolean equals(java.lang.Object):76 -> equals
+      # {"id":"com.android.tools.r8.rewriteFrame","conditions":["throws(Ljava/lang/NullPointerException;)"],"actions":["removeInnerFrames(1)"]}
+    29:36:boolean equals(java.lang.Object):76:76 -> equals
+    0:15:int hashCode():79:79 -> hashCode
+    0:9:boolean isEmpty():72:72 -> isEmpty
+    0:24:java.lang.String toString():81:81 -> toString
+kotlin.ranges.IntRange$Companion -> R8$$REMOVED$$CLASS$$9:
+# {"id":"sourceFile","fileName":"PrimitiveRanges.kt"}
+kotlin.ranges.RangesKt___RangesKt -> R8$$REMOVED$$CLASS$$10:
+# {"id":"sourceFile","fileName":"_Ranges.kt"}
+kotlin.sequences.SequencesKt___SequencesKt -> R8$$REMOVED$$CLASS$$11:
+# {"id":"sourceFile","fileName":"_Sequences.kt"}
+kotlin.sequences.TransformingSequence -> R8$$REMOVED$$CLASS$$13:
+# {"id":"sourceFile","fileName":"Sequences.kt"}
+kotlin.sequences.TransformingSequence$iterator$1 -> R8$$REMOVED$$CLASS$$12:
+# {"id":"sourceFile","fileName":"Sequences.kt"}
+kotlin.text.CharsKt__CharKt -> R8$$REMOVED$$CLASS$$14:
+# {"id":"sourceFile","fileName":"Char.kt"}
+kotlin.text.DelimitedRangesSequence -> h.b:
+# {"id":"sourceFile","fileName":"Strings.kt"}
+    java.lang.CharSequence input -> a
+    int startIndex -> b
+    int limit -> c
+    kotlin.jvm.functions.Function2 getNextMatch -> d
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lh/i;"}
+    0:2:void <init>(java.lang.CharSequence,int,int,kotlin.jvm.functions.Function2):1183:1183 -> <init>
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;IILh/i;)V"}
+    3:4:void <init>(java.lang.CharSequence,int,int,kotlin.jvm.functions.Function2):1184:1184 -> <init>
+    5:6:void <init>(java.lang.CharSequence,int,int,kotlin.jvm.functions.Function2):1185:1185 -> <init>
+    7:8:void <init>(java.lang.CharSequence,int,int,kotlin.jvm.functions.Function2):1186:1186 -> <init>
+    9:11:void <init>(java.lang.CharSequence,int,int,kotlin.jvm.functions.Function2):1187:1187 -> <init>
+    0:5:java.util.Iterator iterator():1190:1190 -> a
+kotlin.text.DelimitedRangesSequence$iterator$1 -> h.a:
+# {"id":"sourceFile","fileName":"Strings.kt"}
+    int nextState -> a
+    int currentStartIndex -> b
+    int nextSearchIndex -> c
+    kotlin.ranges.IntRange nextItem -> d
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lf/c;"}
+    int counter -> e
+    kotlin.text.DelimitedRangesSequence this$0 -> f
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Lh/b;"}
+    0:2:void <init>(kotlin.text.DelimitedRangesSequence):1190:1190 -> <init>
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lh/b;)V"}
+    3:5:void <init>(kotlin.text.DelimitedRangesSequence):0:0 -> <init>
+    6:7:void <init>(kotlin.text.DelimitedRangesSequence):1191:1191 -> <init>
+    8:9:int kotlin.text.DelimitedRangesSequence.access$getStartIndex$p(kotlin.text.DelimitedRangesSequence):1183:1183 -> <init>
+    8:9:void <init>(kotlin.text.DelimitedRangesSequence):1192 -> <init>
+    10:26:void <init>(kotlin.text.DelimitedRangesSequence):1192:1192 -> <init>
+    27:29:void <init>(kotlin.text.DelimitedRangesSequence):1193:1193 -> <init>
+    30:54:int kotlin.ranges.RangesKt___RangesKt.coerceIn(int,int,int):1414:1414 -> <init>
+    30:54:void <init>(kotlin.text.DelimitedRangesSequence):1192 -> <init>
+    0:5:void calcNext():1198:1198 -> a
+    6:7:void calcNext():1199:1199 -> a
+    8:11:void calcNext():1200:1200 -> a
+    12:15:int kotlin.text.DelimitedRangesSequence.access$getLimit$p(kotlin.text.DelimitedRangesSequence):1183:1183 -> a
+    12:15:void calcNext():1202 -> a
+    16:36:void calcNext():1202:1202 -> a
+    37:40:void calcNext():1203:1203 -> a
+    41:43:int kotlin.text.StringsKt__StringsKt.getLastIndex(java.lang.CharSequence):0:0 -> a
+    41:43:void calcNext():1203 -> a
+    44:48:int kotlin.text.StringsKt__StringsKt.getLastIndex(java.lang.CharSequence):391:391 -> a
+    44:48:void calcNext():1203 -> a
+    49:51:void kotlin.ranges.IntRange.<init>(int,int):53:53 -> a
+    49:51:void calcNext():1203 -> a
+    52:53:void calcNext():1203:1203 -> a
+    54:57:void calcNext():1204:1204 -> a
+    58:64:void calcNext():1206:1206 -> a
+    65:69:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):0:0 -> a
+    65:69:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    65:69:void calcNext():1206 -> a
+    70:81:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1005:1005 -> a
+    70:81:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    70:81:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    70:81:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    70:81:void calcNext():1206 -> a
+    82:89:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.util.List):615:615 -> a
+    82:89:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.lang.Iterable):598 -> a
+    82:89:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1006 -> a
+    82:89:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    82:89:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    82:89:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    82:89:void calcNext():1206 -> a
+    90:93:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.util.List):617:617 -> a
+    90:93:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.lang.Iterable):598 -> a
+    90:93:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1006 -> a
+    90:93:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    90:93:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    90:93:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    90:93:void calcNext():1206 -> a
+    94:95:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1006:1006 -> a
+    94:95:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    94:95:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    94:95:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    94:95:void calcNext():1206 -> a
+    96:103:int kotlin.text.StringsKt__StringsKt.indexOf$default(java.lang.CharSequence,java.lang.String,int,boolean,int,java.lang.Object):1113:1113 -> a
+    96:103:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1007 -> a
+    96:103:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    96:103:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    96:103:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    96:103:void calcNext():1206 -> a
+    104:107:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1008:1008 -> a
+    104:107:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    104:107:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    104:107:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    104:107:void calcNext():1206 -> a
+    108:114:kotlin.Pair kotlin.TuplesKt.to(java.lang.Object,java.lang.Object):43:43 -> a
+    108:114:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1008 -> a
+    108:114:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    108:114:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    108:114:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    108:114:void calcNext():1206 -> a
+    115:122:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.util.List):618:618 -> a
+    115:122:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.lang.Iterable):598 -> a
+    115:122:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1006 -> a
+    115:122:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    115:122:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    115:122:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    115:122:void calcNext():1206 -> a
+    123:130:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.util.List):616:616 -> a
+    123:130:java.lang.Object kotlin.collections.CollectionsKt___CollectionsKt.single(java.lang.Iterable):598 -> a
+    123:130:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1006 -> a
+    123:130:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    123:130:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    123:130:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    123:130:void calcNext():1206 -> a
+    131:139:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1011:1011 -> a
+    131:139:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    131:139:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    131:139:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    131:139:void calcNext():1206 -> a
+    140:142:void kotlin.ranges.IntRange.<init>(int,int):53:53 -> a
+    140:142:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1011 -> a
+    140:142:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    140:142:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    140:142:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    140:142:void calcNext():1206 -> a
+    143:152:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1013:1013 -> a
+    143:152:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    143:152:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    143:152:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    143:152:void calcNext():1206 -> a
+    153:169:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1637:1637 -> a
+    153:169:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    153:169:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    153:169:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    153:169:void calcNext():1206 -> a
+    170:188:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1015:1015 -> a
+    170:188:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    170:188:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    170:188:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    170:188:void calcNext():1206 -> a
+    189:192:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1017:1017 -> a
+    189:192:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    189:192:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    189:192:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    189:192:void calcNext():1206 -> a
+    193:206:kotlin.Pair kotlin.TuplesKt.to(java.lang.Object,java.lang.Object):43:43 -> a
+    193:206:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1017 -> a
+    193:206:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    193:206:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    193:206:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    193:206:void calcNext():1206 -> a
+    207:223:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1639:1639 -> a
+    207:223:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    207:223:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    207:223:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    207:223:void calcNext():1206 -> a
+    224:239:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1021:1021 -> a
+    224:239:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    224:239:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    224:239:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    224:239:void calcNext():1206 -> a
+    240:243:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1023:1023 -> a
+    240:243:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    240:243:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    240:243:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    240:243:void calcNext():1206 -> a
+    244:257:kotlin.Pair kotlin.TuplesKt.to(java.lang.Object,java.lang.Object):43:43 -> a
+    244:257:kotlin.Pair kotlin.text.StringsKt__StringsKt.findAnyOf$StringsKt__StringsKt(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1023 -> a
+    244:257:kotlin.Pair kotlin.text.StringsKt__StringsKt.access$findAnyOf(java.lang.CharSequence,java.util.Collection,int,boolean,boolean):1 -> a
+    244:257:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    244:257:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    244:257:void calcNext():1206 -> a
+    258:269:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278:1278 -> a
+    258:269:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    258:269:void calcNext():1206 -> a
+    270:278:kotlin.Pair kotlin.TuplesKt.to(java.lang.Object,java.lang.Object):43:43 -> a
+    270:278:kotlin.Pair kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.CharSequence,int):1278 -> a
+    270:278:java.lang.Object kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2.invoke(java.lang.Object,java.lang.Object):1278 -> a
+    270:278:void calcNext():1206 -> a
+    279:282:void calcNext():1208:1208 -> a
+    283:285:int kotlin.text.StringsKt__StringsKt.getLastIndex(java.lang.CharSequence):0:0 -> a
+    283:285:void calcNext():1208 -> a
+    286:290:int kotlin.text.StringsKt__StringsKt.getLastIndex(java.lang.CharSequence):391:391 -> a
+    286:290:void calcNext():1208 -> a
+    291:293:void kotlin.ranges.IntRange.<init>(int,int):53:53 -> a
+    291:293:void calcNext():1208 -> a
+    294:295:void calcNext():1208:1208 -> a
+    296:298:void calcNext():1209:1209 -> a
+    299:314:void calcNext():1211:1211 -> a
+    315:320:void calcNext():1212:1212 -> a
+    321:323:kotlin.ranges.IntRange kotlin.ranges.IntRange.access$getEMPTY$cp():53:53 -> a
+    321:323:kotlin.ranges.IntRange kotlin.ranges.IntRange$Companion.getEMPTY():85 -> a
+    321:323:kotlin.ranges.IntRange kotlin.ranges.RangesKt___RangesKt.until(int,int):1095 -> a
+    321:323:void calcNext():1212 -> a
+    324:327:kotlin.ranges.IntRange kotlin.ranges.RangesKt___RangesKt.until(int,int):1096:1096 -> a
+    324:327:void calcNext():1212 -> a
+    328:331:void kotlin.ranges.IntRange.<init>(int,int):53:53 -> a
+    328:331:kotlin.ranges.IntRange kotlin.ranges.RangesKt___RangesKt.until(int,int):1096 -> a
+    328:331:void calcNext():1212 -> a
+    332:334:void calcNext():1212:1212 -> a
+    335:340:void calcNext():1213:1213 -> a
+    341:342:void calcNext():1214:1214 -> a
+    343:345:void calcNext():1217:1217 -> a
+    0:4:boolean hasNext():1234:1234 -> hasNext
+    5:7:boolean hasNext():1235:1235 -> hasNext
+    8:15:boolean hasNext():1236:1236 -> hasNext
+    0:4:kotlin.ranges.IntRange next():1222:1222 -> next
+    0:4:java.lang.Object next():1190 -> next
+    5:7:kotlin.ranges.IntRange next():1223:1223 -> next
+    5:7:java.lang.Object next():1190 -> next
+    8:11:kotlin.ranges.IntRange next():1224:1224 -> next
+    8:11:java.lang.Object next():1190 -> next
+    12:16:kotlin.ranges.IntRange next():1226:1226 -> next
+    12:16:java.lang.Object next():1190 -> next
+    17:18:kotlin.ranges.IntRange next():1228:1228 -> next
+    17:18:java.lang.Object next():1190 -> next
+    19:21:kotlin.ranges.IntRange next():1229:1229 -> next
+    19:21:java.lang.Object next():1190 -> next
+    22:32:void kotlin.jvm.internal.Intrinsics.throwJavaNpe(java.lang.String):50:50 -> next
+    22:32:void kotlin.jvm.internal.Intrinsics.checkNotNull(java.lang.Object,java.lang.String):31 -> next
+    22:32:kotlin.ranges.IntRange next():1226 -> next
+    22:32:java.lang.Object next():1190 -> next
+    33:38:kotlin.ranges.IntRange next():1225:1225 -> next
+    33:38:java.lang.Object next():1190 -> next
+    0:7:void remove():0:0 -> remove
+kotlin.text.StringsKt__IndentKt -> h.c:
+# {"id":"sourceFile","fileName":"Indent.kt"}
+kotlin.text.StringsKt__RegexExtensionsJVMKt -> h.d:
+# {"id":"sourceFile","fileName":"RegexExtensionsJVM.kt"}
+kotlin.text.StringsKt__RegexExtensionsKt -> h.e:
+# {"id":"sourceFile","fileName":"RegexExtensions.kt"}
+kotlin.text.StringsKt__StringBuilderJVMKt -> h.f:
+# {"id":"sourceFile","fileName":"StringBuilderJVM.kt"}
+kotlin.text.StringsKt__StringBuilderKt -> h.g:
+# {"id":"sourceFile","fileName":"StringBuilder.kt"}
+kotlin.text.StringsKt__StringNumberConversionsJVMKt -> h.h:
+# {"id":"sourceFile","fileName":"StringNumberConversionsJVM.kt"}
+kotlin.text.StringsKt__StringsKt -> h.j:
+# {"id":"sourceFile","fileName":"Strings.kt"}
+    0:6:boolean contains(java.lang.CharSequence,char,boolean):0:0 -> b
+    0:6:boolean contains$default(java.lang.CharSequence,char,boolean,int,java.lang.Object):1170 -> b
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;C)Z"}
+    7:14:boolean contains(java.lang.CharSequence,char,boolean):1171:1171 -> b
+    7:14:boolean contains$default(java.lang.CharSequence,char,boolean,int,java.lang.Object):1170 -> b
+    12:16:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1114:1114 -> c
+    17:23:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1117:1117 -> c
+    24:27:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1115:1115 -> c
+    28:40:int indexOf$StringsKt__StringsKt(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean):986:986 -> c
+    28:40:int indexOf$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean,int,java.lang.Object):984 -> c
+    28:40:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1115 -> c
+    41:43:void kotlin.ranges.IntRange.<init>(int,int):53:53 -> c
+    41:43:int indexOf$StringsKt__StringsKt(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean):986 -> c
+    41:43:int indexOf$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean,int,java.lang.Object):984 -> c
+    41:43:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1115 -> c
+    44:52:int indexOf$StringsKt__StringsKt(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean):990:990 -> c
+    44:52:int indexOf$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean,int,java.lang.Object):984 -> c
+    44:52:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1115 -> c
+    53:75:int indexOf$StringsKt__StringsKt(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean):992:992 -> c
+    53:75:int indexOf$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean,int,java.lang.Object):984 -> c
+    53:75:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1115 -> c
+    76:93:int indexOf$StringsKt__StringsKt(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean):997:997 -> c
+    76:93:int indexOf$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean,int,java.lang.Object):984 -> c
+    76:93:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1115 -> c
+    12:18:int indexOf(java.lang.CharSequence,char,int,boolean):0:0 -> d
+    12:18:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;CIZI)I"}
+    19:23:int indexOf(java.lang.CharSequence,char,int,boolean):1102:1102 -> d
+    19:23:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    24:29:int indexOf(java.lang.CharSequence,char,int,boolean):1100:1100 -> d
+    24:29:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    30:31:char kotlin.collections.ArraysKt___ArraysKt.single(char[]):2936:2936 -> d
+    30:31:int indexOfAny(java.lang.CharSequence,char[],int,boolean):946 -> d
+    30:31:int indexOf(java.lang.CharSequence,char,int,boolean):1100 -> d
+    30:31:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    32:39:int indexOfAny(java.lang.CharSequence,char[],int,boolean):947:947 -> d
+    32:39:int indexOf(java.lang.CharSequence,char,int,boolean):1100 -> d
+    32:39:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    40:46:int getLastIndex(java.lang.CharSequence):391:391 -> d
+    40:46:int indexOfAny(java.lang.CharSequence,char[],int,boolean):950 -> d
+    40:46:int indexOf(java.lang.CharSequence,char,int,boolean):1100 -> d
+    40:46:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    47:50:int indexOfAny(java.lang.CharSequence,char[],int,boolean):951:951 -> d
+    47:50:int indexOf(java.lang.CharSequence,char,int,boolean):1100 -> d
+    47:50:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    51:52:int indexOfAny(java.lang.CharSequence,char[],int,boolean):1633:1633 -> d
+    51:52:int indexOf(java.lang.CharSequence,char,int,boolean):1100 -> d
+    51:52:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    53:66:int indexOfAny(java.lang.CharSequence,char[],int,boolean):952:952 -> d
+    53:66:int indexOf(java.lang.CharSequence,char,int,boolean):1100 -> d
+    53:66:int indexOf$default(java.lang.CharSequence,char,int,boolean,int,java.lang.Object):1098 -> d
+    13:22:boolean kotlin.text.StringsKt__StringsJVMKt.regionMatches(java.lang.String,int,java.lang.String,int,int,boolean):649:649 -> e
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ljava/lang/String;IIZ)Z"}
+    23:27:boolean kotlin.text.StringsKt__StringsJVMKt.regionMatches(java.lang.String,int,java.lang.String,int,int,boolean):651:651 -> e
+    13:30:boolean regionMatchesImpl(java.lang.CharSequence,int,java.lang.CharSequence,int,int,boolean):833:833 -> f
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/CharSequence;Ljava/lang/CharSequence;IIZ)Z"}
+    31:53:boolean regionMatchesImpl(java.lang.CharSequence,int,java.lang.CharSequence,int,int,boolean):838:838 -> f
+    2:11:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,char,char,boolean):70:70 -> g
+    2:11:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,char,char,boolean,int,java.lang.Object):68 -> g
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;C)Ljava/lang/String;"}
+    0:5:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):0:0 -> h
+    0:5:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;"}
+    6:12:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):88:88 -> h
+    6:12:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    13:21:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):92:92 -> h
+    13:21:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    22:33:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):94:94 -> h
+    22:33:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    34:39:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):96:96 -> h
+    34:39:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    40:47:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):100:100 -> h
+    40:47:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    48:54:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):102:102 -> h
+    48:54:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    55:60:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):103:103 -> h
+    55:60:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    61:77:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):105:105 -> h
+    61:77:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+    78:83:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace(java.lang.String,java.lang.String,java.lang.String,boolean):95:95 -> h
+    78:83:java.lang.String kotlin.text.StringsKt__StringsJVMKt.replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86 -> h
+kotlin.text.StringsKt__StringsKt$rangesDelimitedBy$2 -> h.i:
+# {"id":"sourceFile","fileName":"Strings.kt"}
+    java.util.List $delimitersList -> a
+    boolean $ignoreCase -> b
+    0:2:void kotlin.jvm.internal.Lambda.<init>(int):10:10 -> <init>
+    0:2:void <init>(java.util.List,boolean):0 -> <init>
+    3:7:void <init>(java.util.List,boolean):0:0 -> <init>
+    0:4:java.lang.String kotlin.jvm.internal.Reflection.renderLambdaToString(kotlin.jvm.internal.Lambda):79:79 -> toString
+    0:4:java.lang.String kotlin.jvm.internal.Lambda.toString():11 -> toString
+    5:19:java.lang.String kotlin.jvm.internal.ReflectionFactory.renderLambdaToString(kotlin.jvm.internal.FunctionBase):44:44 -> toString
+    5:19:java.lang.String kotlin.jvm.internal.ReflectionFactory.renderLambdaToString(kotlin.jvm.internal.Lambda):39 -> toString
+    5:19:java.lang.String kotlin.jvm.internal.Reflection.renderLambdaToString(kotlin.jvm.internal.Lambda):79 -> toString
+    5:19:java.lang.String kotlin.jvm.internal.Lambda.toString():11 -> toString
+    20:33:java.lang.String kotlin.jvm.internal.ReflectionFactory.renderLambdaToString(kotlin.jvm.internal.FunctionBase):45:45 -> toString
+    20:33:java.lang.String kotlin.jvm.internal.ReflectionFactory.renderLambdaToString(kotlin.jvm.internal.Lambda):39 -> toString
+    20:33:java.lang.String kotlin.jvm.internal.Reflection.renderLambdaToString(kotlin.jvm.internal.Lambda):79 -> toString
+    20:33:java.lang.String kotlin.jvm.internal.Lambda.toString():11 -> toString
+    34:39:java.lang.String kotlin.jvm.internal.Lambda.toString():11:11 -> toString
+kotlin.text.StringsKt__StringsKt$splitToSequence$1 -> R8$$REMOVED$$CLASS$$15:
+# {"id":"sourceFile","fileName":"Strings.kt"}
+kotlin.text.StringsKt___StringsKt -> R8$$REMOVED$$CLASS$$16:
+# {"id":"sourceFile","fileName":"_Strings.kt"}

@@ -1,0 +1,10 @@
+#Wed Oct 28 20:37:28 UTC 2026
+base.2=/home/runner/work/T2Remote/T2Remote/app/build/intermediates/dex/release/mergeDexRelease/classes3.dex
+path.2=classes3.dex
+base.1=/home/runner/work/T2Remote/T2Remote/app/build/intermediates/dex/release/mergeDexRelease/classes2.dex
+path.1=classes2.dex
+base.0=/home/runner/work/T2Remote/T2Remote/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=classes.dex

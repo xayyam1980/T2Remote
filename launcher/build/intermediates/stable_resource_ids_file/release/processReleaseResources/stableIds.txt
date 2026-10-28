@@ -1,0 +1,14 @@
+app.t2remote.home:xml/text_service = 0x7f030001
+app.t2remote.home:string/text_service_desc = 0x7f020000
+app.t2remote.home:drawable/sys_storage = 0x7f010008
+app.t2remote.home:drawable/sys_sound = 0x7f010007
+app.t2remote.home:drawable/sys_settings = 0x7f010006
+app.t2remote.home:drawable/sys_keyboard = 0x7f010005
+app.t2remote.home:drawable/sys_display = 0x7f010004
+app.t2remote.home:drawable/sys_apps = 0x7f010002
+app.t2remote.home:drawable/sys_time = 0x7f010009
+app.t2remote.home:drawable/sys_bluetooth = 0x7f010003
+app.t2remote.home:drawable/sys_wifi = 0x7f01000a
+app.t2remote.home:xml/t2_ime = 0x7f030000
+app.t2remote.home:drawable/sys_account = 0x7f010001
+app.t2remote.home:drawable/banner = 0x7f010000

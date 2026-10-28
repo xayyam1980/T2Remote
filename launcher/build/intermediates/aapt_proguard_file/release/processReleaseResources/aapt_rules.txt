@@ -1,0 +1,4 @@
+-keep class app.t2remote.home.HomeActivity { <init>(); }
+-keep class app.t2remote.home.T2Ime { <init>(); }
+-keep class app.t2remote.home.TextReceiver { <init>(); }
+-keep class app.t2remote.home.TextService { <init>(); }

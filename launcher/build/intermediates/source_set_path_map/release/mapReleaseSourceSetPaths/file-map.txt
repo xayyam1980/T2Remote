@@ -1,0 +1,8 @@
+app.t2remote.home.launcher-pngs-0 /home/runner/work/T2Remote/T2Remote/launcher/build/generated/res/pngs/release
+app.t2remote.home.launcher-resValues-1 /home/runner/work/T2Remote/T2Remote/launcher/build/generated/res/resValues/release
+app.t2remote.home.launcher-packageReleaseResources-2 /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/incremental/release/packageReleaseResources/merged.dir
+app.t2remote.home.launcher-packageReleaseResources-3 /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
+app.t2remote.home.launcher-merged-not-compiled-resources-4 /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/merged-not-compiled-resources/release
+app.t2remote.home.launcher-release-5 /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/merged_res/release/mergeReleaseResources
+app.t2remote.home.launcher-main-6 /home/runner/work/T2Remote/T2Remote/launcher/src/main/res
+app.t2remote.home.launcher-release-7 /home/runner/work/T2Remote/T2Remote/launcher/src/release/res

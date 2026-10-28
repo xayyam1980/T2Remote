@@ -1,0 +1,179 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.9/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:mergeReleaseNativeLibs
+> Task :app:checkReleaseDuplicateClasses
+
+> Task :app:stripReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libspake2.so.
+
+> Task :app:buildKotlinToolingMetadata
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:extractReleaseNativeSymbolTables
+> Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:generateReleaseResValues
+> Task :app:checkReleaseAarMetadata
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:packageReleaseResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:parseReleaseLocalResources
+> Task :app:mergeReleaseResources
+> Task :app:processReleaseMainManifest
+> Task :app:processReleaseManifest
+> Task :app:javaPreCompileRelease
+> Task :app:desugarReleaseFileDependencies
+> Task :app:mergeReleaseStartupProfile
+> Task :app:processReleaseManifestForPackage
+> Task :app:mergeReleaseArtProfile
+> Task :app:mergeReleaseShaders
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:compressReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:processReleaseResources
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:validateSigningRelease
+> Task :app:optimizeReleaseResources
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :browser:preBuild UP-TO-DATE
+> Task :browser:preReleaseBuild UP-TO-DATE
+> Task :browser:mergeReleaseJniLibFolders
+> Task :browser:mergeReleaseNativeLibs NO-SOURCE
+> Task :browser:stripReleaseDebugSymbols NO-SOURCE
+> Task :browser:extractReleaseNativeSymbolTables NO-SOURCE
+> Task :browser:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :browser:buildKotlinToolingMetadata
+> Task :browser:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :browser:checkReleaseDuplicateClasses
+> Task :browser:checkReleaseAarMetadata
+> Task :browser:generateReleaseResValues
+> Task :browser:mapReleaseSourceSetPaths
+> Task :browser:generateReleaseResources
+> Task :browser:packageReleaseResources
+> Task :browser:mergeReleaseResources
+> Task :browser:createReleaseCompatibleScreenManifests
+> Task :browser:extractDeepLinksRelease
+> Task :browser:parseReleaseLocalResources
+> Task :browser:processReleaseMainManifest
+> Task :browser:processReleaseManifest
+> Task :browser:javaPreCompileRelease
+> Task :browser:processReleaseManifestForPackage
+> Task :browser:mergeReleaseArtProfile
+> Task :browser:processReleaseResources
+> Task :browser:extractProguardFiles
+> Task :browser:mergeReleaseStartupProfile
+> Task :browser:mergeReleaseShaders
+> Task :browser:compileReleaseShaders NO-SOURCE
+> Task :browser:generateReleaseAssets UP-TO-DATE
+> Task :browser:mergeReleaseAssets
+> Task :browser:compressReleaseAssets
+> Task :browser:extractReleaseVersionControlInfo
+> Task :browser:processApplicationManifestReleaseForBundle
+> Task :app:mergeExtDexRelease
+> Task :browser:collectReleaseDependencies
+> Task :browser:sdkReleaseDependencyData
+> Task :browser:validateSigningRelease
+> Task :browser:bundleReleaseResources
+> Task :browser:writeReleaseAppMetadata
+> Task :browser:writeReleaseSigningConfigVersions
+> Task :launcher:preBuild UP-TO-DATE
+> Task :launcher:preReleaseBuild UP-TO-DATE
+> Task :launcher:mergeReleaseJniLibFolders
+> Task :launcher:mergeReleaseNativeLibs NO-SOURCE
+> Task :launcher:stripReleaseDebugSymbols NO-SOURCE
+> Task :launcher:extractReleaseNativeSymbolTables NO-SOURCE
+> Task :launcher:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :launcher:buildKotlinToolingMetadata
+> Task :launcher:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :launcher:checkReleaseDuplicateClasses
+> Task :launcher:checkReleaseAarMetadata
+> Task :launcher:generateReleaseResValues
+> Task :launcher:mapReleaseSourceSetPaths
+> Task :launcher:generateReleaseResources
+> Task :launcher:packageReleaseResources
+> Task :launcher:mergeReleaseResources
+> Task :launcher:createReleaseCompatibleScreenManifests
+> Task :launcher:extractDeepLinksRelease
+> Task :launcher:parseReleaseLocalResources
+> Task :launcher:processReleaseMainManifest
+> Task :launcher:processReleaseManifest
+> Task :launcher:processReleaseManifestForPackage
+> Task :launcher:javaPreCompileRelease
+> Task :launcher:mergeReleaseArtProfile
+> Task :launcher:extractProguardFiles
+> Task :launcher:mergeReleaseStartupProfile
+> Task :launcher:mergeReleaseShaders
+> Task :launcher:compileReleaseShaders NO-SOURCE
+> Task :launcher:generateReleaseAssets UP-TO-DATE
+> Task :launcher:mergeReleaseAssets
+> Task :launcher:compressReleaseAssets
+> Task :launcher:extractReleaseVersionControlInfo
+> Task :launcher:processApplicationManifestReleaseForBundle
+> Task :launcher:collectReleaseDependencies
+> Task :launcher:sdkReleaseDependencyData
+> Task :launcher:validateSigningRelease
+> Task :launcher:writeReleaseAppMetadata
+> Task :launcher:writeReleaseSigningConfigVersions
+> Task :launcher:processReleaseResources
+> Task :launcher:bundleReleaseResources
+
+> Task :browser:compileReleaseKotlin
+w: file:///home/runner/work/T2Remote/T2Remote/browser/src/main/java/app/t2remote/browser/BrowserActivity.kt:197:34 'var systemUiVisibility: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/T2Remote/T2Remote/browser/src/main/java/app/t2remote/browser/BrowserActivity.kt:197:61 'static field SYSTEM_UI_FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/T2Remote/T2Remote/browser/src/main/java/app/t2remote/browser/BrowserActivity.kt:197:95 'static field SYSTEM_UI_FLAG_HIDE_NAVIGATION: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/T2Remote/T2Remote/browser/src/main/java/app/t2remote/browser/BrowserActivity.kt:198:29 'static field SYSTEM_UI_FLAG_IMMERSIVE_STICKY: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/T2Remote/T2Remote/browser/src/main/java/app/t2remote/browser/BrowserActivity.kt:225:26 'var systemUiVisibility: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/T2Remote/T2Remote/browser/src/main/java/app/t2remote/browser/BrowserActivity.kt:225:52 'static field SYSTEM_UI_FLAG_VISIBLE: Int' is deprecated. Deprecated in Java.
+
+> Task :browser:compileReleaseJavaWithJavac NO-SOURCE
+> Task :launcher:compileReleaseKotlin
+> Task :browser:expandReleaseArtProfileWildcards
+> Task :browser:mergeReleaseGeneratedProguardFiles
+> Task :browser:processReleaseJavaRes
+> Task :launcher:compileReleaseJavaWithJavac NO-SOURCE
+> Task :launcher:expandReleaseArtProfileWildcards
+> Task :launcher:mergeReleaseGeneratedProguardFiles
+> Task :launcher:processReleaseJavaRes
+> Task :browser:mergeReleaseJavaResource
+> Task :launcher:mergeReleaseJavaResource
+> Task :app:compileReleaseKotlin
+w: file:///home/runner/work/T2Remote/T2Remote/app/src/main/java/app/t2remote/MainActivity.kt:65:40 'static fun getDefaultAdapter(): BluetoothAdapter!' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/T2Remote/T2Remote/app/src/main/java/app/t2remote/ui/KeyboardScreen.kt:96:35 'constructor(capitalization: KeyboardCapitalization = ..., autoCorrect: Boolean, keyboardType: KeyboardType = ..., imeAction: ImeAction = ..., platformImeOptions: PlatformImeOptions? = ..., showKeyboardOnFocus: Boolean? = ..., hintLocales: LocaleList? = ...): KeyboardOptions' is deprecated. Please use the new constructor that takes optional autoCorrectEnabled parameter.
+w: file:///home/runner/work/T2Remote/T2Remote/app/src/main/java/app/t2remote/ui/RemoteScreen.kt:63:38 'val Icons.Filled.KeyboardArrowLeft: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.KeyboardArrowLeft.
+w: file:///home/runner/work/T2Remote/T2Remote/app/src/main/java/app/t2remote/ui/RemoteScreen.kt:69:38 'val Icons.Filled.KeyboardArrowRight: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.KeyboardArrowRight.
+
+> Task :app:compileReleaseJavaWithJavac NO-SOURCE
+> Task :browser:minifyReleaseWithR8
+> Task :app:dexBuilderRelease
+> Task :app:mergeReleaseGlobalSynthetics
+> Task :app:processReleaseJavaRes
+> Task :browser:compileReleaseArtProfile
+> Task :browser:shrinkReleaseRes
+> Task :browser:optimizeReleaseResources
+> Task :app:mergeReleaseJavaResource
+> Task :browser:packageRelease
+> Task :browser:createReleaseApkListingFileRedirect
+> Task :browser:assembleRelease
+> Task :launcher:minifyReleaseWithR8
+> Task :launcher:compileReleaseArtProfile
+> Task :launcher:shrinkReleaseRes
+> Task :launcher:optimizeReleaseResources
+> Task :launcher:packageRelease
+> Task :launcher:createReleaseApkListingFileRedirect
+> Task :launcher:assembleRelease
+> Task :app:mergeDexRelease
+> Task :app:compileReleaseArtProfile
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:assembleRelease
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/build-1793219791654.json
+
+BUILD SUCCESSFUL in 1m 2s
+127 actionable tasks: 127 executed

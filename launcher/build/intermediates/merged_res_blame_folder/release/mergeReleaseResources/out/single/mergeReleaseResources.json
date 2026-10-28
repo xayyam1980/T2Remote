@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_wifi.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_wifi.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_storage.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_storage.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_sound.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_sound.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_bluetooth.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_bluetooth.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_time.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_time.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/xml_t2_ime.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/xml/t2_ime.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/xml_text_service.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/xml/text_service.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_banner.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/banner.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_settings.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_settings.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_keyboard.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_keyboard.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_account.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_account.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_apps.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_apps.xml"
+    },
+    {
+        "merged": "app.t2remote.home.launcher-release-5:/drawable_sys_display.xml.flat",
+        "source": "app.t2remote.home.launcher-main-6:/drawable/sys_display.xml"
+    }
+]

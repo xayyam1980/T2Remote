@@ -1,0 +1,1 @@
+int drawable banner 0x7f010000

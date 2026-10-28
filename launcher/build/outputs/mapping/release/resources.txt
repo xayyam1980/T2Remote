@@ -1,0 +1,43 @@
+Marking drawable:sys_settings:2130771974 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_account:2130771969 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_wifi:2130771978 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_bluetooth:2130771971 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_display:2130771972 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_sound:2130771975 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_apps:2130771970 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_storage:2130771976 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_keyboard:2130771973 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking drawable:sys_time:2130771977 reachable: referenced from /home/runner/work/T2Remote/T2Remote/launcher/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+@drawable/banner : reachable=true
+@drawable/sys_account : reachable=true
+@drawable/sys_apps : reachable=true
+@drawable/sys_bluetooth : reachable=true
+@drawable/sys_display : reachable=true
+@drawable/sys_keyboard : reachable=true
+@drawable/sys_settings : reachable=true
+@drawable/sys_sound : reachable=true
+@drawable/sys_storage : reachable=true
+@drawable/sys_time : reachable=true
+@drawable/sys_wifi : reachable=true
+@string/text_service_desc : reachable=false
+@xml/t2_ime : reachable=true
+@xml/text_service : reachable=true
+    @string/text_service_desc
+
+The root reachable resources are:
+ drawable:banner:2130771968
+ drawable:sys_account:2130771969
+ drawable:sys_apps:2130771970
+ drawable:sys_bluetooth:2130771971
+ drawable:sys_display:2130771972
+ drawable:sys_keyboard:2130771973
+ drawable:sys_settings:2130771974
+ drawable:sys_sound:2130771975
+ drawable:sys_storage:2130771976
+ drawable:sys_time:2130771977
+ drawable:sys_wifi:2130771978
+ xml:t2_ime:2130903040
+ xml:text_service:2130903041
+Unused resources are: 
+
+Resource shrinking did not work (grew from 8961 to 9209); using original instead

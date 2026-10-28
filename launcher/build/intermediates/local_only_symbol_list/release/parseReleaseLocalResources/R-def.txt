@@ -1,0 +1,16 @@
+R_DEF: Internal format may change without notice
+local
+drawable banner
+drawable sys_account
+drawable sys_apps
+drawable sys_bluetooth
+drawable sys_display
+drawable sys_keyboard
+drawable sys_settings
+drawable sys_sound
+drawable sys_storage
+drawable sys_time
+drawable sys_wifi
+string text_service_desc
+xml t2_ime
+xml text_service
