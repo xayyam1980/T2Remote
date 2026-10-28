@@ -20,7 +20,7 @@ class T2Ime : InputMethodService() {
     private val main = Handler(Looper.getMainLooper())
     private val idle = Runnable { release() }
 
-    override fun onCreate() { super.onCreate(); instance = this; touch() }
+    override fun onCreate() { super.onCreate(); instance = this; TextChannel.start(); touch() }
     override fun onDestroy() { if (instance === this) instance = null; main.removeCallbacks(idle); super.onDestroy() }
 
     // Never show an on-screen keyboard.

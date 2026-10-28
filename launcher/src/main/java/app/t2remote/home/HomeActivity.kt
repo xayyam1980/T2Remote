@@ -65,6 +65,7 @@ class HomeActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        TextChannel.start()
         val root = FrameLayout(this).apply { setBackgroundColor(Color.parseColor("#0B0B0F")) }
 
         // Two backdrops for crossfading

@@ -68,9 +68,10 @@ fun KeyboardScreen() {
 
     // While this tab is open (and Wi-Fi control is on), the projector uses the invisible T2 Keyboard,
     // so its own on-screen keyboard doesn't interfere. Leaving the tab gives it back.
-    androidx.compose.runtime.DisposableEffect(Unit) {
-        if (app.t2remote.adb.WifiHid.active) AdbController.imeBegin()
-        onDispose { if (app.t2remote.adb.WifiHid.active) AdbController.imeEnd() }
+    val wifiReady = st.status == HidController.Status.CONNECTED && app.t2remote.adb.WifiHid.active
+    androidx.compose.runtime.DisposableEffect(wifiReady) {
+        if (wifiReady) AdbController.imeBegin()
+        onDispose { if (wifiReady && app.t2remote.adb.WifiHid.active) AdbController.imeEnd() }
     }
 
     Column(Modifier.fillMaxSize()) {

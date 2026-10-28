@@ -117,6 +117,7 @@ object AdbController {
     fun disconnect() = scope.launch {
         lock.withLock {
             WifiHid.stop()
+            closeTextChannel()
             runCatching { mgr?.disconnect() }
             _state.update { State(output = "Disconnected") }
         }
@@ -135,7 +136,8 @@ object AdbController {
                 val out = execLocked(m, cmd)
                 if (!quiet) _state.update { it.copy(busy = false, output = "$ $cmd\n${out.ifBlank { "(no output)" }}".take(12000)) }
             } catch (e: Throwable) {
-                fail("Connection lost", e)
+                if (WifiHid.active) _state.update { it.copy(busy = false, output = "Command failed: ${e.message}") }
+                else fail("Connection lost", e)
             }
         }
     }
@@ -145,12 +147,36 @@ object AdbController {
     // ---- Layout-independent typing via T2 Home's text service (any language) ----
     private const val TEXT_RX = "-a app.t2remote.home.TEXT -n app.t2remote.home/.TextReceiver"
 
-    fun a11yInsert(text: String) {
-        val b64 = Base64.encodeToString(text.toByteArray(Charsets.UTF_8), Base64.NO_WRAP)
-        shell("am broadcast $TEXT_RX --es b64 $b64 >/dev/null", quiet = true)
+    // Persistent stream to T2 Home's local text channel (127.0.0.1:47321 on the projector, via ADB "tcp:").
+    private val textExec = java.util.concurrent.Executors.newSingleThreadExecutor()
+    @Volatile private var textStream: io.github.muntashirakon.adb.AdbStream? = null
+    @Volatile private var textOut: java.io.OutputStream? = null
+
+    private fun sendLine(line: String) = textExec.execute {
+        val m = mgr ?: return@execute
+        for (attempt in 0..1) {
+            try {
+                val o = textOut ?: m.openStream("tcp:47321").also { textStream = it }.openOutputStream().also { textOut = it }
+                o.write((line + "\n").toByteArray(Charsets.UTF_8)); o.flush()
+                return@execute
+            } catch (e: Throwable) {
+                runCatching { textStream?.close() }
+                textStream = null; textOut = null
+            }
+        }
     }
-    fun a11yDelete(n: Int) { if (n > 0) shell("am broadcast $TEXT_RX --ei del $n >/dev/null", quiet = true) }
-    fun remoteEnter() { shell("am broadcast $TEXT_RX --ez enter true >/dev/null", quiet = true) }
+
+    fun closeTextChannel() = textExec.execute {
+        runCatching { textStream?.close() }
+        textStream = null; textOut = null
+    }
+
+    fun a11yInsert(text: String) {
+        if (text.isEmpty()) return
+        sendLine("T" + Base64.encodeToString(text.toByteArray(Charsets.UTF_8), Base64.NO_WRAP))
+    }
+    fun a11yDelete(n: Int) { if (n > 0) sendLine("D$n") }
+    fun remoteEnter() = sendLine("E")
 
     // ---- T2 Keyboard (invisible IME on the projector) while the phone keyboard is in use ----
     private const val T2_IME = "app.t2remote.home/.T2Ime"
@@ -177,7 +203,7 @@ object AdbController {
             runCatching {
                 val prev = previousIme
                 if (prev != null) execLocked(m, "ime set $prev >/dev/null 2>&1")
-                else execLocked(m, "am broadcast $TEXT_RX --ez release true >/dev/null")
+                else sendLine("R")
             }
         }
     }

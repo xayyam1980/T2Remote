@@ -16,7 +16,7 @@ import android.view.accessibility.AccessibilityNodeInfo
 class TextService : AccessibilityService() {
     companion object { @Volatile var instance: TextService? = null }
 
-    override fun onServiceConnected() { instance = this }
+    override fun onServiceConnected() { instance = this; TextChannel.start() }
     override fun onDestroy() { if (instance === this) instance = null; super.onDestroy() }
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
     override fun onInterrupt() {}
@@ -63,31 +63,82 @@ class TextService : AccessibilityService() {
     fun clear(): Boolean { val node = focusedField() ?: return false; setText(node, "", 0); return true }
 }
 
+/** Single entry point for typing commands (from the socket channel or a broadcast). Main thread. */
+object Typer {
+    /** Returns 1 ok, 2 no service, 3 no text field. */
+    fun run(cmd: Char, arg: String): Int {
+        T2Ime.instance?.takeIf { it.currentInputConnection != null }?.let { ime ->
+            val ok = when (cmd) {
+                'T' -> ime.insert(arg)
+                'D' -> ime.delete(arg.toIntOrNull() ?: 1)
+                'C' -> ime.clear()
+                'E' -> ime.enter()
+                'R' -> { ime.release(); true }
+                else -> false
+            }
+            return if (ok) 1 else 3
+        }
+        if (cmd == 'R') return 1
+        val svc = TextService.instance ?: return 2
+        val ok = when (cmd) {
+            'T' -> svc.insert(arg)
+            'D' -> svc.delete(arg.toIntOrNull() ?: 1)
+            'C' -> svc.clear()
+            'E' -> false
+            else -> false
+        }
+        return if (ok) 1 else 3
+    }
+}
+
+/**
+ * Local text channel on 127.0.0.1:47321 — reachable only through the phone's ADB link (adb "tcp:" stream),
+ * not from the network. One line per command: "T<base64 utf-8>", "D<n>", "C", "E", "R".
+ */
+object TextChannel {
+    const val PORT = 47321
+    @Volatile private var started = false
+    private val main = android.os.Handler(android.os.Looper.getMainLooper())
+
+    fun start() {
+        if (started) return
+        started = true
+        Thread {
+            try {
+                val server = java.net.ServerSocket(PORT, 4, java.net.InetAddress.getByName("127.0.0.1"))
+                while (true) {
+                    val sock = server.accept()
+                    Thread {
+                        runCatching {
+                            sock.getInputStream().bufferedReader(Charsets.UTF_8).use { r ->
+                                while (true) {
+                                    val line = r.readLine() ?: break
+                                    if (line.isEmpty()) continue
+                                    val cmd = line[0]
+                                    val raw = line.substring(1)
+                                    val arg = if (cmd == 'T') String(Base64.decode(raw, Base64.DEFAULT), Charsets.UTF_8) else raw
+                                    main.post { Typer.run(cmd, arg) }
+                                }
+                            }
+                        }
+                        runCatching { sock.close() }
+                    }.apply { isDaemon = true }.start()
+                }
+            } catch (e: Exception) { started = false }
+        }.apply { isDaemon = true; name = "T2TextChannel" }.start()
+    }
+}
+
 /** Receives text from `adb shell am broadcast` (protected by the DUMP permission: shell only). */
 class TextReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        // Prefer the T2 Keyboard input method when it's active; fall back to the accessibility service.
-        T2Ime.instance?.takeIf { it.currentInputConnection != null }?.let { ime ->
-            val ok = when {
-                intent.hasExtra("b64") -> ime.insert(String(Base64.decode(intent.getStringExtra("b64"), Base64.DEFAULT), Charsets.UTF_8))
-                intent.hasExtra("del") -> ime.delete(intent.getIntExtra("del", 1))
-                intent.hasExtra("clear") -> ime.clear()
-                intent.hasExtra("enter") -> ime.enter()
-                intent.hasExtra("release") -> { ime.release(); true }
-                else -> false
-            }
-            resultCode = if (ok) 1 else 3
-            return
+        resultCode = when {
+            intent.hasExtra("b64") -> Typer.run('T', String(Base64.decode(intent.getStringExtra("b64"), Base64.DEFAULT), Charsets.UTF_8))
+            intent.hasExtra("del") -> Typer.run('D', intent.getIntExtra("del", 1).toString())
+            intent.hasExtra("clear") -> Typer.run('C', "")
+            intent.hasExtra("enter") -> Typer.run('E', "")
+            intent.hasExtra("release") -> Typer.run('R', "")
+            else -> 0
         }
-        if (intent.hasExtra("release")) { resultCode = 1; return }
-        val svc = TextService.instance
-        val ok = when {
-            svc == null -> false
-            intent.hasExtra("b64") -> svc.insert(String(Base64.decode(intent.getStringExtra("b64"), Base64.DEFAULT), Charsets.UTF_8))
-            intent.hasExtra("del") -> svc.delete(intent.getIntExtra("del", 1))
-            intent.hasExtra("clear") -> svc.clear()
-            else -> false
-        }
-        resultCode = if (ok) 1 else if (svc == null) 2 else 3   // 1 ok, 2 service off, 3 no text field
     }
 }
