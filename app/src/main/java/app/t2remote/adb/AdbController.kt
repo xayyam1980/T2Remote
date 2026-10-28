@@ -142,6 +142,24 @@ object AdbController {
 
     fun keyevent(code: Int) { shell("input keyevent $code", quiet = true) }
 
+    // ---- Layout-independent typing via T2 Home's text service (any language) ----
+    private const val TEXT_RX = "-a app.t2remote.home.TEXT -n app.t2remote.home/.TextReceiver"
+
+    fun a11yInsert(text: String) {
+        val b64 = Base64.encodeToString(text.toByteArray(Charsets.UTF_8), Base64.NO_WRAP)
+        shell("am broadcast $TEXT_RX --es b64 $b64 >/dev/null", quiet = true)
+    }
+    fun a11yDelete(n: Int) { if (n > 0) shell("am broadcast $TEXT_RX --ei del $n >/dev/null", quiet = true) }
+
+    /** Turn on T2 Home's typing service (idempotent, keeps other accessibility services). */
+    private const val SVC = "app.t2remote.home/app.t2remote.home.TextService"
+    private fun enableTypingServiceCmd() =
+        "pm list packages app.t2remote.home | grep -q . || exit 0; " +
+        "s=\$(settings get secure enabled_accessibility_services); " +
+        "case \"\$s\" in *$SVC*) ;; null|'') settings put secure enabled_accessibility_services $SVC ;; " +
+        "*) settings put secure enabled_accessibility_services \"\$s:$SVC\" ;; esac; " +
+        "settings put secure accessibility_enabled 1"
+
     /** Unicode text via ADBKeyBoard IME (com.android.adbkeyboard) — works for Russian without layout switching. */
     fun typeUnicode(text: String) {
         val b64 = Base64.encodeToString(text.toByteArray(Charsets.UTF_8), Base64.NO_WRAP)
@@ -168,6 +186,7 @@ object AdbController {
                 }
                 _state.update { State(connected = true, target = "$host:$port", output = "ADB connected") }
                 WifiHid.start(m)
+                runCatching { execLocked(m, enableTypingServiceCmd()) }
                 _state.update { it.copy(busy = false, output = "Wi-Fi control active") }
             } catch (e: Throwable) {
                 fail("Wi-Fi connect failed", e)

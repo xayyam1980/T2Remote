@@ -40,8 +40,17 @@ import app.t2remote.hid.KeyMap.Layout
 
 /** Text routing: Bluetooth HID (default) or Wi-Fi ADB via ADBKeyBoard. */
 private object TextOut {
-    fun type(s: String) = if (Prefs.textRouteAdb) AdbController.typeUnicode(s) else HidController.type(s)
-    fun backspace(n: Int) = if (Prefs.textRouteAdb) AdbController.backspace(n) else HidController.keyRepeat(KeyMap.BACKSPACE, n)
+    private val wifi get() = app.t2remote.adb.WifiHid.active
+    fun type(s: String) = when {
+        wifi -> AdbController.a11yInsert(s)          // any language, no layout switching needed
+        Prefs.textRouteAdb -> AdbController.typeUnicode(s)
+        else -> HidController.type(s)
+    }
+    fun backspace(n: Int) = when {
+        wifi -> AdbController.a11yDelete(n)
+        Prefs.textRouteAdb -> AdbController.backspace(n)
+        else -> HidController.keyRepeat(KeyMap.BACKSPACE, n)
+    }
     fun enter() = if (Prefs.textRouteAdb) AdbController.keyevent(66) else HidController.key(KeyMap.ENTER)
 }
 

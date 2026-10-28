@@ -364,7 +364,8 @@ object HidController {
     }
 
     fun click(button: Int = 1) = typingExec.execute {
-        send(HidDescriptor.ID_MOUSE, byteArrayOf((mouseButtons or button).toByte(), 0, 0, 0)); pause()
+        // Hold ~50 ms: some TV UIs (e.g. the on-screen keyboard) ignore ultra-short clicks.
+        send(HidDescriptor.ID_MOUSE, byteArrayOf((mouseButtons or button).toByte(), 0, 0, 0)); Thread.sleep(50)
         send(HidDescriptor.ID_MOUSE, byteArrayOf(mouseButtons.toByte(), 0, 0, 0))
     }
 
