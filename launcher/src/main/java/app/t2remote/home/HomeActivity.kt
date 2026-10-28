@@ -109,12 +109,12 @@ class HomeActivity : Activity() {
         }
         titleCol.addView(title); titleCol.addView(subtitle)
         root.addView(titleCol, FrameLayout.LayoutParams(dp(560f), WRAP_CONTENT, Gravity.TOP or Gravity.START).apply {
-            setMargins(dp(56f), dp(96f), 0, 0)
+            setMargins(dp(56f), dp(64f), 0, 0)
         })
 
         // Bottom: pinned banners + apps row
         val bottom = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-        pinRow = LinearLayout(this).apply { gravity = Gravity.BOTTOM; setPadding(dp(48f), dp(12f), dp(48f), dp(12f)) }
+        pinRow = LinearLayout(this).apply { gravity = Gravity.BOTTOM; setPadding(dp(48f), dp(10f), dp(48f), dp(10f)) }
         bottom.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
             addView(pinRow)
@@ -123,7 +123,7 @@ class HomeActivity : Activity() {
             text = "Apps"; setTextColor(Color.parseColor("#99FFFFFF")); setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
             setPadding(dp(56f), dp(4f), 0, 0)
         })
-        appsRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(8f), dp(48f), dp(10f)) }
+        appsRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(6f), dp(48f), dp(6f)) }
         bottom.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
             addView(appsRow)
@@ -132,7 +132,7 @@ class HomeActivity : Activity() {
             text = "System"; setTextColor(Color.parseColor("#99FFFFFF")); setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
             setPadding(dp(56f), dp(2f), 0, 0)
         })
-        systemRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(8f), dp(48f), dp(26f)) }
+        systemRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(6f), dp(48f), dp(18f)) }
         bottom.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
             addView(systemRow)
@@ -267,8 +267,8 @@ class HomeActivity : Activity() {
             col.addView(label(a.label, 14f))
             frame.addView(col, FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT))
         }
-        frame.layoutParams = LinearLayout.LayoutParams(dp(208f), dp(117f)).apply { setMargins(dp(10f), 0, dp(10f), 0) }
-        wire(frame, a, scale = 1.18f)
+        frame.layoutParams = LinearLayout.LayoutParams(dp(176f), dp(99f)).apply { setMargins(dp(10f), 0, dp(10f), 0) }
+        wire(frame, a, scale = 1.15f)
         return frame
     }
 
@@ -278,13 +278,13 @@ class HomeActivity : Activity() {
             isFocusable = true; isClickable = true; isLongClickable = !system
             tag = a.pkg
             background = rounded(Color.parseColor(if (system) "#33405066" else "#2A2F36"), 28f)
-            val pad = if (system) dp(14f) else dp(10f)
+            val pad = if (system) dp(12f) else dp(8f)
             setPadding(pad, pad, pad, pad)
         }
         if (a.icon != null) frame.addView(ImageView(this).apply { setImageDrawable(a.icon) }, FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT))
         else frame.addView(label("⚙", 22f).apply { gravity = Gravity.CENTER }, FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT))
-        frame.layoutParams = LinearLayout.LayoutParams(dp(56f), dp(56f)).apply { setMargins(dp(8f), 0, dp(8f), 0) }
-        wire(frame, a, scale = 1.25f)
+        frame.layoutParams = LinearLayout.LayoutParams(dp(48f), dp(48f)).apply { setMargins(dp(8f), 0, dp(8f), 0) }
+        wire(frame, a, scale = 1.22f)
         return frame
     }
 
@@ -316,7 +316,7 @@ class HomeActivity : Activity() {
         val incoming = if (showingA) backdropB else backdropA
         val outgoing = if (showingA) backdropA else backdropB
         incoming.setImageDrawable(art.constantState?.newDrawable()?.mutate() ?: art)
-        incoming.animate().alpha(0.55f).setDuration(280).start()
+        incoming.animate().alpha(0.45f).setDuration(280).start()
         outgoing.animate().alpha(0f).setDuration(280).start()
         showingA = !showingA
     }

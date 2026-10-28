@@ -16,11 +16,17 @@ android {
         versionName = "1.0"
     }
 
+    signingConfigs {
+        create("t2") {
+            storeFile = rootProject.file("t2remote.keystore")
+            storePassword = "t2remote"; keyAlias = "t2"; keyPassword = "t2remote"
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
             // Signed with the debug key so the release APK installs directly.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("t2")
         }
     }
     compileOptions {
