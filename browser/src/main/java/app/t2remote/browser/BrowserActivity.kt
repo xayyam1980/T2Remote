@@ -53,7 +53,7 @@ class BrowserActivity : Activity() {
     private fun dp(v: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, resources.displayMetrics).toInt()
 
     companion object {
-        private const val START = "t2://start"
+        private const val START = "https://start.t2.local/"
         private const val DESKTOP_UA =
             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
@@ -162,6 +162,7 @@ class BrowserActivity : Activity() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                 val u = request.url
                 if (u.scheme == "t2") { handleInternal(u); return true }
+                if (u.toString().startsWith(START)) return true
                 if (u.scheme != "http" && u.scheme != "https") return true      // block intent:, market:, etc.
                 if (blocked(u.host)) return true
                 return false
@@ -169,12 +170,19 @@ class BrowserActivity : Activity() {
 
             override fun onPageStarted(view: WebView, u: String?, favicon: Bitmap?) {
                 progress.visibility = View.VISIBLE
-                if (u != null && u.startsWith("http") && !url.hasFocus()) url.setText(u)
+                if (u != null && u.startsWith("http") && !u.startsWith(START) && !url.hasFocus()) url.setText(u)
+            }
+
+            // Low-memory devices: if the web engine dies, rebuild instead of crashing the app.
+            override fun onRenderProcessGone(view: WebView, detail: android.webkit.RenderProcessGoneDetail): Boolean {
+                Toast.makeText(this@BrowserActivity, "Page reloaded (low memory)", Toast.LENGTH_SHORT).show()
+                recreate()
+                return true
             }
 
             override fun onPageFinished(view: WebView, u: String?) {
                 progress.visibility = View.GONE
-                if (u != null && u.startsWith("http")) prefs.edit().putString("last", u).apply()
+                if (u != null && u.startsWith("http") && !u.startsWith(START)) prefs.edit().putString("last", u).apply()
             }
         }
 
