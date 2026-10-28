@@ -225,6 +225,7 @@ class HomeActivity : Activity() {
             App(label, "sys:$action", Intent(action).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), null, getDrawable(icon))
         return listOf(
             e("Settings", Settings.ACTION_SETTINGS, R.drawable.sys_settings),
+            e("Accounts (Google)", "android.settings.SYNC_SETTINGS", R.drawable.sys_account),
             e("Network & Wi-Fi", Settings.ACTION_WIFI_SETTINGS, R.drawable.sys_wifi),
             e("Bluetooth & remotes", Settings.ACTION_BLUETOOTH_SETTINGS, R.drawable.sys_bluetooth),
             e("Display & picture", Settings.ACTION_DISPLAY_SETTINGS, R.drawable.sys_display),
@@ -321,8 +322,16 @@ class HomeActivity : Activity() {
     }
 
     private fun launch(a: App) {
-        try { startActivity(a.intent) }
-        catch (e: Exception) { Toast.makeText(this, "Can't open ${a.label}", Toast.LENGTH_SHORT).show() }
+        // Accounts page differs between firmwares: try the known actions in order.
+        val candidates = if (a.pkg == "sys:android.settings.SYNC_SETTINGS") listOf(
+            a.intent,
+            Intent("android.settings.ADD_ACCOUNT_SETTINGS").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+        ) else listOf(a.intent)
+        for (i in candidates) {
+            try { startActivity(i); return } catch (_: Exception) {}
+        }
+        Toast.makeText(this, "Can't open ${a.label}", Toast.LENGTH_SHORT).show()
     }
 
     private fun togglePin(a: App) {
