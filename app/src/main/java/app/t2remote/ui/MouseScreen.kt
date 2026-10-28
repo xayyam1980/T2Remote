@@ -55,6 +55,18 @@ fun MouseScreen() {
             ) { Text(if (dragLock) "Drop" else "Drag", fontSize = 13.sp) }
             FilledTonalButton(onClick = { HidController.click(2) }, Modifier.weight(1f).height(56.dp)) { Text("Right") }
         }
+        // Arrow pad + OK for screens that ignore mouse clicks (e.g. the Google TV home menu)
+        Row(
+            Modifier.fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            val k = app.t2remote.hid.KeyMap
+            FilledTonalButton(onClick = { HidController.key(k.LEFT) }, Modifier.weight(1f).height(52.dp)) { Text("←", fontSize = 20.sp) }
+            FilledTonalButton(onClick = { HidController.key(k.UP) }, Modifier.weight(1f).height(52.dp)) { Text("↑", fontSize = 20.sp) }
+            Button(onClick = { HidController.key(k.ENTER) }, Modifier.weight(1.2f).height(52.dp)) { Text("OK") }
+            FilledTonalButton(onClick = { HidController.key(k.DOWN) }, Modifier.weight(1f).height(52.dp)) { Text("↓", fontSize = 20.sp) }
+            FilledTonalButton(onClick = { HidController.key(k.RIGHT) }, Modifier.weight(1f).height(52.dp)) { Text("→", fontSize = 20.sp) }
+        }
         Row(
             Modifier.fillMaxWidth().padding(12.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
