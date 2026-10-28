@@ -69,6 +69,28 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
             }
         }
 
+        SectionTitle("Wi-Fi control (recommended)")
+        Card {
+            val adb by app.t2remote.adb.AdbController.state.collectAsState()
+            var ip by remember { mutableStateOf(app.t2remote.Prefs.adbHost.ifBlank { "192.168.100.55" }) }
+            Text("Phone and projector on the same Wi-Fi. One-time on the projector: Developer options → USB debugging ON; " +
+                "accept “Allow debugging” (tick Always allow) the first time.",
+                fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            androidx.compose.material3.OutlinedTextField(
+                ip, { ip = it.trim() }, label = { Text("Projector IP") }, singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(
+                    enabled = ip.isNotBlank() && !adb.busy,
+                    onClick = { app.t2remote.Prefs.adbHost = ip; app.t2remote.adb.AdbController.connectWifiControl(ctx, ip) },
+                ) { Text(if (app.t2remote.adb.WifiHid.active) "Reconnect" else "Connect over Wi-Fi") }
+                if (app.t2remote.adb.WifiHid.active)
+                    OutlinedButton(onClick = { app.t2remote.adb.AdbController.disconnect() }) { Text("Disconnect") }
+            }
+            if (adb.output.isNotBlank()) Text(adb.output, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+
         if (speakerDevice != null) {
             SectionTitle("Projector is connected as a speaker")
             Card {
@@ -83,7 +105,7 @@ fun ConnectScreen(onMakeDiscoverable: () -> Unit, onEnableBluetooth: () -> Unit)
             }
         }
 
-        SectionTitle("Pair from the projector (recommended)")
+        SectionTitle("Bluetooth (may not work on Android 14 projectors)")
         Card {
             Text("The projector accepts a keyboard/mouse only if it does the pairing itself.")
             Text("1. If the projector is already paired: tap Forget below, and on the projector open Settings → Remotes & Accessories → your phone → Unpair.")

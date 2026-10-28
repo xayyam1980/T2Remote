@@ -116,6 +116,7 @@ object AdbController {
 
     fun disconnect() = scope.launch {
         lock.withLock {
+            WifiHid.stop()
             runCatching { mgr?.disconnect() }
             _state.update { State(output = "Disconnected") }
         }
@@ -153,6 +154,82 @@ object AdbController {
     }
 
     val isConnected get() = _state.value.connected
+
+    /** Connect (classic port 5555 by default) and start the virtual keyboard/mouse. */
+    fun connectWifiControl(ctx: Context, host: String, port: Int = 5555) = scope.launch {
+        lock.withLock {
+            _state.update { it.copy(busy = true, output = "Connecting to $host:$port… If the projector asks “Allow debugging?”, tick “Always allow” and press OK.") }
+            try {
+                val m = manager(ctx)
+                if (!_state.value.connected || _state.value.target != "$host:$port") {
+                    runCatching { m.disconnect() }
+                    m.setHostAddress(host)
+                    if (!m.connect(host, port)) throw IllegalStateException("no answer")
+                }
+                _state.update { State(connected = true, target = "$host:$port", output = "ADB connected") }
+                WifiHid.start(m)
+                _state.update { it.copy(busy = false, output = "Wi-Fi control active") }
+            } catch (e: Throwable) {
+                fail("Wi-Fi connect failed", e)
+                _state.update { it.copy(output = it.output + "\nCheck: same Wi-Fi, projector IP, Developer options → USB debugging ON, and accept the prompt on the projector.") }
+            }
+        }
+    }
+}
+
+/**
+ * Virtual keyboard + mouse created ON the projector with Android's built-in `hid` tool (uhid),
+ * fed over an ADB shell stream. Works even where the projector rejects phone Bluetooth HID.
+ */
+object WifiHid {
+    @Volatile var active = false
+        private set
+    private var stream: io.github.muntashirakon.adb.AdbStream? = null
+    private var out: java.io.OutputStream? = null
+    private val writer = java.util.concurrent.Executors.newSingleThreadExecutor()
+
+    internal fun start(m: AbsAdbConnectionManager) {
+        stop()
+        val s = m.openStream("shell:hid -")
+        val o = s.openOutputStream()
+        stream = s; out = o
+        val desc = app.t2remote.hid.HidDescriptor.bytes.joinToString(",") { (it.toInt() and 0xFF).toString() }
+        o.write(("{\"id\":1,\"command\":\"register\",\"name\":\"T2 Remote\",\"vid\":6353,\"pid\":28673," +
+            "\"bus\":\"bluetooth\",\"descriptor\":[$desc]}\n").toByteArray())
+        o.flush()
+        active = true
+        app.t2remote.hid.HidController.onWifiState(true)
+        // Drain output; when the stream ends the device is gone.
+        Thread {
+            runCatching { s.openInputStream().use { inp -> val b = ByteArray(1024); while (inp.read(b) >= 0) {} } }
+            if (stream === s) {
+                active = false
+                app.t2remote.hid.HidController.onWifiState(false)
+            }
+        }.apply { isDaemon = true }.start()
+    }
+
+    fun report(id: Int, data: ByteArray): Boolean {
+        val o = out ?: return false
+        if (!active) return false
+        val body = buildString {
+            append("{\"id\":1,\"command\":\"report\",\"report\":[").append(id)
+            data.forEach { append(',').append(it.toInt() and 0xFF) }
+            append("]}\n")
+        }
+        writer.execute {
+            try { o.write(body.toByteArray()); o.flush() }
+            catch (e: Throwable) { active = false; app.t2remote.hid.HidController.onWifiState(false) }
+        }
+        return true
+    }
+
+    fun stop() {
+        val s = stream
+        stream = null; out = null
+        if (active) { active = false; app.t2remote.hid.HidController.onWifiState(false) }
+        runCatching { s?.close() }
+    }
 }
 
 /** Ready-made configuration commands for Android TV 11. */

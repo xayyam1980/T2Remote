@@ -45,6 +45,10 @@ class MainActivity : ComponentActivity() {
             )
         }
         ensureBluetooth()
+        // Reconnect Wi-Fi control automatically if it was set up before.
+        Prefs.adbHost.takeIf { it.isNotBlank() && Prefs.autoReconnect }?.let {
+            app.t2remote.adb.AdbController.connectWifiControl(this, it)
+        }
     }
 
     private fun hasPermissions() = btPermissions.all {

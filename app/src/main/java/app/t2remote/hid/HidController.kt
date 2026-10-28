@@ -186,6 +186,7 @@ object HidController {
     }
 
     fun disconnect() {
+        if (app.t2remote.adb.WifiHid.active) { app.t2remote.adb.AdbController.disconnect(); return }
         main.removeCallbacks(watchdog)
         val dev = _state.value.host ?: target
         target = null
@@ -232,7 +233,8 @@ object HidController {
                 _state.update { it.copy(status = Status.OFF, host = null, message = "Not registered") }
                 return
             }
-            _state.update { it.copy(status = Status.READY, message = "Ready — pair or pick the projector") }
+            if (!app.t2remote.adb.WifiHid.active)
+                _state.update { it.copy(status = Status.READY, message = "Ready — pair or pick the projector") }
             if (adoptConnected()) return
             val auto = pluggedDevice ?: if (Prefs.autoReconnect) {
                 Prefs.lastHost?.let { addr -> bondedDevices().firstOrNull { it.address == addr } }
@@ -253,7 +255,7 @@ object HidController {
                     _state.update { it.copy(status = Status.CONNECTING) }
                 BluetoothProfile.STATE_DISCONNECTED -> main.post {
                     // During a retry cycle the watchdog owns the state.
-                    if (target == null) {
+                    if (target == null && !app.t2remote.adb.WifiHid.active) {
                         val quickDrop = _state.value.status == Status.CONNECTED &&
                             System.currentTimeMillis() - connectedAt < 4000
                         _state.update {
@@ -279,7 +281,17 @@ object HidController {
 
     // ------------------------------------------------------------------ low-level reports
 
+    /** Called by WifiHid when the Wi-Fi virtual keyboard/mouse appears or goes away. */
+    fun onWifiState(on: Boolean) {
+        log(if (on) "Wi-Fi keyboard/mouse ACTIVE" else "Wi-Fi keyboard/mouse stopped")
+        _state.update {
+            if (on) it.copy(status = Status.CONNECTED, host = null, message = "Connected over Wi-Fi")
+            else it.copy(status = if (hid != null) Status.READY else Status.OFF, message = "Wi-Fi control stopped")
+        }
+    }
+
     private fun send(id: Int, data: ByteArray): Boolean {
+        if (app.t2remote.adb.WifiHid.active) return app.t2remote.adb.WifiHid.report(id, data)
         val h = hid ?: return false
         val host = _state.value.host ?: (if (adoptConnected()) _state.value.host else null) ?: return false
         return h.sendReport(host, id, data)
