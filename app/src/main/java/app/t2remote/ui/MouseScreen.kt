@@ -92,9 +92,13 @@ fun Touchpad(modifier: Modifier) {
                 awaitEachGesture {
                     val down = awaitFirstDown(requireUnconsumed = false)
                     val start = down.uptimeMillis
+                    val origin = down.position
                     var end = start
                     var maxFingers = 1
-                    var travel = 0f
+                    // A tap stays a tap until the finger leaves this radius; until then the pointer doesn't move,
+                    // so the click lands exactly where the pointer was.
+                    val slop = viewConfiguration.touchSlop * 1.5f
+                    var moved = false
                     var accX = 0f; var accY = 0f; var accWheel = 0f
                     val speed = Prefs.pointerSpeed
                     val wheelDiv = 36f / Prefs.scrollSpeed
@@ -108,28 +112,33 @@ fun Touchpad(modifier: Modifier) {
                         maxFingers = max(maxFingers, pressed.size)
 
                         if (pressed.size == 1 && maxFingers == 1) {
-                            val d = pressed[0].positionChange()
-                            travel += abs(d.x) + abs(d.y)
-                            // Mild acceleration: faster swipes move proportionally further
-                            val boost = 1f + (abs(d.x) + abs(d.y)) / 60f
-                            accX += d.x * speed * boost / 2f
-                            accY += d.y * speed * boost / 2f
-                            val ix = accX.toInt(); val iy = accY.toInt()
-                            if (ix != 0 || iy != 0) {
-                                HidController.mouseMove(ix, iy)
-                                accX -= ix; accY -= iy
+                            val c = pressed[0]
+                            if (!moved && (c.position - origin).getDistance() > slop) moved = true
+                            if (moved) {
+                                val d = c.positionChange()
+                                // Mild acceleration: faster swipes move proportionally further
+                                val boost = 1f + (abs(d.x) + abs(d.y)) / 60f
+                                accX += d.x * speed * boost / 2f
+                                accY += d.y * speed * boost / 2f
+                                val ix = accX.toInt(); val iy = accY.toInt()
+                                if (ix != 0 || iy != 0) {
+                                    HidController.mouseMove(ix, iy)
+                                    accX -= ix; accY -= iy
+                                }
                             }
                         } else if (pressed.size >= 2) {
                             val dy = pressed.map { it.positionChange().y }.average().toFloat()
-                            travel += abs(dy)
-                            accWheel += dy / wheelDiv * invert
-                            val w = accWheel.toInt()
-                            if (w != 0) { HidController.wheel(w); accWheel -= w }
+                            if (!moved && abs(pressed[0].position.y - origin.y) > slop) moved = true
+                            if (moved) {
+                                accWheel += dy / wheelDiv * invert
+                                val w = accWheel.toInt()
+                                if (w != 0) { HidController.wheel(w); accWheel -= w }
+                            }
                         }
                         ev.changes.forEach { it.consume() }
                     }
 
-                    if (travel < 24f && end - start < 280) {
+                    if (!moved && end - start < 400) {
                         HidController.click(if (maxFingers >= 2) 2 else 1)
                     }
                 }

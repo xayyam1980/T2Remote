@@ -114,7 +114,7 @@ class HomeActivity : Activity() {
 
         // Bottom: pinned banners + apps row
         val bottom = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-        pinRow = LinearLayout(this).apply { gravity = Gravity.BOTTOM; setPadding(dp(48f), dp(10f), dp(48f), dp(10f)) }
+        pinRow = LinearLayout(this).apply { clipToPadding = false; clipChildren = false; gravity = Gravity.BOTTOM; setPadding(dp(64f), dp(12f), dp(64f), dp(12f)) }
         bottom.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
             addView(pinRow)
@@ -123,7 +123,7 @@ class HomeActivity : Activity() {
             text = "Apps"; setTextColor(Color.parseColor("#99FFFFFF")); setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
             setPadding(dp(56f), dp(4f), 0, 0)
         })
-        appsRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(6f), dp(48f), dp(6f)) }
+        appsRow = LinearLayout(this).apply { clipToPadding = false; clipChildren = false; gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(6f), dp(48f), dp(6f)) }
         bottom.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
             addView(appsRow)
@@ -132,7 +132,7 @@ class HomeActivity : Activity() {
             text = "System"; setTextColor(Color.parseColor("#99FFFFFF")); setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
             setPadding(dp(56f), dp(2f), 0, 0)
         })
-        systemRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(6f), dp(48f), dp(18f)) }
+        systemRow = LinearLayout(this).apply { clipToPadding = false; clipChildren = false; gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(6f), dp(48f), dp(18f)) }
         bottom.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
             addView(systemRow)
