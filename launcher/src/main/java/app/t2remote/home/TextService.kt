@@ -66,6 +66,20 @@ class TextService : AccessibilityService() {
 /** Receives text from `adb shell am broadcast` (protected by the DUMP permission: shell only). */
 class TextReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        // Prefer the T2 Keyboard input method when it's active; fall back to the accessibility service.
+        T2Ime.instance?.takeIf { it.currentInputConnection != null }?.let { ime ->
+            val ok = when {
+                intent.hasExtra("b64") -> ime.insert(String(Base64.decode(intent.getStringExtra("b64"), Base64.DEFAULT), Charsets.UTF_8))
+                intent.hasExtra("del") -> ime.delete(intent.getIntExtra("del", 1))
+                intent.hasExtra("clear") -> ime.clear()
+                intent.hasExtra("enter") -> ime.enter()
+                intent.hasExtra("release") -> { ime.release(); true }
+                else -> false
+            }
+            resultCode = if (ok) 1 else 3
+            return
+        }
+        if (intent.hasExtra("release")) { resultCode = 1; return }
         val svc = TextService.instance
         val ok = when {
             svc == null -> false

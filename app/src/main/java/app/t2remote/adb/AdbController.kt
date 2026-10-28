@@ -150,6 +150,37 @@ object AdbController {
         shell("am broadcast $TEXT_RX --es b64 $b64 >/dev/null", quiet = true)
     }
     fun a11yDelete(n: Int) { if (n > 0) shell("am broadcast $TEXT_RX --ei del $n >/dev/null", quiet = true) }
+    fun remoteEnter() { shell("am broadcast $TEXT_RX --ez enter true >/dev/null", quiet = true) }
+
+    // ---- T2 Keyboard (invisible IME on the projector) while the phone keyboard is in use ----
+    private const val T2_IME = "app.t2remote.home/.T2Ime"
+    @Volatile private var previousIme: String? = null
+
+    /** Switch the projector to T2 Keyboard (hides its on-screen keyboard; phone typing goes straight in). */
+    fun imeBegin() = scope.launch {
+        lock.withLock {
+            val m = mgr ?: return@withLock
+            if (!_state.value.connected) return@withLock
+            runCatching {
+                val cur = execLocked(m, "settings get secure default_input_method").trim()
+                if (cur.isNotBlank() && cur != "null" && !cur.startsWith("app.t2remote.home/")) previousIme = cur
+                execLocked(m, "ime enable $T2_IME >/dev/null 2>&1; ime set $T2_IME >/dev/null 2>&1")
+            }
+        }
+    }
+
+    /** Give the projector its normal keyboard back. */
+    fun imeEnd() = scope.launch {
+        lock.withLock {
+            val m = mgr ?: return@withLock
+            if (!_state.value.connected) return@withLock
+            runCatching {
+                val prev = previousIme
+                if (prev != null) execLocked(m, "ime set $prev >/dev/null 2>&1")
+                else execLocked(m, "am broadcast $TEXT_RX --ez release true >/dev/null")
+            }
+        }
+    }
 
     /** Turn on T2 Home's typing service (idempotent, keeps other accessibility services). */
     private const val SVC = "app.t2remote.home/app.t2remote.home.TextService"

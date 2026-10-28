@@ -51,7 +51,11 @@ private object TextOut {
         Prefs.textRouteAdb -> AdbController.backspace(n)
         else -> HidController.keyRepeat(KeyMap.BACKSPACE, n)
     }
-    fun enter() = if (Prefs.textRouteAdb) AdbController.keyevent(66) else HidController.key(KeyMap.ENTER)
+    fun enter() = when {
+        wifi -> AdbController.remoteEnter()
+        Prefs.textRouteAdb -> AdbController.keyevent(66)
+        else -> HidController.key(KeyMap.ENTER)
+    }
 }
 
 @Composable
@@ -61,6 +65,13 @@ fun KeyboardScreen() {
     var viaAdb by remember { mutableStateOf(Prefs.textRouteAdb) }
     val focus = remember { FocusRequester() }
     val clipboard = LocalClipboardManager.current
+
+    // While this tab is open (and Wi-Fi control is on), the projector uses the invisible T2 Keyboard,
+    // so its own on-screen keyboard doesn't interfere. Leaving the tab gives it back.
+    androidx.compose.runtime.DisposableEffect(Unit) {
+        if (app.t2remote.adb.WifiHid.active) AdbController.imeBegin()
+        onDispose { if (app.t2remote.adb.WifiHid.active) AdbController.imeEnd() }
+    }
 
     Column(Modifier.fillMaxSize()) {
         StatusStrip()
