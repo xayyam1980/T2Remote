@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "T2Remote"
 include(":app")
+include(":launcher")
