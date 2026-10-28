@@ -152,11 +152,35 @@ object AdbController {
     @Volatile private var textStream: io.github.muntashirakon.adb.AdbStream? = null
     @Volatile private var textOut: java.io.OutputStream? = null
 
+    private val _foreground = MutableStateFlow("")
+    /** Package of the app currently in front on the projector (reported by T2 Home). */
+    val foreground: StateFlow<String> = _foreground
+
+    private fun openText(m: AbsAdbConnectionManager): java.io.OutputStream {
+        val st = m.openStream("tcp:47321")
+        textStream = st
+        val o = st.openOutputStream(); textOut = o
+        Thread {
+            runCatching {
+                st.openInputStream().bufferedReader().use { r ->
+                    while (true) {
+                        val line = r.readLine() ?: break
+                        if (line.startsWith("F")) _foreground.value = line.substring(1)
+                    }
+                }
+            }
+        }.apply { isDaemon = true }.start()
+        return o
+    }
+
+    /** Open the text channel now (so foreground-app updates start flowing). */
+    fun ensureTextChannel() = sendLine("P")
+
     private fun sendLine(line: String) = textExec.execute {
         val m = mgr ?: return@execute
         for (attempt in 0..1) {
             try {
-                val o = textOut ?: m.openStream("tcp:47321").also { textStream = it }.openOutputStream().also { textOut = it }
+                val o = textOut ?: openText(m)
                 o.write((line + "\n").toByteArray(Charsets.UTF_8)); o.flush()
                 return@execute
             } catch (e: Throwable) {
@@ -244,6 +268,7 @@ object AdbController {
                 _state.update { State(connected = true, target = "$host:$port", output = "ADB connected") }
                 WifiHid.start(m)
                 runCatching { execLocked(m, enableTypingServiceCmd()) }
+                ensureTextChannel()
                 _state.update { it.copy(busy = false, output = "Wi-Fi control active") }
             } catch (e: Throwable) {
                 fail("Wi-Fi connect failed", e)

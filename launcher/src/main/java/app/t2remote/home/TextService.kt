@@ -18,7 +18,14 @@ class TextService : AccessibilityService() {
 
     override fun onServiceConnected() { instance = this; TextChannel.start() }
     override fun onDestroy() { if (instance === this) instance = null; super.onDestroy() }
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+        if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            val pkg = event.packageName?.toString() ?: return
+            // Ignore keyboards/system overlays so the "current app" stays meaningful
+            if (pkg == "android" || pkg.startsWith("com.android.systemui") || pkg.contains("inputmethod") || pkg == packageName && event.className?.contains("T2Ime") == true) return
+            TextChannel.setForeground(pkg)
+        }
+    }
     override fun onInterrupt() {}
 
     private fun focusedField(): AccessibilityNodeInfo? =
@@ -99,6 +106,19 @@ object TextChannel {
     const val PORT = 47321
     @Volatile private var started = false
     private val main = android.os.Handler(android.os.Looper.getMainLooper())
+    private val clients = java.util.concurrent.CopyOnWriteArrayList<java.io.OutputStream>()
+    @Volatile private var foreground = ""
+    private val io = java.util.concurrent.Executors.newSingleThreadExecutor()
+
+    /** Tell connected phones which app is in front (they switch the touchpad to D-pad mode for TV apps). */
+    fun setForeground(pkg: String) {
+        if (pkg == foreground) return
+        foreground = pkg
+        val line = "F$pkg\n".toByteArray()
+        io.execute {   // sockets can't be written on the main thread
+            for (o in clients) runCatching { synchronized(o) { o.write(line); o.flush() } }.onFailure { clients.remove(o) }
+        }
+    }
 
     fun start() {
         if (started) return
@@ -108,6 +128,9 @@ object TextChannel {
                 val server = java.net.ServerSocket(PORT, 4, java.net.InetAddress.getByName("127.0.0.1"))
                 while (true) {
                     val sock = server.accept()
+                    val out = sock.getOutputStream()
+                    clients.add(out)
+                    runCatching { synchronized(out) { out.write("F$foreground\n".toByteArray()); out.flush() } }
                     Thread {
                         runCatching {
                             sock.getInputStream().bufferedReader(Charsets.UTF_8).use { r ->
@@ -121,6 +144,7 @@ object TextChannel {
                                 }
                             }
                         }
+                        clients.remove(out)
                         runCatching { sock.close() }
                     }.apply { isDaemon = true }.start()
                 }

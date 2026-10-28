@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -39,9 +40,22 @@ import kotlin.math.max
 @Composable
 fun MouseScreen() {
     var dragLock by remember { mutableStateOf(false) }
+    var mode by remember { mutableStateOf(Prefs.touchMode) }
+    val fg by app.t2remote.adb.AdbController.foreground.collectAsState()
+    val autoDpad = fg in DPAD_APPS
+    val dpad = when (mode) { "dpad" -> true; "mouse" -> false; else -> autoDpad }
     Column(Modifier.fillMaxSize()) {
         StatusStrip()
-        Touchpad(Modifier.weight(1f).fillMaxWidth().padding(12.dp))
+        Row(Modifier.fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 8.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            listOf("auto" to "Auto", "mouse" to "Mouse", "dpad" to "D-pad").forEach { (k, label) ->
+                androidx.compose.material3.FilterChip(
+                    selected = mode == k,
+                    onClick = { mode = k; Prefs.touchMode = k },
+                    label = { Text(if (k == "auto") "Auto · " + (if (autoDpad) "D-pad" else "Mouse") else label, fontSize = 12.sp) },
+                )
+            }
+        }
+        Touchpad(Modifier.weight(1f).fillMaxWidth().padding(12.dp), dpad)
         Row(
             Modifier.fillMaxWidth().padding(horizontal = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -82,13 +96,22 @@ fun MouseScreen() {
 /**
  * One finger: move pointer. Two fingers: scroll. Tap: left click. Two-finger tap: right click (Back on Android).
  */
+/** TV apps that ignore mouse clicks — the touchpad becomes a swipe D-pad there. */
+val DPAD_APPS = setOf(
+    "com.google.android.youtube.tv", "com.google.android.youtube.tvmusic", "com.google.android.youtube.tvkids",
+    "com.netflix.ninja", "com.amazon.amazonvideo.livingroom", "com.disney.disneyplus", "com.hbo.hbonow",
+    "com.google.android.apps.tv.launcherx", "com.google.android.tvlauncher", "app.t2remote.home",
+    "com.google.android.katniss",
+)
+
 @Composable
-fun Touchpad(modifier: Modifier) {
+fun Touchpad(modifier: Modifier, dpad: Boolean = false) {
     Box(
         modifier
             .clip(RoundedCornerShape(20.dp))
-            .background(MaterialTheme.colorScheme.surfaceVariant)
-            .pointerInput(Unit) {
+            .background(if (dpad) MaterialTheme.colorScheme.primary.copy(alpha = 0.12f) else MaterialTheme.colorScheme.surfaceVariant)
+            .pointerInput(dpad) {
+                if (dpad) { dpadGestures(); return@pointerInput }
                 awaitEachGesture {
                     val down = awaitFirstDown(requireUnconsumed = false)
                     val start = down.uptimeMillis
@@ -146,10 +169,54 @@ fun Touchpad(modifier: Modifier) {
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            "Touchpad\n1 finger — move · tap — click\n2 fingers — scroll · tap — right click",
+            if (dpad) "D-pad\nswipe — move highlight · tap — OK\n2-finger tap — Back"
+            else "Touchpad\n1 finger — move · tap — click\n2 fingers — scroll · tap — right click",
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
             fontSize = 13.sp,
             textAlign = androidx.compose.ui.text.style.TextAlign.Center,
         )
+    }
+}
+
+
+/** Swipe = arrow keys (repeats while you keep moving), tap = OK, two-finger tap = Back. */
+private suspend fun androidx.compose.ui.input.pointer.PointerInputScope.dpadGestures() {
+    val step = 56.dp.toPx()
+    awaitEachGesture {
+        val down = awaitFirstDown(requireUnconsumed = false)
+        val start = down.uptimeMillis
+        var end = start
+        var fingers = 1
+        var accX = 0f; var accY = 0f
+        var moved = false
+        val slop = viewConfiguration.touchSlop * 1.5f
+        while (true) {
+            val ev = awaitPointerEvent()
+            val pressed = ev.changes.filter { it.pressed }
+            ev.changes.firstOrNull()?.let { end = it.uptimeMillis }
+            if (pressed.isEmpty()) break
+            fingers = max(fingers, pressed.size)
+            if (pressed.size == 1 && fingers == 1) {
+                val d = pressed[0].positionChange()
+                accX += d.x; accY += d.y
+                if (!moved && (pressed[0].position - down.position).getDistance() > slop) moved = true
+                if (moved) {
+                    while (abs(accX) >= step || abs(accY) >= step) {
+                        if (abs(accX) >= abs(accY)) {
+                            HidController.key(if (accX > 0) app.t2remote.hid.KeyMap.RIGHT else app.t2remote.hid.KeyMap.LEFT)
+                            accX -= if (accX > 0) step else -step
+                        } else {
+                            HidController.key(if (accY > 0) app.t2remote.hid.KeyMap.DOWN else app.t2remote.hid.KeyMap.UP)
+                            accY -= if (accY > 0) step else -step
+                        }
+                    }
+                }
+            }
+            ev.changes.forEach { it.consume() }
+        }
+        if (!moved && end - start < 400) {
+            if (fingers >= 2) HidController.consumer(Consumer.BACK)
+            else HidController.key(app.t2remote.hid.KeyMap.ENTER)
+        }
     }
 }

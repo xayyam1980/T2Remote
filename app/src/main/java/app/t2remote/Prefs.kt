@@ -46,6 +46,11 @@ object Prefs {
         get() = sp.getBoolean("textRouteAdb", false)
         set(v) = sp.edit().putBoolean("textRouteAdb", v).apply()
 
+    /** Touchpad mode: "auto" (D-pad in TV apps like YouTube/Netflix), "mouse", or "dpad". */
+    var touchMode: String
+        get() = sp.getString("touchMode", "auto") ?: "auto"
+        set(v) = sp.edit().putString("touchMode", v).apply()
+
     var adbHost: String
         get() = sp.getString("adbHost", "") ?: ""
         set(v) = sp.edit().putString("adbHost", v).apply()
