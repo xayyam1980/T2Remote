@@ -53,6 +53,7 @@ class HomeActivity : Activity() {
     private lateinit var subtitle: TextView
     private lateinit var pinRow: LinearLayout
     private lateinit var appsRow: LinearLayout
+    private lateinit var systemRow: LinearLayout
     private var firstTile: View? = null
     private var lastSignature = ""
     private var appsByPkg: Map<String, App> = emptyMap()
@@ -122,10 +123,19 @@ class HomeActivity : Activity() {
             text = "Apps"; setTextColor(Color.parseColor("#99FFFFFF")); setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
             setPadding(dp(56f), dp(4f), 0, 0)
         })
-        appsRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(8f), dp(48f), dp(28f)) }
+        appsRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(8f), dp(48f), dp(10f)) }
         bottom.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
             addView(appsRow)
+        })
+        bottom.addView(TextView(this).apply {
+            text = "System"; setTextColor(Color.parseColor("#99FFFFFF")); setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+            setPadding(dp(56f), dp(2f), 0, 0)
+        })
+        systemRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(48f), dp(8f), dp(48f), dp(26f)) }
+        bottom.addView(HorizontalScrollView(this).apply {
+            isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false
+            addView(systemRow)
         })
         root.addView(bottom, FrameLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT, Gravity.BOTTOM))
 
@@ -189,7 +199,7 @@ class HomeActivity : Activity() {
         appsByPkg = apps.associateBy { it.pkg }
 
         val focusedPkg = (currentFocus?.tag as? String)
-        pinRow.removeAllViews(); appsRow.removeAllViews(); firstTile = null
+        pinRow.removeAllViews(); appsRow.removeAllViews(); systemRow.removeAllViews(); firstTile = null
 
         val pinnedApps = pins.mapNotNull { appsByPkg[it] }
         if (pinnedApps.isEmpty()) pinRow.addView(TextView(this).apply {
@@ -201,12 +211,29 @@ class HomeActivity : Activity() {
             pinRow.addView(t)
         }
 
-        val settings = App("Settings", "settings", Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), null, null)
-        (apps.filter { it.pkg !in pins } + settings).forEach { appsRow.addView(iconTile(it)) }
+        apps.filter { it.pkg !in pins }.forEach { appsRow.addView(iconTile(it)) }
+        systemEntries().forEach { systemRow.addView(iconTile(it, system = true)) }
 
         val target = focusedPkg?.let { pinRow.findViewWithTag<View>(it) ?: appsRow.findViewWithTag(it) }
             ?: firstTile ?: appsRow.getChildAt(0)
         target?.post { target.requestFocus() }
+    }
+
+    /** System shortcuts: open Android TV settings pages directly. Hidden if the page doesn't exist. */
+    private fun systemEntries(): List<App> {
+        fun e(label: String, action: String, icon: Int) =
+            App(label, "sys:$action", Intent(action).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), null, getDrawable(icon))
+        return listOf(
+            e("Settings", Settings.ACTION_SETTINGS, R.drawable.sys_settings),
+            e("Network & Wi-Fi", Settings.ACTION_WIFI_SETTINGS, R.drawable.sys_wifi),
+            e("Bluetooth & remotes", Settings.ACTION_BLUETOOTH_SETTINGS, R.drawable.sys_bluetooth),
+            e("Display & picture", Settings.ACTION_DISPLAY_SETTINGS, R.drawable.sys_display),
+            e("Sound", Settings.ACTION_SOUND_SETTINGS, R.drawable.sys_sound),
+            e("Apps", Settings.ACTION_APPLICATION_SETTINGS, R.drawable.sys_apps),
+            e("Storage", Settings.ACTION_INTERNAL_STORAGE_SETTINGS, R.drawable.sys_storage),
+            e("Keyboard", "android.settings.HARD_KEYBOARD_SETTINGS", R.drawable.sys_keyboard),
+            e("Date & time", Settings.ACTION_DATE_SETTINGS, R.drawable.sys_time),
+        )
     }
 
     // ------------------------------------------------------------------ tiles
@@ -245,12 +272,13 @@ class HomeActivity : Activity() {
     }
 
     /** Small round icon for the apps row. */
-    private fun iconTile(a: App): View {
+    private fun iconTile(a: App, system: Boolean = false): View {
         val frame = FrameLayout(this).apply {
-            isFocusable = true; isClickable = true; isLongClickable = true
+            isFocusable = true; isClickable = true; isLongClickable = !system
             tag = a.pkg
-            background = rounded(Color.parseColor("#2A2F36"), 28f)
-            setPadding(dp(10f), dp(10f), dp(10f), dp(10f))
+            background = rounded(Color.parseColor(if (system) "#33405066" else "#2A2F36"), 28f)
+            val pad = if (system) dp(14f) else dp(10f)
+            setPadding(pad, pad, pad, pad)
         }
         if (a.icon != null) frame.addView(ImageView(this).apply { setImageDrawable(a.icon) }, FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT))
         else frame.addView(label("⚙", 22f).apply { gravity = Gravity.CENTER }, FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT))
@@ -279,10 +307,11 @@ class HomeActivity : Activity() {
 
     private fun onAppFocused(a: App) {
         title.text = a.label
-        subtitle.text = if (a.pkg == "settings") "Projector settings"
+        subtitle.text = if (a.pkg.startsWith("sys:")) "System · OK to open"
             else if (a.pkg in pinned()) "OK to open · hold OK to unpin" else "OK to open · hold OK to pin"
         // Crossfade the blurred backdrop to this app's artwork
-        val art = a.banner ?: a.icon ?: return
+        val art = (if (a.pkg.startsWith("sys:")) null else a.banner ?: a.icon)
+            ?: GradientDrawable().apply { setColor(Color.parseColor("#1C2A3A")) }
         val incoming = if (showingA) backdropB else backdropA
         val outgoing = if (showingA) backdropA else backdropB
         incoming.setImageDrawable(art.constantState?.newDrawable()?.mutate() ?: art)
@@ -297,7 +326,7 @@ class HomeActivity : Activity() {
     }
 
     private fun togglePin(a: App) {
-        if (a.pkg == "settings") return
+        if (a.pkg.startsWith("sys:")) return
         val p = pinned()
         val msg = if (p.remove(a.pkg)) "Unpinned ${a.label}" else { p.add(a.pkg); "Pinned ${a.label}" }
         savePins(p)
